@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('userName')->unique(); // Unique username
             $table->string('email'); // Unique email
             $table->boolean('isAdmin')->default(false);
+            $table->boolean('status')->default(true);
             $table->string('password'); // Password
             $table->string('token')->nullable(); // Token (nullable for email verification, for example)
             $table->timestamps(); // Created at and Updated at timestamps
