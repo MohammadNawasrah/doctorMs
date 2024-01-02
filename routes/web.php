@@ -5,6 +5,7 @@ use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserPermissionContrller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,12 +19,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login',  [LoginController::class, 'login']);
-Route::post('/register',  [RegisterController::class, 'addNewUser']);
-Route::post('/logOut',  [LogOutController::class, 'logOut']);
-Route::post('/addPermission',  [PermissionController::class, 'addNewPermission']);
-Route::get('/getAllPermission',  [PermissionController::class, 'getAllPermission']);
-Route::post('/addNewActionForPagePermission',  [PermissionController::class, 'addNewActionForPagePermission']);
-Route::post('/setPermissionForUser',  [UserPermissionContrller::class, 'setPermissionForUser']);
-Route::post('/updatePermissionForUser',  [UserPermissionContrller::class, 'updatePermissionForUser']);
-Route::post('/getPermissionForUser',  [UserPermissionContrller::class, 'getPermissionForUser']);
+
+Route::group(['prefix' => '/'], function () {
+    Route::post('/login',  [LoginController::class, 'login']);
+    Route::get('/login',  function () {
+        return View("login");
+    });
+});
+Route::group(['prefix' => '/dashboard'], function () {
+    Route::group(['prefix' => '/userPermission'], function () {
+        Route::post('/setPermissionForUser',  [UserPermissionContrller::class, 'setPermissionForUser']);
+        Route::post('/updatePermissionForUser',  [UserPermissionContrller::class, 'updatePermissionForUser']);
+        Route::post('/getPermissionForUser',  [UserPermissionContrller::class, 'getPermissionForUser']);
+    });
+    Route::group(['prefix' => '/permissions'], function () {
+        Route::post('/addPermission',  [PermissionController::class, 'addNewPermission']);
+        Route::get('/getAllPermission',  [PermissionController::class, 'getAllPermission']);
+        Route::post('/addNewActionForPagePermission',  [PermissionController::class, 'addNewActionForPagePermission']);
+    });
+    Route::post('/register',  [RegisterController::class, 'addNewUser']);
+    Route::post('/logOut',  [LogOutController::class, 'logOut']);
+});
