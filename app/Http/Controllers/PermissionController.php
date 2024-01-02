@@ -13,7 +13,7 @@ class PermissionController extends Controller
     public function addNewPermission(Request $request)
     {
         $jsonPermissionKeys = JsonHelper::getJsonKey($request->input('jsonPermission'));
-        $permissionFromDb = $this->getAllPermission();
+        $permissionFromDb = $this->getAllPermission()["data"];
         $permissionKeysFromDb = JsonHelper::getJsonKey($permissionFromDb);
         if (array_search($jsonPermissionKeys[0], $permissionKeysFromDb) !== false) {
             return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your Page Already Exist");
@@ -46,6 +46,7 @@ class PermissionController extends Controller
     public function getAllPermission()
     {
         $permission = Permission::where("id", 1)->firstOrFail();
-        return json_decode($permission["jsonPermission"], true);
+        RequsetHelper::addResponseData("data", json_decode($permission["jsonPermission"], true));
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Return All Permission sucessfully");
     }
 }

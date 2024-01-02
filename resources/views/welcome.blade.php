@@ -37,39 +37,33 @@
 </style>
 
 <body>
-    <div class="container">
-        <div class="row chatRow">
-            <div class="chatContent">
-                <ul>
-                    <li>test</li>
-                </ul>
-            </div>
-            <div class="chatSection">
-                <div class="chatBox">
-                    <div class="chatInput bg-white" id="chatInput" contenteditable=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <input type="text" id="recipientUserId" placeholder="Recipient User ID">
+    <input type="text" id="message" placeholder="Message">
+    <button id="sendMessageButton">Send Message</button>
+    <ul id="ul">
+
+    </ul>
     <script>
         $(function() {
-            let ipAddress = "z";
-            let socketPort = "3000";
+            let ipAddress = "192.168.100.201";
+            let socketPort = "3001";
             let socket = io(ipAddress + ":" + socketPort);
-            chatInput = $("#chatInput");
-            chatInput.keypress(function(e) {
-                message = $(this).html();
-                console.log(message)
-                if (e.which === 13 && !e.shiftkey) {
-                    socket.emit("sendCahtToServer", message)
-                    chatInput.html("");
-                    return false;
-                }
+            document.getElementById("sendMessageButton").addEventListener("click", () => {
+                const recipientUserId = document.getElementById("recipientUserId").value;
+                const message = document.getElementById("message").value;
+                console.log("je;;p")
+                // Emit the event with user ID, recipient user ID, and message
+                socket.emit("sendChatToServer", {
+                    recipientUserId,
+                    message
+                });
             });
-            socket.on("sendCahtToServer", (message) => {
-                alert(message)
-                // $(".chatContent ul").append('<li>' + message + '</li>')
-            })
+            socket.on("sendChatToServer", (data) => {
+                $("#ul").append(`<li> Received message from user  to ${data.recipientUserId}: ${data.message} </li>`)
+                // alert(`Received message from user  to ${data.recipientUserId}: ${data.message}`)
+                // console.log();
+                // Handle the received message as needed
+            });
         })
     </script>
 </body>
