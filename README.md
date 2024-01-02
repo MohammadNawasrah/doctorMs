@@ -64,3 +64,76 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## install linux
+
+. clone project 
+
+. install composer if not install 
+
+. install php 
+
+. install apache web server httpd Or apache2 
+
+. install mariadb Database 
+
+. install phpmyadmin 
+
+## command 
+
+mv doctorMs /var/www
+
+sudo mysql_secure_installation # to configer root password 
+
+sudo nano  /etc/httpd/conf.d/doctorMs.conf :
+
+    ServerName doctorms.local
+    DocumentRoot /var/www/html/doctorMs/public
+
+    <Directory /var/www/html/doctorMs/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    ErrorLog /var/log/httpd/doctorMs.log
+    CustomLog /var/log/httpd/doctorMs.log combined
+</VirtualHost>
+
+sudo nano /etc/httpd/conf/httpd.conf :
+
+<Directory "/var/www/html/doctorMs/public">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+    Order allow,deny
+    Allow from all
+</Directory>
+
+sudo nano /etx/hosts :
+
+127.0.0.1   doctorms.local
+
+sudo nano doctor/env :
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=doctor
+DB_USERNAME=root
+DB_PASSWORD=7285
+
+## command inside project 
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+
+php artisan config:cache
+
+composer dump-autoload 
+
