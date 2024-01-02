@@ -20,6 +20,9 @@ class LoginController extends Controller
         $password = $request->input('password');
         try {
             $user = Users::where('userName', $userName)->firstOrFail();
+            if (!$user["status"]) {
+                return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your Account Deleted");
+            }
         } catch (Exception $e) {
             return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist");
         }
