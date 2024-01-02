@@ -1,10 +1,14 @@
 <?php
 
+use App\Events\UserRegister;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPermissionContrller;
+use App\Models\User;
+use App\Models\Userss;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +27,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/'], function () {
     Route::post('/login',  [LoginController::class, 'login']);
     Route::get('/login',  function () {
-        return View("login");
+        return View("welcome");
+    });
+    Route::get('/fireEvent',  function () {
+        return View("fireEvent");
+    });
+    Route::post('/fireEvent',  function () {
+        $name = request()->name;
+        event(new UserRegister($name));
+        return View("fireEvent");
     });
 });
 Route::group(['prefix' => '/dashboard'], function () {
