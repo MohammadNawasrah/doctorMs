@@ -20,10 +20,18 @@ class UserPermissionContrller extends Controller
         } catch (Exception $e) {
             return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist");
         }
-        $user = UserPermission::create([
-            'userId' => $user["id"],
-            'jsonPermission' => json_encode($jsonPermission),
-        ]);
+        try {
+            $userPermission = UserPermission::where('userId', $user["id"])->firstOrFail();
+            $userPermission->update([
+                "jsonPermission" => json_encode($jsonPermission)
+            ]);
+            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission already Added Successfully Then Updated");
+        } catch (Exception $e) {
+            $userPermission = UserPermission::create([
+                'userId' => $user["id"],
+                'jsonPermission' => json_encode($jsonPermission),
+            ]);
+        }
         return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission added Successfully");
     }
     public function getPermissionForUser(Request $request)
