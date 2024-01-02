@@ -5,11 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPermissionContrller;
-use App\Models\User;
-use App\Models\Userss;
-use Illuminate\Contracts\View\View;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,24 +24,30 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/'], function () {
     Route::post('/login',  [LoginController::class, 'login']);
     Route::get('/login',  function () {
-        return View("welcome");
+        return View("login");
     });
     Route::get('/fireEvent',  function () {
         return View("fireEvent");
     });
-    Route::post('/fireEvent',  function () {
-        $name = request()->name;
-        event(new UserRegister($name));
-        return View("fireEvent");
-    });
 });
 Route::group(['prefix' => '/dashboard'], function () {
+
+    Route::group(['prefix' => '/users'],  function () {
+        Route::get('/',  function () {
+            return View("users");
+        });
+        Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
+    });
+
     Route::group(['prefix' => '/userPermission'], function () {
         Route::post('/setPermissionForUser',  [UserPermissionContrller::class, 'setPermissionForUser']);
         Route::post('/updatePermissionForUser',  [UserPermissionContrller::class, 'updatePermissionForUser']);
         Route::post('/getPermissionForUser',  [UserPermissionContrller::class, 'getPermissionForUser']);
     });
     Route::group(['prefix' => '/permissions'], function () {
+        Route::get('/',  function () {
+            return View("permissions");
+        });
         Route::post('/addPermission',  [PermissionController::class, 'addNewPermission']);
         Route::get('/getAllPermission',  [PermissionController::class, 'getAllPermission']);
         Route::post('/addNewActionForPagePermission',  [PermissionController::class, 'addNewActionForPagePermission']);
