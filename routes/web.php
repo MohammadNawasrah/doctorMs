@@ -26,3 +26,4 @@ Route::get('/getAllPermission',  [PermissionController::class, 'getAllPermission
 Route::post('/addNewActionForPagePermission',  [PermissionController::class, 'addNewActionForPagePermission']);
 Route::post('/setPermissionForUser',  [UserPermissionContrller::class, 'setPermissionForUser']);
 Route::post('/updatePermissionForUser',  [UserPermissionContrller::class, 'updatePermissionForUser']);
+Route::post('/getPermissionForUser',  [UserPermissionContrller::class, 'getPermissionForUser']);
