@@ -5,16 +5,13 @@ import path from 'path';
 function getAllCssFiles(directory) {
     const cssFiles = [];
     const files = fs.readdirSync(directory);
-
     files.forEach((file) => {
         const filePath = path.join(directory, file);
         const stat = fs.statSync(filePath);
-
         if (stat.isFile() && file.endsWith('.css')) {
             cssFiles.push(filePath);
         }
     });
-
     return cssFiles;
 }
 
