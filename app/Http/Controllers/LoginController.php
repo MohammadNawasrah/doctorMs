@@ -14,6 +14,10 @@ class LoginController extends Controller
 {
     use ValidationHelper;
     use GenerateHelper;
+    public function loginAction()
+    {
+        return View("login");
+    }
     public function login(Request $request)
     {
         $userName = $request->input('userName');

@@ -85,7 +85,9 @@ mv doctorMs /var/www
 
 sudo mysql_secure_installation # to configer root password 
 
-sudo nano  /etc/httpd/conf.d/doctorMs.conf :
+sudo nano  /etc/httpd/conf.d/doctorMs.conf
+or
+sudo nano /etc/apache2/sites-available/000-default.conf :
 
     ServerName doctorms.local
     DocumentRoot /var/www/html/doctorMs/public
@@ -102,7 +104,10 @@ sudo nano  /etc/httpd/conf.d/doctorMs.conf :
     CustomLog /var/log/httpd/doctorMs.log combined
 </VirtualHost>
 
-sudo nano /etc/httpd/conf/httpd.conf :
+sudo nano /etc/httpd/conf/httpd.conf 
+or
+sudo nano /etc/apache2/apache2.conf
+:
 
 <Directory "/var/www/html/doctorMs/public">
     Options Indexes FollowSymLinks
@@ -112,7 +117,7 @@ sudo nano /etc/httpd/conf/httpd.conf :
     Allow from all
 </Directory>
 
-sudo nano /etx/hosts :
+sudo nano /etc/hosts :
 
 127.0.0.1   doctorms.local
 
@@ -136,4 +141,15 @@ php artisan key:generate
 php artisan config:cache
 
 composer dump-autoload 
+
+sudo npm run build
+
+sudo chmod o+w doctorMs   sudo chmod -R  o+w doctorMs
+sudo chmod o+r doctorMs   sudo chmod -R  o+r doctorMs
+sudo chmod o+x doctorMs   sudo chmod -R  o+x doctorMs
+
+
+
+
+
 
