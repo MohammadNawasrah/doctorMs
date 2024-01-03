@@ -41,18 +41,22 @@ io.on("connection", (socket) => {
                     }
                 };
                 var table;
+                var options = '<option value=""></option>';
                 axios.request(configs)
                     .then((response) => {
                         console.log(response)
                         var dataTable = response.data.data;
                         dataTable.forEach(element => {
+                            options += `<option value="${element.userName}">${element.userName}</option>`
+                        });
+                        dataTable.forEach((element, index) => {
                             table += `<tr>
                                 <th>${element.userName}</th>
                                 <th>${element.isOnline}</th>
                                 <th>
-                                    <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
-                                        <font class="tn-in-text">View</font>
-                                    </button>
+                                    <select  class="btn-primary-soft btn sendTo " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
+                                    ${options}
+                                    </select>
                                     <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
                                         <font class="tn-in-text">File</font>
                                     </button>
@@ -78,6 +82,15 @@ io.on("connection", (socket) => {
                 console.log(error);
             });
 
+    })
+    socket.on("getData", (data) => {
+        try {
+
+            socket.broadcast.emit("getData", data)
+        } catch (error) {
+            console.log(error)
+        }
+        console.log(data.userName)
     })
     socket.on("disconnect", () => {
         // let data = JSON.stringify({

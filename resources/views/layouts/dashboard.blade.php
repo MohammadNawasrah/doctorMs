@@ -30,7 +30,7 @@
                                     <img src="{{ url('image/user.png')}}" alt="" width="100%" style="border-radius:50%">
                                 </td>
                                 <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title">aseel@aaseel</p>
+                                    <p id="userName" class="profile-title"></p>
                                     <p class="profile-subtitle">aseel</p>
                                 </td>
                             </tr>
@@ -71,6 +71,11 @@
                 </tr>
             </table>
         </div>
+        <script>
+            $(function() {
+                $("#userName").text(localStorage.getItem("userName"))
+            })
+        </script>
         @yield('content')
     </div>
 
