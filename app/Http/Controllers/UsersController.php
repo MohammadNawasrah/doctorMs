@@ -55,4 +55,15 @@ class UsersController extends Controller
             return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Not Exist");
         }
     }
+    public function getUserByUserName(Request $request)
+    {
+        $userName = $request->get("userName");
+        try {
+            $user = Users::where('userName', $userName)->firstOrFail();
+            RequsetHelper::addResponseData("data", $user);
+            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Return User successfully");
+        } catch (Exception $e) {
+            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Not Exist");
+        }
+    }
 }

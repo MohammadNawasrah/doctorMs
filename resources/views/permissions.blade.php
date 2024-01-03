@@ -63,6 +63,15 @@
     socket.on("setUserId", (arg) => {
         console.log(arg); // "world"
     });
+    socket.on("getData", (data) => {
+        if (localStorage.getItem("userName") === data.userName)
+            $('#tableBody').append(`<tr>
+                                            <th>${ data.userName}</th>
+                                            <th>
+                                            <div>static</div>
+                                            </th>
+                                        </tr>`);
+    })
     socket.on("hello", (arg) => {
         console.log(arg); // "world"
     });

@@ -39,6 +39,7 @@ Route::group(['prefix' => '/dashboard'], function () {
         Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
         Route::post('/user/online', [UsersController::class, 'setSocketIdForUserOnline']);
         Route::post('/user/offline', [UsersController::class, 'setSocketIdForUserOffline']);
+        Route::post('/user', [UsersController::class, 'getUserByUserName']);
     });
 
     Route::group(['prefix' => '/userPermission'], function () {

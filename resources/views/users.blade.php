@@ -78,6 +78,28 @@
     //     // console.log();
     //     // Handle the received message as needed
     // });
+    $(function() {
+        $(document).on("change", ".sendTo", function() {
+            var settings = {
+                "url": "http://localhost/dashboard/users/user",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+                "data": JSON.stringify({
+                    "userName": $(this).val()
+                }),
+            };
+            $.ajax(settings).done(function(response) {
+                console.log(response);
+                socket.emit("getData", {
+                    "userName": response.data.userName
+                })
+            });
+
+        })
+    })
 </script>
 <script>
 
