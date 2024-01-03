@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ url('/css/admin.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title>@yield('title', 'Your App')</title>
+    @vite(['resources/css/admin.css','resources/css/main.css','resources/css/animations.css'])
 </head>
 
 <body>

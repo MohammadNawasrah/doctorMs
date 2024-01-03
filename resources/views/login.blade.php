@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
+    @vite(['resources/css/login.css','resources/css/main.css','resources/css/animations.css'])
     <link rel="stylesheet" href="{{url('/css/main.css')}}">
     <link rel="stylesheet" href="{{ url('/css/animations.css')}}">
-    <link rel="stylesheet" href="{{ url('/css/login.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
