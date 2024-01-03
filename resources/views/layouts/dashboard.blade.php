@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{{ url('/css/animations.css')}}">
     <link rel="stylesheet" href="{{ url('/css/admin.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
+    <script>
+        var ipAddress = "127.0.0.1";
+        var socketPort = "3000";
+    </script>
     <title>@yield('title', 'Your App')</title>
     @vite(['resources/css/admin.css','resources/css/main.css','resources/css/animations.css'])
 </head>

@@ -50,37 +50,36 @@
     </table>
 </div>
 <script>
-    $(function() {
-        var settings = {
-            "url": "http://localhost/dashboard/users/getAllAdminUsers",
-            "method": "GET",
-            "timeout": 0,
-            "headers": {},
-        };
-        $.ajax(settings).done(function(response) {
-            console.log(response);
-            if (response.status === 200) {
-                response.data.forEach(element => {
-                    $('#tableBody').append(`<tr>
-                                            <th>${element.userName}</th>
-                                            <th>
-                                                <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
-                                                    <font class="tn-in-text">View</font>
-                                                </button>
-                                                <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
-                                                    <font class="tn-in-text">File</font>
-                                                </button>
-                                                <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
-                                                    <font class="tn-in-text">Pdf</font>
-                                                </button>
-                                                <button class="btn-primary-soft btn " style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;margin-top: 10px;">
-                                                    <font class="tn-in-text">Reject</font>
-                                                </button>
-                                            </th>
-                                        </tr>`);
-                });
-            }
-        });
+    let socket = io(ipAddress + ":" + socketPort);
+    // socket.emit("setUserId", {
+    //     "userId": "51e0273e-a221-43c1-b3bc-1046e5b4fbc7",
+    //     "status": "online"
+    // });
+    socket.emit("connectUser", {
+        "userName": localStorage.getItem("userName")
     })
+    socket.on("getTable", (data) => {
+        console.log(data)
+        $('#tableBody').html(data.html);
+    });
+    // document.getElementById("sendMessageButton").addEventListener("click", () => {
+    //     const recipientUserId = document.getElementById("recipientUserId").value;
+    //     const message = document.getElementById("message").value;
+    //     console.log("je;;p")
+    //     // Emit the event with user ID, recipient user ID, and message
+    //     socket.emit("sendChatToServer", {
+    //         recipientUserId,
+    //         message
+    //     });
+    // });
+    // socket.on("sendChatToServer", (data) => {
+    //     $("#ul").append(`<li> Received message from user  to ${data.recipientUserId}: ${data.message} </li>`)
+    //     // alert(`Received message from user  to ${data.recipientUserId}: ${data.message}`)
+    //     // console.log();
+    //     // Handle the received message as needed
+    // });
+</script>
+<script>
+
 </script>
 @endsection
