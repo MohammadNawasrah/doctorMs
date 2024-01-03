@@ -64,6 +64,7 @@
             </table>
         </div>
     </center>
+
     <script>
         $(document).ready(function() {
             $("#login").off("submit");
@@ -89,7 +90,8 @@
                             "background-color": "#d4edda"
                         })
                         message.text(response.message);
-                        window.location.href = "http://localhost/dashboard";
+                        localStorage.setItem("userName", response.data.userName)
+                        window.location.href = "http://localhost/dashboard/users";
                         return;
                     }
                     message.css({
@@ -102,6 +104,7 @@
             })
         })
     </script>
+
 </body>
 
 </html>

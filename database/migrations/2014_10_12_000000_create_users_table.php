@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('firstName'); // First name
             $table->string('lastName'); // Last name
             $table->string('userName')->unique(); // Unique username
+            $table->string('socketId')->nullable();
+            $table->boolean('isOnline')->default(false);
             $table->string('email'); // Unique email
             $table->boolean('isAdmin')->default(false);
             $table->boolean('status')->default(true);

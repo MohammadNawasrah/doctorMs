@@ -37,6 +37,8 @@ Route::group(['prefix' => '/dashboard'], function () {
             return View("users");
         });
         Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
+        Route::post('/user/online', [UsersController::class, 'setSocketIdForUserOnline']);
+        Route::post('/user/offline', [UsersController::class, 'setSocketIdForUserOffline']);
     });
 
     Route::group(['prefix' => '/userPermission'], function () {

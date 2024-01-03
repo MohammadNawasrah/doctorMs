@@ -10,9 +10,11 @@ class Users extends Model
     protected $fillable = [
         'firstName',
         'lastName',
+        'socketId',
+        'isOnline',
         'userName',
         'email',
-        'isAdmin',  // Assuming isAdmin can be mass-assigned
+        'isAdmin',
         'password',
         'token'
     ];

@@ -49,6 +49,31 @@
     </table>
 </div>
 <script>
+    let socket = io(ipAddress + ":" + socketPort);
+    // document.getElementById("sendMessageButton").addEventListener("click", () => {
+    //     const recipientUserId = document.getElementById("recipientUserId").value;
+    //     const message = document.getElementById("message").value;
+    //     console.log("je;;p")
+    //     // Emit the event with user ID, recipient user ID, and message
+    //     socket.emit("sendChatToServer", {
+    //         recipientUserId,
+    //         message
+    //     });
+    // });
+    socket.on("setUserId", (arg) => {
+        console.log(arg); // "world"
+    });
+    socket.on("hello", (arg) => {
+        console.log(arg); // "world"
+    });
+    // socket.on("sendChatToServer", (data) => {
+    //     $("#ul").append(`<li> Received message from user  to ${data.recipientUserId}: ${data.message} </li>`)
+    //     // alert(`Received message from user  to ${data.recipientUserId}: ${data.message}`)
+    //     // console.log();
+    //     // Handle the received message as needed
+    // });
+</script>
+<script>
     $(function() {
         var settings = {
             "url": "http://localhost/dashboard/permissions/getAllPermission",
