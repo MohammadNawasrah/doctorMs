@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('patientAppointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->dateTime('currentAppointment');
             $table->dateTime('nextappointment');
             $table->timestamps();
         });
