@@ -37,10 +37,10 @@ class LoginController
         $name = $user["firstName"] . " " . $user["lastName"];
         $validation = $this->loginValidation($userName, $password, $passwordFromDB);
         if ($validation["status"] == HttpStatusCodes::HTTP_OK) {
-            $token = $this->generateTokenByUsername($userName);
-            RequsetHelper::addResponseData("data", ["token" => $token, "name" => $name, "userName" => $userName, "password" => $passwordFromDB, "isAdmin" => $user["isAdmin"]]);
+            $patientToken = $this->generateTokenByUsername($userName);
+            RequsetHelper::addResponseData("data", ["token" => $patientToken, "name" => $name, "userName" => $userName, "password" => $passwordFromDB, "isAdmin" => $user["isAdmin"]]);
             $user->update([
-                'token' => $token
+                'token' => $patientToken
             ]);
         }
         return RequsetHelper::getResponse($validation["status"], $validation["message"]);

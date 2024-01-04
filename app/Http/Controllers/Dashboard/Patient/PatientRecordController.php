@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientRecords;
 use App\Models\Patients;
-use Exception;
 use Illuminate\Http\Request;
-use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 
@@ -14,87 +12,48 @@ class PatientRecordController
 {
     public function addRecord(Request $request)
     {
-        $token = $request->get('token');
+        $patientToken = $request->get('token');
         $patientNote = $request->get('patientNote');
-        $patient = Patients::where('token', $token)->firstOrFail();
-        if (!$patient) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Patient token not found");
-        }
-        $patient = PatientRecords::create([
+        $patient = Patients::getPatientByToken($patientToken);
+        $data = [
             'patientId' =>  $patient["id"],
             'patientNote' => $patientNote,
-        ]);
+        ];
+        PatientRecords::createRecord($data);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient " . $patient["fullName"] . "added Record sucessfully");
     }
     public function showRecords()
     {
-        try {
-            $patientData = Patients::select('patients.token', 'patientRecords.*')
-                ->join('patientRecords', 'patients.id', '=', 'patientRecords.patientId')->get();
-            if (count($patientData) != 0) {
-                RequsetHelper::addResponseData("data", $patientData);
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
-            }
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Not found Record');
-        } catch (\Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'An error occurred');
-        }
+        $patientsRecords = PatientRecords::getAllRecords();
+        RequsetHelper::addResponseData("data", $patientsRecords);
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patients data with appointments retrieved successfully');
     }
     public function showRecord(Request $request)
     {
-        try {
-            $token = $request->get("token");
-            $patientData = Patients::select('patients.token', 'patientRecords.*')
-                ->join('patientRecords', 'patients.id', '=', 'patientRecords.patientId')
-                ->where("patients.token", $token)->get();
-            if (count($patientData) != 0) {
-                RequsetHelper::addResponseData("data", $patientData);
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
-            } else {
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient Record not found');
-            }
-        } catch (\Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'An error occurred');
-        }
+        $patientToken = $request->get("token");
+        $patient = Patients::getPatientByToken($patientToken);
+        $patinetRecord = PatientRecords::getAllPatientRecords($patient["id"]);
+        RequsetHelper::addResponseData("data", $patinetRecord);
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
     }
     public function deleteRecord(Request $request)
     {
-        $token = $request->get("token");
+        $patientToken = $request->get("token");
         $recordId = $request->get("recordId");
-        try {
-            $patient = Patients::where("token", $token)->firstOrFail();
-            try {
-                $patientRecords = PatientRecords::where("patientId", $patient["id"])
-                    ->Where("id", $recordId)->firstOrFail();
-                $patientRecords->delete();
-            } catch (\Throwable $th) {
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Record not found');
-            }
-        } catch (Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient not found');
-        }
+        $patient = Patients::getPatientByToken($patientToken);
+        PatientRecords::deletePatientRecord($patient["id"], $recordId);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient Record deleted successfully');
     }
     public function updateRecord(Request $request)
     {
-        $token = $request->get("token");
+        $patientToken = $request->get("token");
         $recordId = $request->get("recordId");
+        $patient = Patients::getPatientByToken($patientToken);
         $patientNote = $request->get("patientNote");
-        try {
-            $patient = Patients::where("token", $token)->firstOrFail();
-            try {
-                $patientRecords = PatientRecords::where("patientId", $patient["id"])
-                    ->Where("id", $recordId)->firstOrFail();
-                $patientRecords->update([
-                    'patientNote' => $patientNote,
-                ]);
-                RequsetHelper::addResponseData("data", $patientRecords);
-            } catch (\Throwable $th) {
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Record not found');
-            }
-        } catch (Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient not found');
-        }
+        $newData = [
+            'patientNote' => $patientNote,
+        ];
+        PatientRecords::updatePatientRecord($patient["id"], $recordId, $newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient Record updated successfully');
     }
 }

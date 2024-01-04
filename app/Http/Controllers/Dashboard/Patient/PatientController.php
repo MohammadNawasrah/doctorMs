@@ -17,68 +17,45 @@ class PatientController
         $fullName = $request->get("fullName");
         $age = $request->get('age');
         $phoneNumber = $request->get('phoneNumber');
-        $patient = Patients::where('phoneNumber', $phoneNumber)->get();
-        if (count($patient) != 0) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Patient Phone number already Exist");
-        }
-        $patient = Patients::create([
+        $newData = [
             'fullName' => $fullName,
             'age' => $age,
             'phoneNumber' => $phoneNumber,
             'token' => $this->generateTokenByUsername($phoneNumber)
-        ]);
+        ];
+        Patients::createRecord($newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient $fullName added sucessfully");
     }
     public function updatePatient(Request $request)
     {
-        $token = $request->get("token");
+        $patientToken = $request->get("token");
         $fullName = $request->get("fullName");
         $age = $request->get('age');
         $phoneNumber = $request->get('phoneNumber');
-        try {
-            $existingPatient = Patients::where('phoneNumber', $phoneNumber)->first();
-            if ($existingPatient && $existingPatient->token !== $token) {
-                return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Phone number already exists for another patient');
-            }
-            $patient = Patients::where("token", $token)->firstOrFail();
-            $patient->update([
-                'fullName' => $fullName,
-                'age' => $age,
-                'phoneNumber' => $phoneNumber,
-            ]);
-            RequsetHelper::addResponseData("data", $patient);
-        } catch (Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient not found');
-        }
+        $newData = [
+            'fullName' => $fullName,
+            'age' => $age,
+            'phoneNumber' => $phoneNumber,
+        ];
+        Patients::updatePatientRecord($patientToken, $newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient updated successfully');
     }
     public function deletePatient(Request $request)
     {
-        $token = $request->get("token");
-        try {
-            $patient = Patients::where("token", $token)->firstOrFail();
-        } catch (Exception $exception) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient not found');
-        }
-        $patient->delete();
+        $patientToken = $request->get("token");
+        Patients::deletePatient($patientToken);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient deleted successfully');
     }
     public function showPatient(Request $request)
     {
-        $token = $request->get("token");
-        $patient = Patients::where("token", $token)->get();
-        if (count($patient) == 0) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient not found');
-        }
+        $patientToken = $request->get("token");
+        $patient = Patients::getPatientByToken($patientToken);
         RequsetHelper::addResponseData("data", $patient);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient fetch successfully');
     }
     public function showPatients()
     {
-        $patient = Patients::all();
-        if (count($patient) == 0) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patients not found');
-        }
+        $patient = Patients::getAllPatients();
         RequsetHelper::addResponseData("data", $patient);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patients Fetch successfully');
     }
