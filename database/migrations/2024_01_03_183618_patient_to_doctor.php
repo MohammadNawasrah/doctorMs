@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('patientToDoctor', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId');
-            $table->integer('patientId');
+            $table->foreignId("userId")->constrained("users")->onDelete('cascade');
+            $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
