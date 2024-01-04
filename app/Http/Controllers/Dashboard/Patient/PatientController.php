@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\Patients;
 use Exception;
@@ -9,7 +9,7 @@ use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 
-class PatientController extends Controller
+class PatientController
 {
     use GenerateHelper;
     public function addPatient(Request $request)

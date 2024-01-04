@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientRecords;
 use App\Models\Patients;
@@ -10,7 +10,7 @@ use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 
-class PatientRecordController extends Controller
+class PatientRecordController
 {
     use GenerateHelper;
     public function addRecord(Request $request)

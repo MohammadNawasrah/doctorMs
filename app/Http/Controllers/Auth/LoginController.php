@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Models\Users;
 use Exception;
@@ -10,7 +10,7 @@ use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 use Trait\Helpers\ValidationHelper;
 
-class LoginController extends Controller
+class LoginController
 {
     use ValidationHelper;
     use GenerateHelper;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\UserPermission;
 use App\Models\Users;
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 
-class UserPermissionContrller extends Controller
+class UserPermissionContrller
 {
     public function setPermissionForUser(Request $request)
     {

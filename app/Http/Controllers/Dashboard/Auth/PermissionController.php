@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\Permission;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\JsonHelper;
 use Trait\Helpers\RequsetHelper;
 
-class PermissionController extends Controller
+class PermissionController
 {
     public function addNewPermission(Request $request)
     {
