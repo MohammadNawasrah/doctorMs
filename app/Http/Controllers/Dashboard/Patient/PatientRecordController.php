@@ -12,7 +12,6 @@ use Trait\Helpers\RequsetHelper;
 
 class PatientRecordController
 {
-    use GenerateHelper;
     public function addRecord(Request $request)
     {
         $token = $request->get('token');

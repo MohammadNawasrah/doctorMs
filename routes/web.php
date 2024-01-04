@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\Auth\PermissionController;
 use App\Http\Controllers\Dashboard\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\Auth\UserPermissionContrller;
 use App\Http\Controllers\Dashboard\Auth\UsersController;
+use App\Http\Controllers\Dashboard\Patient\PatientAppointmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,7 @@ Route::group(['prefix' => '/dashboard'], function () {
     permissions();
     patients();
     patientRecords();
+    patientAppointment();
     Route::post('/logOut',  [LogOutController::class, 'logOut']);
 });
 function users()
@@ -63,6 +65,7 @@ function userPermission()
             Route::post('/getPermissionForUser',  [UserPermissionContrller::class, 'getPermissionForUser']);
         });
 }
+
 function permissions()
 {
     return
@@ -95,5 +98,16 @@ function patientRecords()
             Route::post('/record/add',  [PatientRecordController::class, 'addRecord']);
             Route::post('/record/update',  [PatientRecordController::class, 'updateRecord']);
             Route::post('/record/delete',  [PatientRecordController::class, 'deleteRecord']);
+        });
+}
+function patientAppointment()
+{
+    return
+        Route::group(['prefix' => '/patientAppointments'], function () {
+            Route::post('/',  [PatientAppointmentController::class, 'showAppointments']);
+            Route::post('/appointment',  [PatientAppointmentController::class, 'showAppointment']);
+            Route::post('/appointment/add',  [PatientAppointmentController::class, 'addAppointment']);
+            Route::post('/appointment/update',  [PatientAppointmentController::class, 'updateAppointment']);
+            Route::post('/appointment/delete',  [PatientAppointmentController::class, 'deleteAppointment']);
         });
 }
