@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\Users;
 use Exception;
@@ -9,7 +9,7 @@ use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 use Trait\Helpers\ValidationHelper;
 
-class LogOutController extends Controller
+class LogOutController
 {
     use ValidationHelper;
     public function logOut(Request $request)

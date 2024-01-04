@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
 use Trait\Helpers\ValidationHelper;
 
-class RegisterController extends Controller
+class RegisterController
 {
     use ValidationHelper;
     public function addNewUser(Request $request)
