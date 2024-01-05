@@ -37,7 +37,8 @@
             "traits/Helpers/HttpStatusCodes.php",
             "traits/Helpers/GenerateHelper.php",
             "traits/Helpers/JsonHelper.php",
-            "traits/Helpers/DateHelper.php"
+            "traits/Helpers/DateHelper.php",
+            "traits/Helpers/LoginHelper.php"
         ]
     },
     "autoload-dev": {

@@ -14,6 +14,7 @@ class LogOutController
     use ValidationHelper;
     public function logOut(Request $request)
     {
+        session()->flush();
         $userName = $request->input('userName');
         $password = $request->input('password');
         try {

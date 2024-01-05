@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Users;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
+use Trait\Helpers\LoginHelper;
 use Trait\Helpers\RequsetHelper;
 use Trait\Helpers\ValidationHelper;
 
@@ -16,10 +18,13 @@ class LoginController
     use GenerateHelper;
     public function loginAction()
     {
+
         return View("login");
     }
+
     public function login(Request $request)
     {
+
         $userName = $request->input('userName');
         $password = $request->input('password');
         try {
@@ -36,13 +41,15 @@ class LoginController
         $passwordFromDB = $user["password"];
         $name = $user["firstName"] . " " . $user["lastName"];
         $validation = $this->loginValidation($userName, $password, $passwordFromDB);
-        if ($validation["status"] == HttpStatusCodes::HTTP_OK) {
-            $patientToken = $this->generateTokenByUsername($userName);
-            RequsetHelper::addResponseData("data", ["token" => $patientToken, "name" => $name, "userName" => $userName, "password" => $passwordFromDB, "isAdmin" => $user["isAdmin"]]);
+        if (json_decode($validation)->status == HttpStatusCodes::HTTP_OK) {
+            $userToken = $this->generateTokenByUsername($userName);
+            RequsetHelper::addResponseData("data", ["token" => $userToken, "name" => $name, "userName" => $userName, "password" => $passwordFromDB, "isAdmin" => $user["isAdmin"]]);
             $user->update([
-                'token' => $patientToken
+                'token' => $userToken
             ]);
+            session(['userName' => $userName]);
+            session(['token' => $userToken]);
         }
-        return RequsetHelper::getResponse($validation["status"], $validation["message"]);
+        return RequsetHelper::getResponse();
     }
 }

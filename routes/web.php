@@ -23,7 +23,7 @@ Route::group(['prefix' => '/'], function () {
 
 Route::group(['prefix' => '/dashboard'],  function () {
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/', fn () => view('users'));
+        Route::get('/', fn () => view('users'))->name('dashboard');
         Route::post('/register', [RegisterController::class, 'addNewUser']);
         Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
         Route::post('/user/online', [UsersController::class, 'setSocketIdForUserOnline']);
@@ -70,5 +70,5 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/toDoctor/update', [PatientToDoctorController::class, 'updatetoDoctor']);
         Route::post('/toDoctor/delete', [PatientToDoctorController::class, 'deletetoDoctor']);
     });
-    Route::post('/logOut', [LogOutController::class, 'logOut']);
+    Route::get('/logOut', [LogOutController::class, 'logOut']);
 });
