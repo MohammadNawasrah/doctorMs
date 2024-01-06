@@ -4,107 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/css/bootstrap5.3.0/bootstrap.min.css','resources/css/login.css'])
+    <script src="{{mix('resources/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{mix('resources/js/login.js')}}"></script>
+    <script src="{{mix('resources/js/route.js')}}"></script>
+    <script src="{{mix('resources/js/mainFunction.js')}}"></script>
     <title>Login</title>
-    @vite(['resources/css/login.css','resources/css/main.css','resources/css/animations.css'])
-    <link rel="stylesheet" href="{{url('/css/main.css')}}">
-    <link rel="stylesheet" href="{{ url('/css/animations.css')}}">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <center>
-        <div class="container">
-            <table style="margin: 0;padding: 0;width: 60%;">
-                <tr>
-                    <td>
-                        <p class="header-text">Welcome Back!</p>
-                    </td>
-                </tr>
-                <div class="form-body">
-                    <form id="login" method="POST">
-                        <tr>
-                            <td>
-                                <p class="sub-text">Login with your details to continue</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-td">
-                                <label for="userName" class="form-label">Email: </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-td">
-                                <input type="textt" id="userName" name="userName" class="input-text" placeholder="User Name" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-td">
-                                <label for="userpassword" class="form-label">Password: </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-td">
-                                <input type="password" id="password" name="userpassword" class="input-text" placeholder="Password" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    <div id="message"></div>
-                                    <button type="submit" class="login-btn btn-primary btn">Login</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h3 class="card-title header-text">Welcome Back!</h3>
+                        <p class="card-text sub-text mb-5">Login with your details to continue</p>
+                        <form id="login" method="POST">
+                            <div class="mb-5">
+                                <input type="text" id="userName" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="username" required>
+                            </div>
+                            <div class="mb-5">
+                                <input type="password" id="password" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div id="loginMessage" class="alert alert-danger d-none" role="alert">
+                            </div>
+                            <div class="mb-5">
+                                <input type="submit" id="loginButton" style="width: 80%;" value="Login" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </table>
+            </div>
         </div>
-    </center>
+    </div>
+</body>
 
-    <script>
-        $(document).ready(function() {
-            $("#login").off("submit");
-            $("#login").on("submit", function(event) {
-                event.preventDefault();
-                var settings = {
-                    "url": "http://localhost/login",
-                    "method": "POST",
-                    "headers": {
-                        "XSRF-TOKEN": "eyJpdiI6IjJ0UUFmMVBFNkdCMS94Rm5JeXBVMFE9PSIsInZhbHVlIjoibWNqS1I2MEUzcDZlT0VQRmpNSDhyUHRrWC8vVlM0c3FUQklTS1prOEN5ZlI4N0JNeW5hWFNHTExKNi9kNGU4TVY5M3U5WW5oNTZZSHFSNXBMTEdMSGJETHZTdmRBcTRVKzhWcmU4TGJNdW9ZYWxUTVJ3dW02ZjVtTWtFNXpEL1UiLCJtYWMiOiIzNjNjOWRmZTgwM2ViYzcxZmEzNzhiZmVmOTc3YjMxMjM0ZDc3NjllYzJlNmQ5Y2YxNTEwZGY4YTUxN2UxMWY4IiwidGFnIjoiIn0%3D",
-                        "Content-Type": "application/json",
-                    },
-                    "data": JSON.stringify({
-                        "userName": $("#userName").val(),
-                        "password": $("#password").val()
-                    }),
-                };
-                let message = $("#message");
-                $.ajax(settings).done(function(response) {
-                    if (response.status === 200) {
-                        message.css({
-                            "display": "flex",
-                            "background-color": "#d4edda"
-                        })
-                        message.text(response.message);
-                        localStorage.setItem("userName", response.data.userName)
-                        window.location.href = "http://localhost/dashboard/users";
-                        return;
-                    }
-                    message.css({
-                        "display": "flex",
-                        "background-color": "#f8d7da"
-                    })
-                    message.text(response.message);
-                    // #d4edda
-                });
-            })
-        })
-    </script>
-
+</html>
 </body>
 
 </html>

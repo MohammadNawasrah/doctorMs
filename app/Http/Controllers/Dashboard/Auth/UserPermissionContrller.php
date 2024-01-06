@@ -8,12 +8,15 @@ use Exception;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
+use Trait\Helpers\SessionHelper;
+use Trait\Helpers\UtileHelper;
 
 class UserPermissionContrller
 {
     public function setPermissionForUser(Request $request)
     {
         $userName = $request->input('userName');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         $jsonPermission = $request->input('jsonPermission');
         try {
             $user = Users::where('userName', $userName)->firstOrFail();
@@ -37,6 +40,7 @@ class UserPermissionContrller
     public function getPermissionForUser(Request $request)
     {
         $userName = $request->input('userName');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         try {
             $user = Users::where('userName', $userName)->firstOrFail();
         } catch (Exception $e) {
@@ -55,6 +59,7 @@ class UserPermissionContrller
     {
         $userName = $request->input('userName');
         $jsonPermission = $request->input('jsonPermission');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         try {
             $user = Users::where('userName', $userName)->firstOrFail();
         } catch (Exception $e) {
