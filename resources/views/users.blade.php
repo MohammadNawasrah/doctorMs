@@ -54,11 +54,10 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div id="deleteUserMessageModal"></div>
-
-
-                                <div class="modal-footer" style="display: flex;justify-content: center;align-items: center;">
-                                    <button type="button" id="deleteUser" class="btn btn-primary">Delete User</button>
+                                <div style="display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
+                                    <div>
+                                        <button type="button" id="deleteUser" class="btn btn-primary">Delete User</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -143,15 +142,5 @@
                             })
                         })
                     </script> -->
-<script>
-    $(function() {
 
-    });
-</script>
-<script>
-    $(function() {
-
-
-    })
-</script>
 @endsection

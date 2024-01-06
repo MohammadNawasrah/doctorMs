@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard\Auth;
 
+use App\Models\HtmlCode;
+use App\Models\HtmlCodeForPage;
 use App\Models\UserPermission;
 use App\Models\Users;
 use Exception;
 use Illuminate\Http\Request;
+use Nette\Utils\Html;
 use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
@@ -95,28 +98,8 @@ class UsersController
     {
 
         $acctionAllow = UserPermission::getOnPermissionPageToUser();
-        $pages = [
-            "permissionPage" => '<a class="nav-link hover-link" data-url="permissions" href="http://localhost/dashboard/permissions">
-        <div class="menu-btn">
-            <p class="menu-text"><i class="bi bi-key custom-icon"></i>Permission</p>
-        </div>
-                </a>',
-            "usersPage" => ' <a class="nav-link hover-link" data-url="users" href="http://localhost/dashboard/users">
-                <div class="menu-btn">
-                    <p class="menu-text"><i class="bi bi-person custom-icon"></i> Add New User</p>
-                </div>
-            </a>',
-            "patientsPage" => ' <a class="nav-link hover-link" href="Data patients.html">
-            <div class="menu-btn">
-                <p class="menu-text"><i class="bi bi-bar-chart custom-icon"></i>Patients</p>
-            </div>
-            </a>',
-            "schedulePage" => '                            <a class="nav-link hover-link" href="Schedule.html">
-            <div class="menu-btn">
-                <p class="menu-text"><i class="bi bi-alarm custom-icon"></i> Schedule</p>
-            </div>
-            </a>'
-        ];
+
+        $pages = HtmlCode::getHtmlCodeForPage("dashboard");
         $pagesSend = array();
         foreach ($acctionAllow as  $value) {
             if (isset($pages[$value]))
@@ -128,9 +111,9 @@ class UsersController
     public function getHtmlByPermission()
     {
         SessionHelper::checkIfLogedinForApi();
-        $users = Users::getAdminUsers();
         $acctionAllow = UserPermission::getOnPermissionToUser();
         $table = '';
+        $users = Users::getAdminUsers();
         foreach ($users as $user) {
             $table .= '<tr><td style="text-align: center;">' . $user . '</td>
             <td style="display: flex;justify-content: space-evenly;">
@@ -150,72 +133,8 @@ class UsersController
         if ((in_array("addUser", $acctionAllow) || in_array("updateUser", $acctionAllow) || in_array("deleteUser", $acctionAllow)) && in_array("showUsers", $acctionAllow)) {
             array_push($acctionAllow, "usersTableShow");
         }
-        $actions = [
-            "addUser" => '
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUserModal">
-                    Add User
-                </button>
-                <div class="modal fade" id="addNewUserModal" tabindex="-1" aria-labelledby="addNewUserModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addNewUserModalLabel">Add User</h5>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addNewUserForm">
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="text" class="form-control " id="firstNameInput" placeholder="First Name" required>
-                                            </div>
-                                            <div class="col">
-                                                <input type="text" class="form-control " id="lastNameInput" placeholder="Last Name" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="text" class="form-control" id="userNameInput" placeholder="User Name" required>
-                                            </div>
-                                            <div class="col">
-                                                <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <select style="background-color: white;border: none;outline: 1px solid black;border-radius: 2px;" class="form-select form-select-sm" aria-label="Small select example" id="userTypeInput" required>
-                                            <option selected>Choose an account type</option>
-                                            <option value="true">Admin</option>
-                                            <option value="false">User</option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="password" class="form-control mb-3" id="passwordInput" placeholder="Enter your password" required>
-                                        </div>
-                                        <div class="col">
-                                            <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Confirm your password" required>
-                                        </div>
-                                    </div>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches">
-                                        <label class="custom-control-label" for="customSwitches">User Status</label>
-                                    </div>
-                                    <div id="addUserMessage" class="alert alert-danger d-none" role="alert">
-                                    </div>
-                                    <div style="display: flex;justify-content: center;align-items: center;">
-                                        <button type="submit" id="addNewUserButton" class="btn btn-primary w-100">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>',
-            "usersTableShow" => $table,
-
-        ];
-
+        HtmlCode::getHtmlCodeForPageToUpdateIt("users", "usersTableShow", $table);
+        $actions = HtmlCode::getHtmlCodeForPage("users");
         $actionsSend = array();
         foreach ($acctionAllow as  $value) {
             if (isset($actions[$value]))

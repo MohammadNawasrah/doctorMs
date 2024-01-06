@@ -7,12 +7,9 @@ $(function () {
     $(document).off("click", '#addNewUserButton')
     $(document).on("click", '#addNewUserButton', function (event) {
         event.preventDefault();
+        selectedButton = $(this)
         if ($("#userTypeInput").val() === "Choose an account type") {
-            let message = $("#addUserMessage")
-            message.removeClass("d-none");
-            message.removeClass("alert-success");
-            message.addClass("alert-danger");
-            message.text("please chose type of user");
+            Message.addMessage("Please Fill user type", selectedButton, "danger");
             return;
         }
         var settings = {
@@ -31,26 +28,21 @@ $(function () {
                 "password": $("#passwordInput").val()
             }),
         };
-        Loader.addLoader($(this));
+
+        Loader.addLoader(selectedButton)
         $.ajax(settings).done(function (response) {
-            let addUserMessage = $("#addUserMessage");
             response = JSON.parse(response)
-            addUserMessage.removeClass("d-none");
             if (response.status === 200) {
-                addUserMessage.removeClass("alert-danger");
-                addUserMessage.addClass("alert-success");
-                addUserMessage.text(response.message);
-                fetchAllUsers();
+                Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
                     $("#addNewUserModal").modal("hide")
-                    Loader.removeLoader()
-                }, 500)
+                    Loader.removeLoader();
+                    fetch();
+                }, 1000);
                 return;
             }
-            Loader.removeLoader()
-            addUserMessage.removeClass("alert-success");
-            addUserMessage.addClass("alert-danger");
-            addUserMessage.text(response.message);
+            Loader.removeLoader();
+            Message.addMessage(response.message, selectedButton, "danger");
         });
     })
     $(document).off("click", ".addPermissionsToUserModal")
@@ -121,29 +113,20 @@ $(function () {
                 "jsonPermission": JsonPermaission
             }),
         };
-        Loader.addLoader($(this));
-        let savePermissionToUserMessage = $("#savePermissionToUserMessage");
+        selectedButton = $(this)
+        Loader.addLoader(selectedButton)
         $.ajax(settings).done(function (response) {
-            savePermissionToUserMessage.removeClass("d-none");
             response = JSON.parse(response)
             if (response.status === 200) {
-                savePermissionToUserMessage.removeClass("alert-danger");
-                savePermissionToUserMessage.addClass("alert-success");
-                savePermissionToUserMessage.text(response.message);
+                Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
-                    Loader.removeLoader();
                     $("#addPermissionToUserModal").modal("hide");
-                    savePermissionToUserMessage.addClass("d-none");
-                    if (sessionStorage.getItem("userName") === selectedUser) {
-                        location.reload();
-                    }
-                }, 1000)
+                    Loader.removeLoader();
+                }, 1000);
                 return;
             }
             Loader.removeLoader();
-            savePermissionToUserMessage.removeClass("alert-success");
-            savePermissionToUserMessage.addClass("alert-danger");
-            savePermissionToUserMessage.text(response.message);
+            Message.addMessage(response.message, selectedButton, "danger");
         });
     })
     function fetch() {
@@ -193,30 +176,20 @@ $(function () {
                 "userName": selectedUser
             }),
         };
-        Loader.addLoader($(this));
-        let deleteUserMessageModal = $("#deleteUserMessageModal");
+        selectedButton = $(this)
+        Loader.addLoader(selectedButton)
         $.ajax(settings).done(function (response) {
-            deleteUserMessageModal.removeClass("d-none");
             response = JSON.parse(response)
             if (response.status === 200) {
-                deleteUserMessageModal.removeClass("alert-danger");
-                deleteUserMessageModal.addClass("alert-success");
-                deleteUserMessageModal.text(response.message);
+                Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
+                    $("#deleteUserModal").modal("hide")
                     Loader.removeLoader();
-                    $("#deleteUserModal").modal("hide");
-                    deleteUserMessageModal.addClass("d-none");
-                    fetch();
-                    if (sessionStorage.getItem("userName") === selectedUser) {
-                        location.reload();
-                    }
-                }, 1000)
+                }, 1000);
                 return;
             }
             Loader.removeLoader();
-            deleteUserMessageModal.removeClass("alert-success");
-            deleteUserMessageModal.addClass("alert-danger");
-            deleteUserMessageModal.text(response.message);
+            Message.addMessage(response.message, selectedButton, "danger");
         })
     })
 })

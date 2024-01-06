@@ -30,8 +30,10 @@
                             </div>
                             <div id="loginMessage" class="alert alert-danger d-none" role="alert">
                             </div>
-                            <div class="mb-5">
-                                <input type="submit" id="loginButton" style="width: 80%;" value="Login" class="btn btn-primary">
+                            <div style="display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
+                                <div class="mb-5">
+                                    <input type="submit" id="loginButton" style="width: 100%;" value="Login" class="btn btn-primary">
+                                </div>
                             </div>
                         </form>
                     </div>

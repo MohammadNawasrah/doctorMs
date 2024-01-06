@@ -98,24 +98,21 @@ $(function () {
                 "jsonPermission": resultPermissionObject
             }),
         };
+        selectedButton = $(this)
+        Loader.addLoader(selectedButton)
         $.ajax(settings).done(function (response) {
             response = JSON.parse(response)
-            let addPermissionMessage = $("#addPermissionMessage");
-            addPermissionMessage.removeClass("d-none");
             if (response.status === 200) {
-                addPermissionMessage.removeClass("alert-danger");
-                addPermissionMessage.addClass("alert-success");
-                addPermissionMessage.text(response.message);
+                Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
+                    Loader.removeLoader();
                     $("#addNewPermissionModal").modal("hide")
-                    addPermissionMessage.addClass("d-none");
+                    fetchPermission();
                 }, 1000);
-                fetchPermission();
                 return;
             }
-            addPermissionMessage.removeClass("alert-success");
-            addPermissionMessage.addClass("alert-danger");
-            addPermissionMessage.text(response.message);
+            Loader.removeLoader();
+            Message.addMessage(response.message, selectedButton, "danger");
         });
     })
     $(document).off("click", "#addActionToPageName");
@@ -144,25 +141,21 @@ $(function () {
                 "actions": resultActionObject
             }),
         };
-
+        selectedButton = $(this)
+        Loader.addLoader(selectedButton)
         $.ajax(settings).done(function (response) {
             response = JSON.parse(response)
-            let addActionsMessage = $("#addActionsMessage");
-            addActionsMessage.removeClass("d-none");
             if (response.status === 200) {
-                addActionsMessage.removeClass("alert-danger");
-                addActionsMessage.addClass("alert-success");
-                addActionsMessage.text(response.message);
+                Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
+                    Loader.removeLoader();
                     $("#addNewActionModal").modal("hide")
-                    addActionsMessage.addClass("d-none");
+                    fetchPermission();
                 }, 1000);
-                fetchPermission();
                 return;
             }
-            addActionsMessage.removeClass("alert-success");
-            addActionsMessage.addClass("alert-danger");
-            addActionsMessage.text(response.message);
+            Loader.removeLoader();
+            Message.addMessage(response.message, selectedButton, "danger");
         });
     })
 })

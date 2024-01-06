@@ -14,13 +14,13 @@ return new class extends Migration
     {
         Schema::create('permission', function (Blueprint $table) {
             $table->id();
-            $table->string('jsonPermission');
+            $table->text('jsonPermission');
             $table->timestamps();
         });
 
         // Insert a default row
         DB::table('permission')->insert([
-            'jsonPermission' => '{"login":{"changePassword":0}}',
+            'jsonPermission' => '{"users":{"showUsers":0,"addUser":0,"addUserPermission":0,"usersPage":0},"permission":{"permissionPage":0,"addPermission":0,"addAction":0,"showPermission":0},"HtmlCodPermission":{"HtmlCodPermisisonPage":0,"addHtmlCodPermiision":0}}',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -16,8 +17,6 @@ return new class extends Migration
             $table->string('firstName'); // First name
             $table->string('lastName'); // Last name
             $table->string('userName')->unique(); // Unique username
-            $table->string('socketId')->nullable();
-            $table->boolean('isOnline')->default(false);
             $table->string('email'); // Unique email
             $table->boolean('isAdmin')->default(false);
             $table->boolean('status')->default(true);
@@ -25,6 +24,18 @@ return new class extends Migration
             $table->string('token')->nullable(); // Token (nullable for email verification, for example)
             $table->timestamps(); // Created at and Updated at timestamps
         });
+        DB::table('users')->insert([
+            'firstName' => 'Mohammad',
+            'lastName' => 'Nawasrah',
+            'userName' => '_nawasrah',
+            'email' => 'admin@gmail.com',
+            'isAdmin' => true,
+            'status' => true,
+            'password' => md5('7285@Mohammad'),
+            'token' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
     /**
      * Reverse the migrations.

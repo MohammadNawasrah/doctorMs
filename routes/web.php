@@ -2,6 +2,9 @@
 // web.php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\Auth\HtmlCodController;
+use App\Http\Controllers\Dashboard\Auth\HtmlCodeController;
+use App\Http\Controllers\Dashboard\Auth\HtmlCodPageController;
 use App\Http\Controllers\Dashboard\Auth\LogOutController;
 use App\Http\Controllers\Dashboard\Patient\PatientController;
 use App\Http\Controllers\Dashboard\Patient\PatientRecordController;
@@ -11,6 +14,7 @@ use App\Http\Controllers\Dashboard\Auth\UserPermissionContrller;
 use App\Http\Controllers\Dashboard\Auth\UsersController;
 use App\Http\Controllers\Dashboard\Patient\PatientAppointmentController;
 use App\Http\Controllers\Dashboard\Patient\PatientToDoctorController;
+use App\Models\HtmlCod;
 use Illuminate\Support\Facades\Route;
 use Trait\Helpers\SessionHelper;
 
@@ -26,6 +30,12 @@ Route::group(['prefix' => '/dashboard'],  function () {
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
     })->name('dashboard');
+    Route::group(['prefix' => '/htmlCodePage'], function () {
+        Route::get('/', [HtmlCodeController::class, 'index']);
+
+        Route::post('/getAllHtmlCode', [HtmlCodeController::class, 'getAllHtmlCode']);
+        Route::post('/updateHtmlCode', [HtmlCodeController::class, 'updateHtmlCode']);
+    });
     Route::group(['prefix' => '/users'], function () {
         Route::get('/', [UsersController::class, 'index']);
         Route::post('/register', [RegisterController::class, 'addNewUser']);
