@@ -111,6 +111,9 @@
                         <li class="nav-item" data-permission="usersPage">
 
                         </li>
+                        <li class="nav-item" data-permission="htmlCodePage">
+
+                        </li>
                     </ul>
                 </div>
             </nav>

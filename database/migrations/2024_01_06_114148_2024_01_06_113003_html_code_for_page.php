@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('HtmlCod');
+
         Schema::create('HtmlCod', function (Blueprint $table) {
             $table->id();
             $table->string("pageName");
-            $table->text("patientId");
+            $table->string("actionName");
+            $table->text("HtmlCod");
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('HtmlCod');
+        //
     }
 };

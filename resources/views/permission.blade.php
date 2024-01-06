@@ -14,10 +14,10 @@
                     <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
                         <!-- ====================================================================================== -->
                         <div class="row mb-5">
-                            <div class="col" data-permission="addNewAction" style="display: flex;justify-content: center;">
+                            <div class="col" data-permission="addAction" style="display: flex;justify-content: center;">
 
                             </div>
-                            <div class="col" data-permission="addNewPermission" style="display: flex;justify-content: center;">
+                            <div class="col" data-permission="addPermission" style="display: flex;justify-content: center;">
 
                             </div>
                         </div>

@@ -48,9 +48,9 @@ class UserPermission extends Model
                 $userPermission = json_decode(UserPermission::where('userId',  $user->id)->get()[0]["jsonPermission"], true);
                 foreach ($userPermission as $pageName => $actions) {
 
-                    if (isset($actions[strtolower($pageName) . "Page"]))
-                        if ($actions[strtolower($pageName) . "Page"]) {
-                            array_push($pagesOn,  strtolower($pageName) . "Page");
+                    if (isset($actions[($pageName) . "Page"]))
+                        if ($actions[($pageName) . "Page"]) {
+                            array_push($pagesOn, ($pageName) . "Page");
                         }
                 }
                 return  $pagesOn;
@@ -66,7 +66,7 @@ class UserPermission extends Model
             if (session()->has('token')) {
                 $user = Users::where("token", session("token"))->select("id")->firstOrFail();
                 $userPermission = json_decode(UserPermission::where('userId',  $user->id)->get()[0]["jsonPermission"], true);
-                if (!$userPermission[$pageName][strtolower($pageName) . "Page"]) {
+                if (!$userPermission[$pageName][($pageName) . "Page"]) {
                     return true;
                 }
             }
