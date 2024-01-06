@@ -9,5 +9,6 @@ class Login {
     static login = UrlData.baseUrl + "/login"
 }
 class Dashboard {
+    static dashboard = UrlData.baseUrl + "/dashboard";
     static users = UrlData.baseUrl + "/dashboard/users";
 }

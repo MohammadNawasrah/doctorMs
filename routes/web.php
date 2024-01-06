@@ -12,23 +12,30 @@ use App\Http\Controllers\Dashboard\Auth\UsersController;
 use App\Http\Controllers\Dashboard\Patient\PatientAppointmentController;
 use App\Http\Controllers\Dashboard\Patient\PatientToDoctorController;
 use Illuminate\Support\Facades\Route;
+use Trait\Helpers\SessionHelper;
 
 Route::fallback(fn () => redirect()->route('index'))->name('fallback');
 
 Route::group(['prefix' => '/'], function () {
     Route::post('/login', [LoginController::class, 'login']);
-    Route::get('/login', [LoginController::class, 'loginAction'])->name('index');
-    Route::get('/fireEvent', fn () => view('fireEvent'));
+    Route::get('/login', [LoginController::class, 'index'])->name('index');
 });
 
 Route::group(['prefix' => '/dashboard'],  function () {
+    Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
+    Route::get('/', function () {
+        return SessionHelper::checkIfLogedinForView('layouts.dashboard');
+    })->name('dashboard');
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/', fn () => view('users'))->name('dashboard');
+        Route::get('/', [UsersController::class, 'index']);
         Route::post('/register', [RegisterController::class, 'addNewUser']);
         Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
         Route::post('/user/online', [UsersController::class, 'setSocketIdForUserOnline']);
         Route::post('/user/offline', [UsersController::class, 'setSocketIdForUserOffline']);
         Route::post('/user', [UsersController::class, 'getUserByUserName']);
+        Route::post('/user/delete', [UsersController::class, 'deleteUser']);
+        Route::post('/getUserPermissions', [UsersController::class, 'getUserPermissions']);
+        Route::post('/getHtmlByPermission', [UsersController::class, 'getHtmlByPermission']);
     });
     Route::group(['prefix' => '/userPermission'], function () {
         Route::post('/setPermissionForUser', [UserPermissionContrller::class, 'setPermissionForUser']);
@@ -36,10 +43,11 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/getPermissionForUser', [UserPermissionContrller::class, 'getPermissionForUser']);
     });
     Route::group(['prefix' => '/permissions'], function () {
-        Route::get('/', fn () => view('permissions'));
+        Route::get('/', [PermissionController::class, "index"]);
         Route::post('/addPermission', [PermissionController::class, 'addNewPermission']);
         Route::get('/getAllPermission', [PermissionController::class, 'getAllPermission']);
         Route::post('/addNewActionForPagePermission', [PermissionController::class, 'addNewActionForPagePermission']);
+        Route::post('/getHtmlByPermission', [PermissionController::class, 'getHtmlByPermission']);
     });
     Route::group(['prefix' => '/patients'], function () {
         Route::post('/', [PatientController::class, 'showPatients']);
@@ -70,5 +78,5 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/toDoctor/update', [PatientToDoctorController::class, 'updatetoDoctor']);
         Route::post('/toDoctor/delete', [PatientToDoctorController::class, 'deletetoDoctor']);
     });
-    Route::get('/logOut', [LogOutController::class, 'logOut']);
+    Route::get('/logOut', [LogOutController::class, 'logOut'])->name("logOut");
 });

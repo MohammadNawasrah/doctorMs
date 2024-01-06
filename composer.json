@@ -38,7 +38,9 @@
             "traits/Helpers/GenerateHelper.php",
             "traits/Helpers/JsonHelper.php",
             "traits/Helpers/DateHelper.php",
-            "traits/Helpers/LoginHelper.php"
+            "traits/Helpers/LoginHelper.php",
+            "traits/Helpers/SessionHelper.php",
+            "traits/Helpers/UtileHelper.php"
         ]
     },
     "autoload-dev": {

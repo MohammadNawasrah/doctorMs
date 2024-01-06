@@ -12,6 +12,7 @@
         align-items: center;
     }
 </style>
+<script src="{{mix('resources/js/users.js')}}"></script>
 <!-- Main Content -->
 <main role="main" class="col-9">
     <!-- Content Goes Here -->
@@ -20,70 +21,51 @@
             <div class="col-md-8  ">
                 <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
                     <!-- ====================================================================================== -->
-
-                    <div class="modal fade" id="addNewUserModal" tabindex="-1" aria-labelledby="addNewUserModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="addPermissionToUserModal" tabindex="-1" aria-labelledby="addPermissionToUserModalModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addNewUserModalLabel">Add User</h5>
+                                    <h5 class="modal-title" id="addPermissionToUserModalModalLabel">Fill the information</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="addNewUserForm">
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="text" class="form-control " id="firstNameInput" placeholder="First Name" required>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control " id="lastNameInput" placeholder="Last Name" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="text" class="form-control" id="userNameInput" placeholder="User Name" required>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <select style="background-color: white;
-border: none;
-outline: 1px solid black;
-border-radius: 2px;" class="form-select form-select-sm" aria-label="Small select example" id="userTypeInput" required>
-                                                <option selected>Choose an account type</option>
-                                                <option value="true">Admin</option>
-                                                <option value="false">User</option>
-                                            </select>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="password" class="form-control mb-3" id="passwordInput" placeholder="Enter your password" required>
-                                            </div>
-                                            <div class="col">
-                                                <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Confirm your password" required>
-                                            </div>
-                                        </div>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitches">
-                                            <label class="custom-control-label" for="customSwitches">User Status</label>
-                                        </div>
-                                        <div id="addUserMessage" class="alert alert-danger d-none" role="alert">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary w-100">Submit</button>
-                                    </form>
+                                    <div class="mb-3">
+                                    </div>
+                                    <div class="mb-3" style="display: flex;flex-direction: column;justify-content: center; align-items: center;">
+                                        <select class="form-select" id="pagesNamePermission" aria-label="Default select example" required>
+                                        </select>
+                                    </div>
+                                    <div class="row mt-2" id="actionsPermissionForUsers" style="display: flex;flex-direction: column;justify-content: center; align-items: center;">
+                                    </div>
+                                    <div id="savePermissionToUserMessage" class="alert d-none" role="alert">
+                                    </div>
+                                    <div class="row" style="display: flex ;justify-content: center;align-items: center;">
+                                        <button type="button" id="savePermissionToUser" class="btn btn-danger">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" tabindex="-1" role="dialog" id="deleteUserModal" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteUserModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div id="deleteUserMessageModal"></div>
+
+
+                                <div class="modal-footer" style="display: flex;justify-content: center;align-items: center;">
+                                    <button type="button" id="deleteUser" class="btn btn-primary">Delete User</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- ===================================================================================== -->
-                    <div class="row" style="justify-content: center;display: flex; margin: 20px;">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUserModal">
-                            Add User
-                        </button>
+                    <div class="row" data-permission="addUser" style="justify-content: center;display: flex; margin: 20px;">
+
                     </div>
                     <div class="container" style="height: 500px;overflow-y: scroll;">
                         <div class="table-responsive">
@@ -94,7 +76,7 @@ border-radius: 2px;" class="form-select form-select-sm" aria-label="Small select
                                         <th scope="col" class="col-3" style="padding-left: 5%;">Events</th>
                                     </tr>
                                 </thead>
-                                <tbody id="usersData">
+                                <tbody data-permission="usersTableShow" id="usersTableBody">
                                     <!-- fill from ajax -->
                                 </tbody>
                             </table>
@@ -163,77 +145,13 @@ border-radius: 2px;" class="form-select form-select-sm" aria-label="Small select
                     </script> -->
 <script>
     $(function() {
-        function fetchAllUsers() {
-            var settings = {
-                "url": "http://localhost/dashboard/users/getAllAdminUsers",
-                "method": "GET",
-                "timeout": 0,
-            };
-            $.ajax(settings).done(function(response) {
-                response = JSON.parse(response)
-                $("#usersData").html("");
-                if (response.status === 200) {
-                    response.data.forEach(element => {
-                        $("#usersData").append(`
-                        <tr>
-                            <td style="text-align: center;">${element.userName}</td>
-                            <td style="display: flex;justify-content: space-evenly;">
-                                <button class="btn btn-primary"  data-toggle="tooltip" data-placement="top" title="Add Permission"><i class="bi bi-plus"></i></button>
-                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Update"><i class="bi bi-arrow-down-up"></i></button>
-                                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>
-                            `)
-                    });
-                }
-            });
-        }
-        fetchAllUsers();
-        $('#addNewUserForm').off("submit")
-        $('#addNewUserForm').on("submit", function(event) {
-            event.preventDefault();
-            if ($("#userTypeInput").val() === "Choose an account type") {
-                let message = $("#addUserMessage")
-                message.removeClass("d-none");
-                message.removeClass("alert-success");
-                message.addClass("alert-danger");
-                message.text("please chose type of user");
-                return;
-            }
-            var settings = {
-                "url": "http://localhost/dashboard/users/register",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Content-Type": "application/json",
-                },
-                "data": JSON.stringify({
-                    "firstName": $("#firstNameInput").val(),
-                    "lastName": $("#lastNameInput").val(),
-                    "userName": $("#userNameInput").val(),
-                    "email": $("#emailInput").val(),
-                    "isAdmin": $("#userTypeInput").val(),
-                    "password": $("#passwordInput").val()
-                }),
-            };
-            $.ajax(settings).done(function(response) {
-                console.log(response)
-                let message = $("#addUserMessage");
-                response = JSON.parse(response)
-                message.removeClass("d-none");
-                if (response.status === 200) {
-                    message.removeClass("alert-danger");
-                    message.addClass("alert-success");
-                    message.text(response.message);
-                    fetchAllUsers();
-                    $("#addNewUserModal").modal("hide")
-                    return;
-                }
-                message.removeClass("alert-success");
-                message.addClass("alert-danger");
-                message.text(response.message);
-            });
-        })
+
     });
+</script>
+<script>
+    $(function() {
+
+
+    })
 </script>
 @endsection

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <script src="{{mix('resources/js/jquery-3.7.1.min.js')}}"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,6 +71,7 @@
     </style>
     <!-- @vite(['resources/css/bootstrap5.3.0/bootstrap.min.css','resources/css/login.css']) -->
     <script src="{{mix('resources/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{mix('resources/js/mainFunction.js')}}"></script>
     <!-- @vite(['resources/css/admin.css','resources/css/main.css','resources/css/animations.css']) -->
 </head>
 
@@ -95,48 +95,49 @@
                             <p class="profile-subtitle">aseel</p>
                         </div>
                     </div>
-                    <a href="logout.php" class="btn btn-blue btn-block hover-effect">Log out</a>
+                    <a href="http://localhost/dashboard/logOut" class="btn btn-blue btn-block hover-effect">Log out</a>
                     <hr class="my-4 border">
                     <!-- Menu Items -->
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link hover-link" href="Schedule.html">
-                                <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-alarm custom-icon"></i> Schedule</p>
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="schedulePage">
+
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link hover-link" href="Data patients.html">
-                                <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-bar-chart custom-icon"></i> Data patients</p>
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="patientsPage">
+
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link hover-link" data-url="permissions" href="http://localhost/dashboard/permissions">
-                                <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Permission</p>
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="permissionPage">
+
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link hover-link" data-url="users" href="http://localhost/dashboard/users">
-                                <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-person custom-icon"></i> Add New User</p>
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="usersPage">
+
                         </li>
                     </ul>
                 </div>
             </nav>
             <script>
                 $(function() {
-                    $("#userName").text(localStorage.getItem("userName"))
+                    var settings = {
+                        "url": "http://localhost/dashboard/userPageToAccess",
+                        "method": "POST",
+                        "timeout": 0,
+                    };
+                    $.ajax(settings).done(function(response) {
+                        response = JSON.parse(response);
+                        if (response.status == 200) {
+                            data = response.data;
+                            data.forEach(permission => {
+                                keys = Object.keys(permission)
+                                keys.forEach(element => {
+                                    $(`[data-permission=${element}]`).append(permission[element])
+                                });
+                            })
+                        }
+                        $(`[data-url="${lastSegment}"]`).addClass("menu-active");
+                    });
+                    $("#userName").text(sessionStorage.getItem("userName"))
                     const urlSegments = window.location.pathname.split('/');
                     const lastSegment = urlSegments[urlSegments.length - 1];
-                    $(`[data-url="${lastSegment}"]`).addClass("menu-active");
-                    console.log(`Last Segment: ${lastSegment}`);
+
                 })
             </script>
             @yield('content')

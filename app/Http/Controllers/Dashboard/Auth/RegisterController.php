@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
+use Trait\Helpers\UtileHelper;
 use Trait\Helpers\ValidationHelper;
 
 class RegisterController
@@ -17,6 +18,7 @@ class RegisterController
         $lastName = $request->input('lastName');
         $userName = $request->input('userName');
         $isAdmin = $request->input('isAdmin');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         if ($isAdmin == 'true')
             $isAdmin = true;
         else

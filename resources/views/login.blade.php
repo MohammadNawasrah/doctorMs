@@ -9,6 +9,7 @@
     <script src="{{mix('resources/js/jquery-3.7.1.min.js')}}"></script>
     <script src="{{mix('resources/js/login.js')}}"></script>
     <script src="{{mix('resources/js/route.js')}}"></script>
+    <script src="{{mix('resources/js/mainFunction.js')}}"></script>
     <title>Login</title>
 </head>
 
@@ -30,7 +31,7 @@
                             <div id="loginMessage" class="alert alert-danger d-none" role="alert">
                             </div>
                             <div class="mb-5">
-                                <input type="submit" style="width: 80%;" value="Login" class="btn btn-primary">
+                                <input type="submit" id="loginButton" style="width: 80%;" value="Login" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

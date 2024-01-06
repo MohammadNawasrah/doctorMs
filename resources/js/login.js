@@ -1,6 +1,6 @@
 $(function () {
-    $("#login").off("submit");
-    $("#login").on("submit", function (event) {
+    $(document).off("click", "#loginButton");
+    $(document).on("click", "#loginButton", function (event) {
         event.preventDefault();
         var settings = {
             "url": Login.login,
@@ -14,21 +14,26 @@ $(function () {
                 "password": $("#password").val()
             }),
         };
-        let message = $("#loginMessage");
+        Loader.addLoader($(this))
+        let loginMessage = $("#loginMessage");
         $.ajax(settings).done(function (response) {
             response = JSON.parse(response)
-            message.removeClass("d-none");
+            loginMessage.removeClass("d-none");
             if (response.status === 200) {
-                message.removeClass("alert-danger");
-                message.addClass("alert-success");
-                message.text(response.message);
-                localStorage.setItem("userName", response.data.userName)
-                window.location.href = Dashboard.users;
+                loginMessage.removeClass("alert-danger");
+                loginMessage.addClass("alert-success");
+                loginMessage.text(response.message);
+                sessionStorage.setItem("userName", response.data.userName)
+                setTimeout(() => {
+                    Loader.removeLoader();
+                    window.location.href = Dashboard.dashboard;
+                }, 500)
                 return;
             }
-            message.removeClass("alert-success");
-            message.addClass("alert-danger");
-            message.text(response.message);
+            loginMessage.removeClass("alert-success");
+            loginMessage.addClass("alert-danger");
+            loginMessage.text(response.message);
+            Loader.removeLoader();
         });
     })
 });
