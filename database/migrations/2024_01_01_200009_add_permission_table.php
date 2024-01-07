@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('userPermission', function (Blueprint $table) {
+        Schema::create('user_permission', function (Blueprint $table) {
             $table->id();
             $table->integer("userId");
             $table->string('jsonPermission');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('userPermission');
+        Schema::dropIfExists('user_permission');
     }
 };
