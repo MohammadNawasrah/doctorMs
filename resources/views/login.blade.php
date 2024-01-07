@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap5.3.0/bootstrap.min.css">
     <link rel="stylesheet" href="/css/login.css">
-    <script src="/js/jquery-3.7.1.min.js"></script>
-    <script src="/js/route.js"></script>
+    <script src="/js/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/js/util/route.js"></script>
     <script src="/js/login.js"></script>
-    <script src="/js/mainFunction.js"></script>
+    <script src="/js/util/mainClass.js"></script>
     <title>Login</title>
 </head>
 
