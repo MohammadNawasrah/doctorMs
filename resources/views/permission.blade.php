@@ -3,7 +3,7 @@
 @section('title', 'Users')
 
 @section('content')
-<script src="{{mix('resources/js/permission.js')}}"></script>
+<script src="/js/permission.js"></script>
 <!-- Main Content -->
 <main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col-9 ">
     <main role="main" class="col-9 md-ml-sm-auto">
@@ -43,7 +43,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     var settings = {
-        "url": "http://localhost/dashboard/permissions/getHtmlByPermission",
+        "url": Permissions.getHtmlByPermission,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -53,9 +53,7 @@
         "data": JSON.stringify({
             "userName": sessionStorage.getItem("userName")
         }),
-
     };
-
     $.ajax(settings).done(function(response) {
         response = JSON.parse(response);
         if (response.status == 200) {
