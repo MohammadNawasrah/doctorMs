@@ -101,7 +101,7 @@ $(function () {
             JsonPermaission[pageName] = actions;
         });
         var settings = {
-            "url": Users.getUserPermissions,
+            "url": UserPermission.updatePermissionForUser,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -119,6 +119,9 @@ $(function () {
             if (response.status === 200) {
                 Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
+                    if (sessionStorage.getItem("userName") === selectedUser) {
+                        location.reload();
+                    }
                     $("#addPermissionToUserModal").modal("hide");
                     Loader.removeLoader();
                 }, 1000);
