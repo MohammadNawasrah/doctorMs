@@ -133,6 +133,13 @@
                         <li class="nav-item" data-permission="htmlCodePage">
 
                         </li>
+                        <li class="nav-item" data-permission="patientsPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                                <div class="menu-btn">
+                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -154,6 +161,7 @@
                                 });
                             })
                         }
+                        console.log(lastSegment)
                         $(`[data-url="${lastSegment}"]`).addClass("menu-active");
                     });
                     $("#userName").text(sessionStorage.getItem("userName"))

@@ -59,7 +59,9 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/addNewActionForPagePermission', [PermissionController::class, 'addNewActionForPagePermission']);
         Route::post('/getHtmlByPermission', [PermissionController::class, 'getHtmlByPermission']);
     });
+
     Route::group(['prefix' => '/patients'], function () {
+        Route::get('/', [PatientController::class, 'index']);
         Route::post('/', [PatientController::class, 'showPatients']);
         Route::post('/patient', [PatientController::class, 'showPatient']);
         Route::post('/patient/add', [PatientController::class, 'addPatient']);
