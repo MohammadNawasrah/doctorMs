@@ -128,7 +128,7 @@
                             </a>
                         </li>
                         <li class="nav-item" data-permission="patientsPage">
-                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/dateToDay">
                                 <div class="menu-btn">
                                     <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
                                 </div>

@@ -26,6 +26,9 @@ Route::group(['prefix' => '/'], function () {
 });
 
 Route::group(['prefix' => '/dashboard'],  function () {
+    Route::get('/dateToDay', function () {
+        return View('dateToDay');
+    });
     Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
