@@ -3,7 +3,7 @@ var pagesName;
 $(function () {
     function fetchPermission() {
         var settings = {
-            "url": "Permissions.getAllPermission",
+            "url": Permissions.getAllPermission,
             "method": "GET",
             "timeout": 0,
         };
