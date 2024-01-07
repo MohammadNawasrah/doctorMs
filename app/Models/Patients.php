@@ -24,9 +24,21 @@ class Patients extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Patient Not Found"));
         }
     }
+    public static function getPatientByPhoneNumber($phoneNumber)
+    {
+        try {
+            self::where('phoneNumber', $phoneNumber)->firstOrFail();
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Phone Number Already Exist"));
+        } catch (\Throwable $th) {
+        }
+    }
     public static function createRecord($newData)
     {
         try {
+            if ($newData["age"] <= 0 || $newData["age"] >= 150) {
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, "age Just From 1 to 150"));
+            }
+            self::getPatientByPhoneNumber($newData["phoneNumber"]);
             self::create($newData);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));

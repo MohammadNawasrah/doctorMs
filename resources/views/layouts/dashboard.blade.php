@@ -19,6 +19,14 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
+        .centerPage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
         .hover-link:hover {
             background-color: #e3efff;
             /* تحديد لون الخلفية عند هوفر */

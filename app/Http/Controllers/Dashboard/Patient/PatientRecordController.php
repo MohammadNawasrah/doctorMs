@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientRecords;
 use App\Models\Patients;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
@@ -28,10 +29,10 @@ class PatientRecordController
         RequsetHelper::addResponseData("data", $patientsRecords);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patients data with appointments retrieved successfully');
     }
-    public function showRecord(Request $request)
+    public function showRecord($token)
     {
-        $patientToken = $request->get("token");
-        $patient = Patients::getPatientByToken($patientToken);
+        return View("patientRecord");
+        $patient = Patients::getPatientByToken($token);
         $patinetRecord = PatientRecords::getAllPatientRecords($patient["id"]);
         RequsetHelper::addResponseData("data", $patinetRecord);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
