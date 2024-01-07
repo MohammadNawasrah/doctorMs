@@ -27,6 +27,10 @@
             text-align: center;
         }
 
+        .margin {
+            margin: 15px;
+        }
+
         .hover-link:hover {
             background-color: #e3efff;
             /* تحديد لون الخلفية عند هوفر */

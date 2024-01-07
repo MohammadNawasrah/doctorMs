@@ -67,9 +67,11 @@ class Patients extends Model
     public static function updatePatientRecord($patientToken, $newData)
     {
         try {
-            self::getPatientByToken($patientToken)->update($newData);
+            self::where('phoneNumber', $newData["phoneNumber"])
+                ->where('token', '!=', $newData["token"])->firstOrFail();
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, "Phone Number Already Exsit"));
         } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+            self::getPatientByToken($patientToken)->update($newData);
         }
     }
 }
