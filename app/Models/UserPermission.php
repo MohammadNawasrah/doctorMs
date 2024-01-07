@@ -46,14 +46,16 @@ class UserPermission extends Model
                 $pagesOn = [];
                 $user = Users::where("token", session("token"))->select("id")->firstOrFail();
                 $userPermission = json_decode(UserPermission::where('userId',  $user->id)->get()[0]["jsonPermission"], true);
-                foreach ($userPermission as $pageName => $actions) {
-
-                    if (isset($actions[($pageName) . "Page"]))
-                        if ($actions[($pageName) . "Page"]) {
-                            array_push($pagesOn, ($pageName) . "Page");
-                        }
+                if (isset($userPermission)) {
+                    foreach ($userPermission as $pageName => $actions) {
+                        if (isset($actions[($pageName) . "Page"]))
+                            if ($actions[($pageName) . "Page"]) {
+                                array_push($pagesOn, ($pageName) . "Page");
+                            }
+                    }
+                    return  $pagesOn;
                 }
-                return  $pagesOn;
+                return die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "No Have Any Permission"));
             }
             return die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "you are Not Login"));
         } catch (\Throwable $th) {
