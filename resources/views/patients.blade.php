@@ -26,50 +26,65 @@
                               <input type="text" class="form-control " id="inputField1" placeholder="First Name" required>
                             </div>
 
-                            <div class="col">
-                              <input type="text" class="form-control " id="inputField1" placeholder="Last Name" required>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <div class="row">
-                            <div class="col">
-                              <input type="text" class="form-control" id="inputField1" placeholder="User Name" required>
-                            </div>
-                            <div class="col">
 
-                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
-                            </div>
+  <!-- Modal -->
+  <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="datetime-local" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-5"></div>
+  <div class="col"><button class="btn btn-primary" style="margin-bottom:4%;" data-bs-toggle="modal" data-bs-target="#aseel">Add patient</button>
+</div></div>
+<!-- ============================================Add patient========================================== -->
+<div class="modal fade" id="aseel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Fill the information</h5>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col">
+                          <input type="text" class="form-control" id="inputField1" placeholder="Full Name" required>
                           </div>
-                        </div>
-                        <div class="mb-3">
-                          <select class="form-select" aria-label="Default select example" required>
-                            <option selected>Choose an account </option>
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                          </select>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-
-                            <input type="password" class="form-control mb-3" id="password" placeholder="Enter your password" required>
-                          </div>
-
-                          <div class="col">
-
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-                          </div>
-                        </div>
-                        <label class="form-check-label" for="switch">Status</label>
-                        <div class="mb-3 form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="switch">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
-                      </form>
                     </div>
-                  </div>
                 </div>
-              </div> -->
+                <div class="mb-3">
+                <div class="row">
+                <div class="col">
+
+                    <input type="number" class="form-control " id="inputField1" placeholder="Age" required>
+                </div>
+
+                <div class="col">
+                  <input type="tel" class="form-control " id="phoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                </div>
+            </div>
+        </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
               <!-- ===================================================================================== -->
               <!-- ==========================================delete modal============================================ -->
 
