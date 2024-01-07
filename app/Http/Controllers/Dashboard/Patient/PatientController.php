@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\Patients;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
@@ -12,6 +13,10 @@ use Trait\Helpers\RequsetHelper;
 class PatientController
 {
     use GenerateHelper;
+    public function index()
+    {
+        return View("patients");
+    }
     public function addPatient(Request $request)
     {
         $fullName = $request->get("fullName");
