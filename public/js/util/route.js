@@ -15,6 +15,7 @@ class Dashboard {
     static htmlCodePage = Dashboard.dashboard + "/htmlCodePage";
     static userPageToAccess = Dashboard.dashboard + "/userPageToAccess";  // Added
     static userPermission = Dashboard.dashboard + "/userPermission"
+    static patients = Dashboard.dashboard + "/patients";
     // Add more routes as needed
 }
 
@@ -54,11 +55,11 @@ class Permissions {
 }
 
 class Patients {
-    static showPatients = Dashboard.dashboard + "/patients";  // Added
-    static showPatient = Dashboard.dashboard + "/patient";  // Added
-    static addPatient = Dashboard.dashboard + "/patient/add";  // Added
-    static updatePatient = Dashboard.dashboard + "/patient/update";  // Added
-    static deletePatient = Dashboard.dashboard + "/patient/delete";  // Added
+    static showPatients = Dashboard.patients;  // Added
+    static showPatient = Dashboard.patients + "/patient";  // Added
+    static addPatient = Dashboard.patients + "/patient/add";  // Added
+    static updatePatient = Dashboard.patients + "/patient/update";  // Added
+    static deletePatient = Dashboard.patients + "/patient/delete";  // Added
     // Add more routes as needed
 }
 
