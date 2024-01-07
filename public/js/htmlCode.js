@@ -1,6 +1,8 @@
+
+
 $(function () {
     var settings = {
-        "url": "http://localhost/dashboard/htmlCodePage/getAllHtmlCode",
+        "url": HtmlCodePage.getAllHtmlCode,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -35,7 +37,7 @@ $(function () {
             dataToSend[$(element).data("select")] = $(element).val();
         })
         var settings = {
-            "url": "http://localhost/dashboard/htmlCodePage/updateHtmlCode",
+            "url": HtmlCodePage.updateHtmlCode,
             "method": "POST",
             "timeout": 0,
             "headers": {
