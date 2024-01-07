@@ -40,7 +40,8 @@
             "traits/Helpers/DateHelper.php",
             "traits/Helpers/LoginHelper.php",
             "traits/Helpers/SessionHelper.php",
-            "traits/Helpers/UtileHelper.php"
+            "traits/Helpers/UtileHelper.php",
+            "traits/Helpers/ImageHelper.php"
         ]
     },
     "autoload-dev": {
