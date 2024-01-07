@@ -9,7 +9,7 @@ use Trait\Helpers\RequsetHelper;
 
 class PatientRecords extends Model
 {
-    protected $table = 'patientRecords';
+    protected $table = 'patient_records';
 
     protected $fillable = [
         'patientId',

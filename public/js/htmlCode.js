@@ -44,9 +44,7 @@ $(function () {
         function doneSaveHtmlChange(response) {
             var response = JSON.parse(response);
             if (response.status == 200) {
-                console.log(selectButton)
                 Message.addMessage(response.message, selectButton, "success")
-                console.log(response.message)
                 setInterval(() => {
                     Loader.removeLoader()
                     location.reload();

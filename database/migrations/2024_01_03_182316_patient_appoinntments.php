@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    // patientId patientNote  
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('patient_records', function (Blueprint $table) {
+        // patientId currentAppointment  nextappointment
+        Schema::create('patient_appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->string('patientNote')->nullable();
+            $table->dateTime('nextappointment');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patientRecords');
+        Schema::dropIfExists('patient_appointments');
     }
 };

@@ -11,7 +11,7 @@ use Trait\Helpers\RequsetHelper;
 
 class PatientAppoinntments extends Model
 {
-    protected $table = 'patientAppointments';
+    protected $table = 'patient_appointments';
 
     protected $fillable = [
         'patientId',

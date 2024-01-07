@@ -8,7 +8,7 @@ use Trait\Helpers\RequsetHelper;
 
 class PatientToDoctor extends Model
 {
-    protected $table = 'patientToDoctor';
+    protected $table = 'patient_to_doctor';
 
     protected $fillable = [
         'userId',

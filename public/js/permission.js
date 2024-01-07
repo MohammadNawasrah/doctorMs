@@ -1,7 +1,50 @@
 var permissions;
 var pagesName;
 $(function () {
-
+    function fetchPermission() {
+        var settings = {
+            "url": "Permissions.getAllPermission",
+            "method": "GET",
+            "timeout": 0,
+        };
+        $.ajax(settings).done(function (response) {
+            const permissionTableBody = $("#permissionTableBody");
+            permissionTableBody.html("");
+            response = JSON.parse(response)
+            if (response.status === 200) {
+                permissions = JSON.parse(response.data.jsonPermission);
+                pagesName = Object.keys(permissions)
+                pagesName.forEach(pageName => {
+                    actionsName = Object.keys(permissions[pageName])
+                    pageNameSelectOptions = "";
+                    actionsName.forEach(actionName => {
+                        pageNameSelectOptions += ` <option value="${actionName}">${actionName}</option>`;
+                    })
+                    permissionTableBody.append(`
+                        <tr>
+                            <td style="text-align: center;">${pageName}</td>
+                            <td style="display: flex;justify-content: space-evenly;">
+                                <select style="width: 200px;" class="form-select" aria-label="Default select example">
+                                ${pageNameSelectOptions}
+                                </select>
+                            </td>
+                        </tr>
+                            `)
+                });
+                return;
+            }
+            permissionTableBody.append(`
+                        <tr>
+                            <td colspan="2" >
+                                <div style="display:flex;justify-content:center">
+                                    ${response.message}
+                                </div>
+                            </td>
+                        </tr>
+                            `)
+        });
+    }
+    fetchPermission();
     $(document).on("click", "#addPermissionInput", function () {
         const actionInput = $("#permissionInputs");
         actionInput.append(`  <input type="text" class="form-control mb-3 " id="inputField1" placeholder="Action Name" required>`);

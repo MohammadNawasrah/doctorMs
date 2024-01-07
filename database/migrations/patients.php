@@ -6,16 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    // patientId patientNote  
+    // id fullName age phoneNumber 
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('patient_records', function (Blueprint $table) {
+        Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->string('patientNote')->nullable();
+            $table->string('fullName');
+            $table->string('phoneNumber')->unique();
+            $table->string('token');
+            $table->integer('age');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patientRecords');
+        Schema::dropIfExists('patients');
     }
 };
