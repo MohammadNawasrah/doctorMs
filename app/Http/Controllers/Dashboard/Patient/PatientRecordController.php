@@ -31,7 +31,15 @@ class PatientRecordController
     }
     public function showRecord($token)
     {
-        return View("patientRecord");
+        return View("patientShowRecord");
+        $patient = Patients::getPatientByToken($token);
+        $patinetRecord = PatientRecords::getAllPatientRecords($patient["id"]);
+        RequsetHelper::addResponseData("data", $patinetRecord);
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
+    }
+    public function fullRecord($token)
+    {
+        return View("patientFullRecord");
         $patient = Patients::getPatientByToken($token);
         $patinetRecord = PatientRecords::getAllPatientRecords($patient["id"]);
         RequsetHelper::addResponseData("data", $patinetRecord);

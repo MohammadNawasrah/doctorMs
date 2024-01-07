@@ -28,82 +28,69 @@
 
 
   <!-- Modal -->
-                            <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="ModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ModalLabel"></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <input type="datetime-local" class="form-control">
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-success">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row"
-                                style="display: flex;justify-content: center;align-items: center; margin-bottom: 20px;">
-                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#addNewPatientModal">Add patient</button>
-                            </div>
-                            <!-- ============================================Add patient========================================== -->
-                            <div class="modal fade" id="addNewPatientModal" tabindex="-1"
-                                aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="addNewPatientModalLabel">Fill the information
-                                            </h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" id="patientFullName"
-                                                            placeholder="Full Name" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <input type="number" class="form-control " id="patientAge"
-                                                            placeholder="Age" required>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="tel" class="form-control " id="patientPhoneNumber"
-                                                            placeholder="Phone Number"
-                                                            pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="centerPage">
-                                                <div>
-                                                    <div>
-                                                        <button type="button" id="addNewPatient"
-                                                            class="btn btn-primary w-100">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ===================================================================================== -->
-                            <!-- ==========================================delete modal============================================ -->
+              <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ModalLabel"></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <input type="datetime-local" class="form-control">
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="display: flex;justify-content: center;align-items: center; margin-bottom: 20px;">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewPatientModal">Add patient</button>
+              </div>
+              <!-- ============================================Add patient========================================== -->
+              <div class="modal fade" id="addNewPatientModal" tabindex="-1" aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addNewPatientModalLabel">Fill the information</h5>
+                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col">
+                            <input type="text" class="form-control" id="patientFullName" placeholder="Full Name" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col">
+                            <input type="number" class="form-control " id="patientAge" placeholder="Age" required>
+                          </div>
+                          <div class="col">
+                            <input type="tel" class="form-control " id="patientPhoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="centerPage">
+                        <div>
+                          <div>
+                            <button type="button" id="addNewPatient" class="btn btn-primary w-100">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ===================================================================================== -->
+              <!-- ==========================================delete modal============================================ -->
 
                             <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal"
                                 aria-labelledby="deletePatientModalLabel" aria-hidden="true">
@@ -249,23 +236,23 @@
                 }),
             };
 
-            var selectedButton = $(this);
-            Loader.addLoader(selectedButton);
-            $.ajax(settings).done(function (response) {
-                response = JSON.parse(response)
-                if (response.status === 200) {
-                    Message.addMessage(response.message, selectedButton, "success");
-                    setTimeout(() => {
-                        $("#addNewPatientModal").modal("hide");
-                        Loader.removeLoader();
-                        fetchPatients();
-                    }, 1000);
-                    return;
-                }
-                Loader.removeLoader();
-                Message.addMessage(response.message, selectedButton, "danger");
-            });
-        })
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#addNewPatientModal").modal("hide");
+            Loader.removeLoader();
+            fetchPatients();
+          }, 1000);
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
     })
+  })
 </script>
 @endsection
