@@ -1,3 +1,5 @@
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,7 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('user_permission', function (Blueprint $table) {
+            $table->id();
+            $table->integer("userId");
+            $table->string('jsonPermission');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('user_permission');
     }
 };

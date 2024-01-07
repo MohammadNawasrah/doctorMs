@@ -8,7 +8,7 @@ use Trait\Helpers\RequsetHelper;
 
 class HtmlCode extends Model
 {
-    protected $table = "htmlCodeForPage";
+    protected $table = "html_code_for_page";
     protected $fillable = [
         'pageName',
         "actionName",

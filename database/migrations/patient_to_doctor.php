@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -6,16 +9,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    // patientId patientNote  
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('patient_records', function (Blueprint $table) {
+        Schema::create('patient_to_doctor', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("userId")->constrained("users")->onDelete('cascade');
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->string('patientNote')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patientRecords');
+        Schema::dropIfExists('patient_to_doctor');
     }
 };

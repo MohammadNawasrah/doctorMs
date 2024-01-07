@@ -13,7 +13,7 @@ use Trait\Helpers\SessionHelper;
 
 class UserPermission extends Model
 {
-    protected $table = "userPermission";
+    protected $table = "user_permission";
     protected $fillable = [
         'userId',
         'jsonPermission',
