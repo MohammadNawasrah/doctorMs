@@ -26,6 +26,8 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="addPermissionToUserModalModalLabel">Fill the information</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
@@ -49,14 +51,14 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteUserModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="deleteUserModalLabel">are you sure to delete ??</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div style="display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
                                     <div>
-                                        <button type="button" id="deleteUser" class="btn btn-primary">Delete User</button>
+                                        <button type="button" id="deleteUser" class="btn btn-danger m-3">Delete User</button>
                                     </div>
                                 </div>
                             </div>
