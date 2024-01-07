@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientAppoinntments;
 use App\Models\Patients;
-use Exception;
 use Illuminate\Http\Request;
 use Trait\Helpers\DateHelper;
 use Trait\Helpers\HttpStatusCodes;

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/bootstrap5.3.0/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap5.3.0/bootstrap.min.css">
     <title>@yield('title', 'Your App')</title>
     <style>
         /* Add your custom styles here if needed */
@@ -69,10 +69,9 @@
             color: #0d6efd;
         }
     </style>
-    <!-- @vite(['resources/css/bootstrap5.3.0/bootstrap.min.css','resources/css/login.css']) -->
-    <script src="{{mix('resources/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{mix('resources/js/mainFunction.js')}}"></script>
-    <!-- @vite(['resources/css/admin.css','resources/css/main.css','resources/css/animations.css']) -->
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/mainFunction.js"></script>
+    <script src="/js/route.js"></script>
 </head>
 
 <body>
@@ -95,7 +94,7 @@
                             <p class="profile-subtitle">aseel</p>
                         </div>
                     </div>
-                    <a href="http://localhost/dashboard/logOut" class="btn btn-blue btn-block hover-effect">Log out</a>
+                    <a href="{{ url('/dashboard/logOut') }}" class="btn btn-blue btn-block hover-effect">Log out</a>
                     <hr class="my-4 border">
                     <!-- Menu Items -->
                     <ul class="nav flex-column">
@@ -120,7 +119,7 @@
             <script>
                 $(function() {
                     var settings = {
-                        "url": "http://localhost/dashboard/userPageToAccess",
+                        "url": Dashboard.userPageToAccess,
                         "method": "POST",
                         "timeout": 0,
                     };

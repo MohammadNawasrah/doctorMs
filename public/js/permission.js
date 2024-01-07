@@ -1,10 +1,10 @@
-
 var permissions;
 var pagesName;
 $(function () {
+
     function fetchPermission() {
         var settings = {
-            "url": "http://localhost/dashboard/permissions/getAllPermission",
+            "url": Permissions.getAllPermission,
             "method": "GET",
             "timeout": 0,
         };
@@ -86,7 +86,7 @@ $(function () {
         const resultPermissionObject = {};
         resultPermissionObject[pageName] = resultActionObject;
         var settings = {
-            "url": "http://localhost/dashboard/permissions/addPermission",
+            "url": Permissions.addPermission,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -130,7 +130,7 @@ $(function () {
             resultActionObject[element] = 0;
         });
         var settings = {
-            "url": "http://localhost/dashboard/permissions/addNewActionForPagePermission",
+            "url": Permissions.addNewActionForPagePermission,
             "method": "POST",
             "timeout": 0,
             "headers": {

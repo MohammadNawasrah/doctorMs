@@ -1,5 +1,4 @@
 
-
 var selectedUser = ""
 var pagesName;
 $(function () {
@@ -13,7 +12,7 @@ $(function () {
             return;
         }
         var settings = {
-            "url": "http://localhost/dashboard/users/register",
+            "url": Users.register,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -49,7 +48,7 @@ $(function () {
     $(document).on("click", ".addPermissionsToUserModal", function () {
         selectedUser = $(this).data("user_name");
         var settings = {
-            "url": "http://localhost/dashboard/users/getUserPermissions",
+            "url": Users.getUserPermissions,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -102,7 +101,7 @@ $(function () {
             JsonPermaission[pageName] = actions;
         });
         var settings = {
-            "url": "http://localhost/dashboard/userPermission/setPermissionForUser",
+            "url": Users.getUserPermissions,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -131,7 +130,7 @@ $(function () {
     })
     function fetch() {
         var settings = {
-            "url": "http://localhost/dashboard/users/getHtmlByPermission",
+            "url": Users.getHtmlByPermission,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -166,7 +165,7 @@ $(function () {
     })
     $(document).on("click", "#deleteUser", function () {
         var settings = {
-            "url": "http://localhost/dashboard/users/user/delete",
+            "url": Users.deleteUser,
             "method": "POST",
             "timeout": 0,
             "headers": {

@@ -12,7 +12,7 @@
         align-items: center;
     }
 </style>
-<script src="{{mix('resources/js/users.js')}}"></script>
+<script src="/js/users.js"></script>
 <!-- Main Content -->
 <main role="main" class="col-9">
     <!-- Content Goes Here -->
