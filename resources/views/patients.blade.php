@@ -168,7 +168,7 @@
   $(function() {
     function fetchPatients() {
       var settings = {
-        "url": "http://localhost/dashboard/patients",
+        "url": Patients.showPatients,
         "method": "POST",
         "timeout": 0,
       };
@@ -189,7 +189,7 @@
     })
     $(document).on("click", "#deletePatient", function() {
       var settings = {
-        "url": "http://localhost/dashboard/patients/patient/delete",
+        "url": Patients.deletePatient,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -218,7 +218,7 @@
     })
     $(document).on("click", "#addNewPatient", function() {
       var settings = {
-        "url": "http://localhost/dashboard/patients/patient/add",
+        "url": Patients.addPatient,
         "method": "POST",
         "timeout": 0,
         "headers": {
