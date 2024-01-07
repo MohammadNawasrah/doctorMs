@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
+use Trait\Helpers\UtileHelper;
 
 class PatientController
 {
@@ -22,6 +23,7 @@ class PatientController
         $fullName = $request->get("fullName");
         $age = $request->get('age');
         $phoneNumber = $request->get('phoneNumber');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         $newData = [
             'fullName' => $fullName,
             'age' => $age,
@@ -69,13 +71,11 @@ class PatientController
             <td style="display: flex;justify-content: space-evenly;">
             ';
 
-            $table .= ' <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Add an appointment"><i class="bi bi-plus"></i></button>';
-
             $table .= '<button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-down-up"></i></button>';
 
             $table .= '<button class="btn btn-warning" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="record" data-bs-toggle="modal" data-bs-target="#Modaadsfl"><i class="bi bi-files"></i></button>';
 
-            $table .= '<a href="#" target="_blank" class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" ><i class="bi bi-binoculars"></i></a>';
+            $table .= '<a href="/dashboard/patientRecords/record/' . $patient["token"] . '" target="_blank" class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" ><i class="bi bi-binoculars"></i></a>';
 
             $table .= '<button data-token="' . $patient["token"] . '" id="deletePatientButton" class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete" ><i class="bi bi-trash"></i></button>';
 
