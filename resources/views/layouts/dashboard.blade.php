@@ -120,11 +120,27 @@
                         <li class="nav-item" data-permission="permissionPage"> </li>
                         <li class="nav-item" data-permission="usersPage"> </li>
                         <li class="nav-item" data-permission="htmlCodePage"> </li>
-                        <li class="nav-item" data-permission="patientsPage"> <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                        <li class="nav-item" data-permission="patientsPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
                                 <div class="menu-btn">
                                     <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
                                 </div>
-                            </a> </li>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-permission="patientsPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                                <div class="menu-btn">
+                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-permission="patientsPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                                <div class="menu-btn">
+                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

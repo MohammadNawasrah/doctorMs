@@ -75,7 +75,7 @@ class PatientController
 
             $table .= '<button class="btn btn-warning" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="record" data-bs-toggle="modal" data-bs-target="#Modaadsfl"><i class="bi bi-files"></i></button>';
 
-            $table .= '<button class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" data-bs-toggle="modal" data-bs-target="#Moddal"><i class="bi bi-binoculars"></i></button>';
+            $table .= '<a href="#" target="_blank" class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" ><i class="bi bi-binoculars"></i></a>';
 
             $table .= '<button data-token="' . $patient["token"] . '" id="deletePatientButton" class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete" ><i class="bi bi-trash"></i></button>';
 
