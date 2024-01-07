@@ -68,34 +68,30 @@
         .p-active {
             color: #0d6efd;
         }
-
         select {
-            outline: none;
-            border: 1px solid #ced4da;
-            padding: 0.375rem 2rem 0.375rem 0.75rem;
-            /* Increased right padding for the arrow */
-            font-size: 1rem;
-            line-height: 1.5;
-            background-color: #fff;
-            background-image: url('arrow-down.png');
-            /* Replace 'arrow-down.png' with your arrow image */
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            /* Adjust the position as needed */
-            border-radius: 0.25rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-            width: 100%;
-        }
+      outline: none;
+      border: 1px solid #ced4da;
+      padding: 0.375rem 2rem 0.375rem 0.75rem; /* Increased right padding for the arrow */
+      font-size: 1rem;
+      line-height: 1.5;
+      background-color: #fff;
+      background-image: url('arrow-down.png'); /* Replace 'arrow-down.png' with your arrow image */
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center; /* Adjust the position as needed */
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      width: 100%;
+    }
 
-        /* Style for when the select is focused */
-        select:focus {
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
+    /* Style for when the select is focused */
+    select:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
     </style>
-    <script src="/js/jquery/jquery-3.7.1.min.js"></script>
-    <script src="/js/util/mainClass.js"></script>
-    <script src="/js/util/route.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/mainFunction.js"></script>
+    <script src="/js/route.js"></script>
 </head>
 
 <body>
@@ -148,7 +144,6 @@
                         "timeout": 0,
                     };
                     $.ajax(settings).done(function(response) {
-                        console.log(response)
                         response = JSON.parse(response);
                         if (response.status == 200) {
                             data = response.data;
