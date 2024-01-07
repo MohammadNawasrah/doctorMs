@@ -39,7 +39,7 @@
                                     <div id="savePermissionToUserMessage" class="alert d-none" role="alert">
                                     </div>
                                     <div class="row" style="display: flex ;justify-content: center;align-items: center;">
-                                        <button type="button" id="savePermissionToUser" class="btn btn-danger">Save</button>
+                                        <button type="button" id="savePermissionToUser" class="btn btn-success">Save</button>
                                     </div>
                                 </div>
                             </div>
