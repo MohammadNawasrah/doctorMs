@@ -40,6 +40,7 @@ class PatientController
         $age = $request->get('age');
         $phoneNumber = $request->get('phoneNumber');
         $newData = [
+            "token" => $patientToken,
             'fullName' => $fullName,
             'age' => $age,
             'phoneNumber' => $phoneNumber,
@@ -71,11 +72,11 @@ class PatientController
             <td style="display: flex;justify-content: space-evenly;">
             ';
 
-            $table .= '<button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-down-up"></i></button>';
+            $table .= '<button class="btn btn-success" data-token="' . $patient["token"] . '" id="updatePatientModalButton" data-phone_number="' . $patient["phoneNumber"] . '" data-age="' . $patient["age"] . '" data-full_name="' . $patient["fullName"] . '"  style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update" ><i class="bi bi-arrow-down-up"></i></button>';
 
-            $table .= '<button class="btn btn-warning" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="record" data-bs-toggle="modal" data-bs-target="#Modaadsfl"><i class="bi bi-files"></i></button>';
+            $table .= '<a class="btn btn-warning" href="/dashboard/patientRecords/record/show/' . $patient["token"] . '" target="_blank"  data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="record" ><i class="bi bi-files"></i></a>';
 
-            $table .= '<a href="/dashboard/patientRecords/record/' . $patient["token"] . '" target="_blank" class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" ><i class="bi bi-binoculars"></i></a>';
+            $table .= '<a href="/dashboard/patientRecords/record/full/' . $patient["token"] . '" target="_blank" class="btn btn-secondary" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="View record" ><i class="bi bi-binoculars"></i></a>';
 
             $table .= '<button data-token="' . $patient["token"] . '" id="deletePatientButton" class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete" ><i class="bi bi-trash"></i></button>';
 

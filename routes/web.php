@@ -73,7 +73,8 @@ Route::group(['prefix' => '/dashboard'],  function () {
     });
     Route::group(['prefix' => '/patientRecords'], function () {
         Route::post('/', [PatientRecordController::class, 'showRecords']);
-        Route::get('/record/{token}', [PatientRecordController::class, 'showRecord']);
+        Route::get('/record/full/{token}', [PatientRecordController::class, 'fullRecord']);
+        Route::get('/record/show/{token}', [PatientRecordController::class, 'showRecord']);
         Route::post('/record/add', [PatientRecordController::class, 'addRecord']);
         Route::post('/record/update', [PatientRecordController::class, 'updateRecord']);
         Route::post('/record/delete', [PatientRecordController::class, 'deleteRecord']);
