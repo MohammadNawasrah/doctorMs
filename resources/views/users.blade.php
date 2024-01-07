@@ -27,7 +27,7 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="addPermissionToUserModalModalLabel">Fill the information</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true">&times;</span>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
