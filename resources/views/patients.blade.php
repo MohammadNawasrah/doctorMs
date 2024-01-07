@@ -121,10 +121,42 @@
   </div>
   <div class="row">
   <div class="col-5"></div>
-  <div class="col"><button class="btn btn-primary" style="margin-bottom:4%;">Add patient</button>
+  <div class="col"><button class="btn btn-primary" style="margin-bottom:4%;" data-bs-toggle="modal" data-bs-target="#aseel">Add patient</button>
 </div></div>
-<!-- ====================================================================================== -->
+<!-- ============================================Add patient========================================== -->
+<div class="modal fade" id="aseel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Fill the information</h5>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col">
+                          <input type="text" class="form-control" id="inputField1" placeholder="Full Name" required>
+                          </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                <div class="row">
+                <div class="col">
 
+                    <input type="number" class="form-control " id="inputField1" placeholder="Age" required>
+                </div>
+
+                <div class="col">
+                  <input type="tel" class="form-control " id="phoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                </div>
+            </div>
+        </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- ====================================================================================== -->
 
                                     <table class="table table-bordered">
