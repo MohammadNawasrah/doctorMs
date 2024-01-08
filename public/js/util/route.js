@@ -16,6 +16,7 @@ class Dashboard {
     static userPageToAccess = Dashboard.dashboard + "/userPageToAccess";  // Added
     static userPermission = Dashboard.dashboard + "/userPermission"
     static patients = Dashboard.dashboard + "/patients";
+    static patientAppointment = Dashboard.dashboard + "/patientAppointments";
     // Add more routes as needed
 }
 
@@ -73,12 +74,12 @@ class PatientRecords {
 }
 
 class PatientAppointments {
-    static showAppointments = Dashboard.dashboard + "/patientAppointments";  // Added
-    static showAppointment = Dashboard.dashboard + "/patientAppointments/appointment";  // Added
-    static addAppointment = Dashboard.dashboard + "/patientAppointments/appointment/add";  // Added
-    static updateAppointment = Dashboard.dashboard + "/patientAppointments/appointment/update";  // Added
-    static deleteAppointment = Dashboard.dashboard + "/patientAppointments/appointment/delete";  // Added
-    static patientsHaveAppoinntment = Dashboard.dashboard + "/patientAppointments/appointment/haveAppoinntment";  // Added
+    // Added
+    static showAppointment = Dashboard.patientAppointment + "/appointment";  // Added
+    static addAppointment = Dashboard.patientAppointment + "/appointment/add";  // Added
+    static updateAppointment = Dashboard.patientAppointment + "/appointment/update";  // Added
+    static deleteAppointment = Dashboard.patientAppointment + "/appointment/delete";  // Added
+    static patientsHaveAppoinntment = Dashboard.patientAppointment + "/appointment/haveAppoinntment";  // Added
     // Add more routes as needed
 }
 
