@@ -15,14 +15,14 @@ class PatientAppoinntments extends Model
 
     protected $fillable = [
         'patientId',
-        'nextappointment',
+        'next_appointment',
         'status_to_send_doctor'
     ];
     public static function createRecord($newData)
     {
         try {
             if (!self::isPatientRecordAlreadyExist($newData["patientId"])) {
-                if (!DateHelper::isDateTodayOrInFuture($newData["nextappointment"])) {
+                if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
                     die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
                 }
                 self::create($newData);
@@ -55,7 +55,7 @@ class PatientAppoinntments extends Model
 
             $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
-                ->whereDate('patient_appointments.nextappointment', '=', $today)
+                ->whereDate('patient_appointments.next_appointment', '=', $today)
                 ->where("patient_appointments.status_to_send_doctor", false)->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
@@ -106,7 +106,7 @@ class PatientAppoinntments extends Model
     public static function updatePatientRecord($patientId, $newData)
     {
         try {
-            if (!DateHelper::isDateTodayOrInFuture($newData["nextappointment"])) {
+            if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
                 die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
             }
             $patient = self::getPatientRecord($patientId);

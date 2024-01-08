@@ -308,7 +308,7 @@
         },
         "data": JSON.stringify({
           "token": selectedUser,
-          "nextappointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
+          "next_appointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
         }),
       };
 

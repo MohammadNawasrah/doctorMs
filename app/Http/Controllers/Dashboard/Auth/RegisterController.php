@@ -30,8 +30,10 @@ class RegisterController
             'userName' => $userName,
             'password' => md5($password),
             'isAdmin' => $isAdmin,
-            'email' => $email
+            'email' => $email,
+            'type' => 1 //fix
         ];
+        Users::createNewUser($newUser);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Welcom " . $userName);;
     }
 }
