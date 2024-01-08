@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // patientId currentAppointment  nextappointment
+        // patientId currentAppointment  next_appointment
         Schema::create('patientAppointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->dateTime('nextappointment');
+            $table->dateTime('next_appointment');
             $table->timestamps();
         });
     }

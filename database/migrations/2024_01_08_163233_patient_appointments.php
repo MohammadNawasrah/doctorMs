@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // patientId currentAppointment  nextappointment
+        // patientId currentAppointment  next_appointment
         Schema::create('patient_appointments', function (Blueprint $table) {
             $table->id();
             $table->boolean('status_to_send_doctor')->default(false);

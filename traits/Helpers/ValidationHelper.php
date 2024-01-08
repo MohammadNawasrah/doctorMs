@@ -40,7 +40,7 @@ trait ValidationHelper
     }
     public function registerValidation($userName, $password, $email)
     {
-        if ($this->validateUsername($userName)) {
+        if (!$this->validUserName($userName)) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Not valid User Name"));
         }
         if (!$this->validateEmail($email)) {

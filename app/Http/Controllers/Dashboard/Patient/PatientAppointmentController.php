@@ -21,10 +21,10 @@ class PatientAppointmentController
     {
         $patientToken = $request->input('token');
         $patient = Patients::getPatientByToken($patientToken);
-        $nextappointment = $request->input('nextappointment');
+        $next_appointment = $request->input('next_appointment');
         $newData = [
             'patientId' =>  $patient["id"],
-            'nextappointment' => $nextappointment,
+            'next_appointment' => $next_appointment,
         ];
         PatientAppoinntments::createRecord($newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient added Appointment sucessfully");
@@ -48,9 +48,9 @@ class PatientAppointmentController
     {
         $patientToken = $request->get("token");
         $patient = Patients::getPatientByToken($patientToken);
-        $nextappointment = $request->get("nextappointment");
+        $next_appointment = $request->get("next_appointment");
         $newData = [
-            'nextappointment' => $nextappointment,
+            'next_appointment' => $next_appointment,
         ];
         PatientAppoinntments::updatePatientRecord($patient["id"], $newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient Appoinntment updated successfully');
@@ -63,7 +63,7 @@ class PatientAppointmentController
             $table .= '<tr style="text-align: center;">
             <td><div style="padding-top:10px">' . $patient["id"] . '</div></td>
             <td style="text-align: center;"><div style="padding-top:10px">' . $patient["fullName"] . '</div></td>
-            <td ><div style="padding-top:10px">' . $patient["nextappointment"] . '</div></td>
+            <td ><div style="padding-top:10px">' . $patient["next_appointment"] . '</div></td>
             <td style="display: flex;justify-content: space-evenly;">
             ';
             $table .= '<button class="btn btn-primary" data-token="' . $patient["token"] . '" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>';

@@ -29,23 +29,10 @@ class Permission extends Model
             $allPermissionsPagesName = JsonHelper::getJsonKey($allPermissions);
             foreach ($allPermissionsPagesName as  $pageNameFromDb) {
                 if ($pageName == $pageNameFromDb) {
-                    die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name already Exist'));
+                    return true;
                 }
             }
-        } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
-        }
-    }
-    public static function checkIfPageNameNotExist($pageName)
-    {
-        try {
-            $allPermissions = json_decode(self::getAllPermission()["jsonPermission"]);
-            $allPermissionsPagesName = JsonHelper::getJsonKey($allPermissions);
-            foreach ($allPermissionsPagesName as  $pageNameFromDb) {
-                if ($pageName == $pageNameFromDb) {
-                }
-            }
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name Not Exist'));
+            return false;
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
         }
@@ -57,9 +44,10 @@ class Permission extends Model
             $allActionsInPageName = $allPermissions[$pageName];
             foreach ($allActionsInPageName as  $key => $value) {
                 if (in_array($key, $actions)) {
-                    RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Page $key Already Exist");
+                    return $key;
                 }
             }
+            return false;
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
         }

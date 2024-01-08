@@ -124,6 +124,7 @@
         "timeout": 0,
       };
       $.ajax(settings).done(function(response) {
+        console.log(response)
         response = JSON.parse(response);
         $("#patientsAppointmentBody").html("");
         if (response.status === 200) {
@@ -139,7 +140,8 @@
     $(document).on("click", "#sendToDoctorButton", function() {
       socket.emit("sendPatientToServer", {
         toDoctor: sessionStorage.getItem("userToken"),
-        patientToken: $(this).data("token")
+        patientToken: $(this).data("token"),
+        baseUrl: UrlData.baseUrl
       });
     })
     socket.on("responsSendToServer", (response) => {

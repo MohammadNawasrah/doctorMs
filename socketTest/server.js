@@ -13,15 +13,17 @@ const activeUsers = {};
 io.on("connection", (socket) => {
     const userId = uuidv4();
     activeUsers[userId] = socket.id;
+
     socket.on("sendPatientToServer", (response) => {
         let data = JSON.stringify({
-            "userToken": "X25hd2FzcmFoZTRmMTI0MWIzZWNkZjM1NDBiMmI0MWViYmJlZDU2YWE=",
+            "userToken": response.toDoctor,
             "patientToken": response.patientToken
         });
+        console.log(response.baseUrl)
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'http://localhost/dashboard/patientsToDoctor/toDoctor/add',
+            url: response.baseUrl + '/dashboard/patientsToDoctor/toDoctor/add',
             headers: {
                 'Content-Type': 'application/json'
             },

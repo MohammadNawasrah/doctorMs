@@ -15,7 +15,6 @@ class LoginPage {
     static onResponse(response, selectedButton) {
         response = JSON.parse(response)
         if (response.status === 200) {
-            console.log(response);
             Message.addMessage(response.message, selectedButton, "success");
             sessionStorage.setItem("userName", response.data.userName);
             sessionStorage.setItem("nameOfUser", response.data.name);
