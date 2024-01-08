@@ -17,13 +17,16 @@ io.on("connection", (socket) => {
     socket.on("sendPatientToServer", (response) => {
         let data = JSON.stringify({
             "userToken": response.toDoctor,
+
             "patientToken": response.patientToken
         });
         console.log(response.baseUrl)
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
+
             url: response.baseUrl + '/dashboard/patientsToDoctor/toDoctor/add',
+
             headers: {
                 'Content-Type': 'application/json'
             },
