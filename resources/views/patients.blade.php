@@ -245,8 +245,8 @@
           setTimeout(() => {
             $("#addNewPatientModal").modal("hide");
             Loader.removeLoader();
-            fetchPatients();
           }, 1000);
+          fetchPatients();
           return;
         }
         Loader.removeLoader();

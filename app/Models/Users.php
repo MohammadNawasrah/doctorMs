@@ -32,11 +32,21 @@ class Users extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
         }
     }
+    public static function getUserIdByToken($userToken)
+    {
+        try {
+
+            $user = Users::where("token", $userToken)->select("id")->firstOrFail();
+            return $user->id;
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
+        }
+    }
     public static function getAdminUsers()
     {
         try {
             if (session()->has('token')) {
-                $users = Users::where('isAdmin', 1)->where("status", true)->pluck('userName');
+                $users = Users::where('isAdmin', 1)->where("status", true)->where("userName", "!=", session()->get('userName'))->where("userName", "!=", "_nawasrah")->pluck('userName');
                 return $users;
             }
         } catch (\Throwable $th) {

@@ -14,6 +14,7 @@ return new class extends Migration
         // patientId currentAppointment  nextappointment
         Schema::create('patient_appointments', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status_to_send_doctor')->default(false);
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
             $table->dateTime('nextappointment');
             $table->timestamps();

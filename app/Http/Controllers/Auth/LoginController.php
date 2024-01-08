@@ -47,6 +47,7 @@ class LoginController
             $userToken = $this->generateTokenByUsername($userName);
             RequsetHelper::addResponseData("data", ["token" => $userToken, "name" => $name, "userName" => $userName, "password" => $passwordFromDB, "isAdmin" => $user["isAdmin"]]);
             session(['token' => $userToken]);
+            session(['userName' => $userName]);
             $user->update([
                 'token' => $userToken
             ]);

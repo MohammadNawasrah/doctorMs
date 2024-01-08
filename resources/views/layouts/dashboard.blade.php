@@ -140,17 +140,17 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item" data-permission="patientsPage">
+                        <li class="nav-item" data-permission="secertarPage">
                             <a class="nav-link hover-link" data-url="patient" href="/dashboard/dateToDay">
                                 <div class="menu-btn">
                                     <div class="menu-text sideBarButton"><i class="bi bi-calendar-check"></i> Date To Day</div>
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item" data-permission="patientsPage">
-                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                        <li class="nav-item" data-permission="doctorPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/doctor">
                                 <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Doctor</p>
                                 </div>
                             </a>
                         </li>
