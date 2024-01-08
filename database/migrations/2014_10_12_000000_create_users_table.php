@@ -1,72 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    // patientId patientNote  
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('patient_records', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->string('patientNote')->nullable();
-            $table->timestamps();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('patient_records');
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -80,31 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // patientId currentAppointment  nextappointment
-        Schema::create('patient_appointments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->dateTime('nextappointment');
-            $table->timestamps();
+        Schema::create('users', function (Blueprint $table) {
+            $table->id(); // Auto-incremental primary key
+            $table->string('firstName'); // First name
+            $table->string('lastName'); // Last name
+            $table->string('userName')->unique(); // Unique username
+            $table->string('email'); // Unique email
+            $table->string('type');
+            $table->boolean('isAdmin')->default(false);
+            $table->boolean('status')->default(true);
+            $table->string('password'); // Password
+            $table->string('token')->nullable(); // Token (nullable for email verification, for example)
+            $table->timestamps(); // Created at and Updated at timestamps
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('patient_appointments');
+        Schema::dropIfExists('users');
     }
 };
-
-
-
-
-
-
-
-
-
-
-

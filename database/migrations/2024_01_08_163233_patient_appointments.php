@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('status_to_send_doctor')->default(false);
             $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
-            $table->dateTime('nextappointment');
+            $table->dateTime('next_appointment');
             $table->timestamps();
         });
     }

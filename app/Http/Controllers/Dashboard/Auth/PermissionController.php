@@ -32,9 +32,7 @@ class PermissionController
         $jsonPermission = $request->input('jsonPermission');
         UtileHelper::checkIfDataEmptyOrNullJsonData($jsonPermission);
         $pageName = JsonHelper::getFirstKey($jsonPermission);
-        if (Permission::checkIfPageNameAlreadyExist($pageName)) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name already Exist');
-        }
+        Permission::checkIfPageNameAlreadyExist($pageName);
         $newData = [
             "jsonPermission" => Permission::addOnJsonPermission($jsonPermission)
         ];
@@ -48,13 +46,8 @@ class PermissionController
         $actions = $request->input('actions');
         UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         $actionsKeys = JsonHelper::getJsonKey($actions);
-        if (!Permission::checkIfPageNameAlreadyExist($pageName)) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name Not Exist');
-        }
-        $isActionExist = Permission::checkIfActionsInPageNameAlreadyExist($pageName, $actionsKeys);
-        if ($isActionExist !== false) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Page $isActionExist Already Exist");
-        }
+        Permission::checkIfPageNameNotExist($pageName);
+        Permission::checkIfActionsInPageNameAlreadyExist($pageName, $actionsKeys);
         $newData = [
             "jsonPermission" => Permission::addOnJsonPageName($pageName, $actions)
         ];
@@ -72,6 +65,6 @@ class PermissionController
                 array_push($actionsSend, [$value => $actions[$value]]);
         }
         RequsetHelper::addResponseData("data", $actionsSend);
-        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Good Luck");
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Actions fetch successfully");
     }
 }
