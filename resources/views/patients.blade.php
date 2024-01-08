@@ -15,10 +15,12 @@
 
               <!-- Modal -->
               <div class="row centerPage margin">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewPatientModal">Add patient</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewPatientModal">Add
+                  patient</button>
               </div>
               <!-- ============================================Add patient========================================== -->
-              <div class="modal fade" id="addNewPatientModal" tabindex="-1" aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
+              <div class="modal fade" id="addNewPatientModal" tabindex="-1" aria-labelledby="addNewPatientModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -31,7 +33,8 @@
                       <div class="mb-3">
                         <div class="row">
                           <div class="col">
-                            <input type="text" class="form-control" id="patientFullName" placeholder="Full Name" required>
+                            <input type="text" class="form-control" id="patientFullName" placeholder="Full Name"
+                              required>
                           </div>
                         </div>
                       </div>
@@ -41,7 +44,8 @@
                             <input type="number" class="form-control " id="patientAge" placeholder="Age" required>
                           </div>
                           <div class="col">
-                            <input type="tel" class="form-control " id="patientPhoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                            <input type="tel" class="form-control " id="patientPhoneNumber" placeholder="Phone Number"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                           </div>
                         </div>
                       </div>
@@ -57,7 +61,8 @@
                 </div>
               </div>
               <!-- ===================================================================================== -->
-              <div class="modal fade" id="updatePatientModal" tabindex="-1" aria-labelledby="updatePatientModalLabel" aria-hidden="true">
+              <div class="modal fade" id="updatePatientModal" tabindex="-1" aria-labelledby="updatePatientModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -70,7 +75,8 @@
                       <div class="mb-3">
                         <div class="row">
                           <div class="col">
-                            <input type="text" class="form-control" id="patientFullNameUpdate" placeholder="Full Name" required>
+                            <input type="text" class="form-control" id="patientFullNameUpdate" placeholder="Full Name"
+                              required>
                           </div>
                         </div>
                       </div>
@@ -80,7 +86,8 @@
                             <input type="number" class="form-control " id="patientAgeUpdate" placeholder="Age" required>
                           </div>
                           <div class="col">
-                            <input type="tel" class="form-control " id="patientPhoneNumberUpdate" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                            <input type="tel" class="form-control " id="patientPhoneNumberUpdate"
+                              placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                           </div>
                         </div>
                       </div>
@@ -98,7 +105,8 @@
 
               <!-- ==========================================delete modal============================================ -->
 
-              <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal" aria-labelledby="deletePatientModalLabel" aria-hidden="true">
+              <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal"
+                aria-labelledby="deletePatientModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -120,7 +128,8 @@
               <!-- ====================================================================================== -->
               <!-- ==========================================date modal============================================ -->
 
-              <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal" aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
+              <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal"
+                aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -136,7 +145,8 @@
                     <div class="centerPage">
                       <div>
                         <div>
-                          <button type="button" id="addAppointment" class="btn btn-danger m-3">Add New Appointmet</button>
+                          <button type="button" id="addAppointment" class="btn btn-danger m-3">Add New
+                            Appointmet</button>
                         </div>
                       </div>
                     </div>
@@ -169,14 +179,14 @@
 </main>
 
 <script>
-  $(function() {
+  $(function () {
     function fetchPatients() {
       var settings = {
         "url": Patients.showPatients,
         "method": "POST",
         "timeout": 0,
       };
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(response);
         if (response.status === 200) {
           $("#patientsBody").html("");
@@ -186,11 +196,11 @@
     }
     fetchPatients();
     var selectedUser;
-    $(document).on("click", "#deletePatientButton", function() {
+    $(document).on("click", "#deletePatientButton", function () {
       selectedUser = $(this).data("token")
       $("#deletePatientModal").modal("show")
     })
-    $(document).on("click", "#deletePatient", function() {
+    $(document).on("click", "#deletePatient", function () {
       var settings = {
         "url": Patients.deletePatient,
         "method": "POST",
@@ -204,7 +214,7 @@
       };
       var selectedButton = $(this);
       Loader.addLoader(selectedButton);
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(response)
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
@@ -220,7 +230,7 @@
         Message.addMessage(response.message, selectedButton, "danger");
       });
     })
-    $(document).on("click", "#addNewPatient", function() {
+    $(document).on("click", "#addNewPatient", function () {
       var settings = {
         "url": Patients.addPatient,
         "method": "POST",
@@ -238,7 +248,7 @@
 
       var selectedButton = $(this);
       Loader.addLoader(selectedButton);
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(response)
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
@@ -253,14 +263,14 @@
         Message.addMessage(response.message, selectedButton, "danger");
       });
     })
-    $(document).on("click", "#updatePatientModalButton", function() {
+    $(document).on("click", "#updatePatientModalButton", function () {
       selectedUser = $(this).data("token")
       $("#updatePatientModal").modal("show")
       $("#patientFullNameUpdate").val($(this).data("full_name"));
       $("#patientAgeUpdate").val($(this).data("age"));
       $("#patientPhoneNumberUpdate").val($(this).data("phone_number"));
     })
-    $(document).on("click", "#updatePatient", function() {
+    $(document).on("click", "#updatePatient", function () {
       var settings = {
         "url": "http://localhost/dashboard/patients/patient/update",
         "method": "POST",
@@ -278,7 +288,7 @@
       };
       var selectedButton = $(this);
       Loader.addLoader(selectedButton);
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(response)
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
@@ -293,11 +303,11 @@
         Message.addMessage(response.message, selectedButton, "danger");
       });
     })
-    $(document).on("click", "#addAppointmentButton", function() {
+    $(document).on("click", "#addAppointmentButton", function () {
       selectedUser = $(this).data("token")
     })
     $(document).off("click", "#addAppointment")
-    $(document).on("click", "#addAppointment", function() {
+    $(document).on("click", "#addAppointment", function () {
       var settings = {
         "url": PatientAppointments.addAppointment,
         "method": "POST",
@@ -314,7 +324,7 @@
 
       var selectedButton = $(this);
       Loader.addLoader(selectedButton);
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(response)
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
