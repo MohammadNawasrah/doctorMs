@@ -19,14 +19,13 @@ class PatientAppointmentController
     }
     public function addAppointment(Request $request)
     {
-        $patientToken = $request->get('token');
+        $patientToken = $request->input('token');
         $patient = Patients::getPatientByToken($patientToken);
-        $nextappointment = $request->get('nextappointment');
+        $nextappointment = $request->input('nextappointment');
         $newData = [
             'patientId' =>  $patient["id"],
             'nextappointment' => $nextappointment,
         ];
-
         PatientAppoinntments::createRecord($newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient added Appointment sucessfully");
     }
@@ -59,7 +58,26 @@ class PatientAppointmentController
     public function patientsHaveAppoinntment()
     {
         $patientAppointmentsData = PatientAppoinntments::getAllPatientsHaveAppoinntmentToday();
-        RequsetHelper::addResponseData("data", $patientAppointmentsData);
+        $table = '';
+        foreach ($patientAppointmentsData as $patient) {
+            $table .= '<tr style="text-align: center;">
+            <td><div style="padding-top:10px">' . $patient["id"] . '</div></td>
+            <td style="text-align: center;"><div style="padding-top:10px">' . $patient["fullName"] . '</div></td>
+            <td ><div style="padding-top:10px">' . $patient["nextappointment"] . '</div></td>
+            <td style="display: flex;justify-content: space-evenly;">
+            ';
+            $table .= '<button class="btn btn-primary" data-token="' . $patient["token"] . '" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>';
+
+            $table .= '<button class="btn btn-success" data-token="' . $patient["token"] . '"  data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>';
+
+            $table .= '<button class="btn btn-danger" data-token="' . $patient["token"] . '" data-toggle="tooltip"  data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>';
+
+            $table .= "</td></tr>";
+        }
+        $actions = [
+            "patientsAppointmentBody" => $table
+        ];
+        RequsetHelper::addResponseData("data", $actions);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient Appoinntment updated successfully');
     }
 }

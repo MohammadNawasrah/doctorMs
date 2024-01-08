@@ -11,23 +11,9 @@
           <div class="col-12">
             <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
               <!-- ====================================================================================== -->
-              <!-- <div class="modal fade" id="addNewPatientModal" tabindex="-1" aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="addNewPatientModalLabel">Fill the information</h5>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <div class="row">
-                            <div class="col">
-
-                              <input type="text" class="form-control " id="inputField1" placeholder="First Name" required>
-                            </div>
 
 
-  <!-- Modal -->
+              <!-- Modal -->
               <div class="row centerPage margin">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewPatientModal">Add patient</button>
               </div>
@@ -134,32 +120,30 @@
               <!-- ====================================================================================== -->
               <!-- ==========================================date modal============================================ -->
 
-
-              <!-- Modal -->
-              <!-- <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+              <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal" aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="ModalLabel"></h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <h5 class="modal-title" id="addAppointmentTitle">Add New Appointment</h5>
+                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
                     <div class="modal-body">
-                      <form>
-                        <input type="datetime-local" class="form-control">
-                      </form>
+                      <input type="date" id="dateAppointment" min="<?php echo date('Y-m-d'); ?>">
+                      <input type="time" id="timeAppointment">
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success">Save</button>
+                    <div class="centerPage">
+                      <div>
+                        <div>
+                          <button type="button" id="addAppointment" class="btn btn-danger m-3">Add New Appointmet</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-5"></div>
-                <div class="col"><button class="btn btn-primary" style="margin-bottom:4%;">Add patient</button>
-                </div>
-              </div> -->
+
               <!-- ====================================================================================== -->
 
               <!-- ====================================================================================== -->
@@ -192,7 +176,6 @@
         "method": "POST",
         "timeout": 0,
       };
-
       $.ajax(settings).done(function(response) {
         response = JSON.parse(response);
         if (response.status === 200) {
@@ -228,6 +211,7 @@
           setTimeout(() => {
             $("#deletePatientModal").modal("hide");
             Loader.removeLoader();
+            location.reload();
             fetchPatients();
           }, 1000);
           return;
@@ -302,6 +286,41 @@
             $("#updatePatientModal").modal("hide");
             Loader.removeLoader();
             fetchPatients();
+          }, 1000);
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
+    })
+    $(document).on("click", "#addAppointmentButton", function() {
+      selectedUser = $(this).data("token")
+    })
+    $(document).off("click", "#addAppointment")
+    $(document).on("click", "#addAppointment", function() {
+      var settings = {
+        "url": PatientAppointments.addAppointment,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2puUER1VVZYcEJ2bXJsd2MrWjlESjh4K1E5aWZPdE5FTERMbWk5bkhMc2xTK0ttbHNhRzJHd2J1Sk81VHJ1M1hnWGVFYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZWMxYjdiNmExIiwidGFnIjoiIn0%3D"
+        },
+        "data": JSON.stringify({
+          "token": selectedUser,
+          "nextappointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
+        }),
+      };
+
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#addAppointmetModal").modal("hide");
+            Loader.removeLoader();
           }, 1000);
           return;
         }

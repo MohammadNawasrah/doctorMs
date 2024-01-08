@@ -32,7 +32,7 @@ class Message {
             $(`<div class="alert alert-${type}" style="height: 30px;
             display: flex;width: 250px;
             justify-content: center;
-            align-items: center;" id="${Message.token}">${messageText}</div>`).insertBefore($(`#${button.attr("id")}`).parent())
+            align-items: center;width: max-content;" id="${Message.token}">${messageText}</div>`).insertBefore($(`#${button.attr("id")}`).parent())
 
             return;
         }

@@ -105,6 +105,7 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
     </style>
+
     <script src="/js/jquery/jquery-3.7.1.min.js"></script>
     <script src="/js/util/mainClass.js"></script>
     <script src="/js/util/route.js"></script>
@@ -142,7 +143,7 @@
                         <li class="nav-item" data-permission="patientsPage">
                             <a class="nav-link hover-link" data-url="patient" href="/dashboard/dateToDay">
                                 <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                    <div class="menu-text sideBarButton"><i class="bi bi-calendar-check"></i> Date To Day</div>
                                 </div>
                             </a>
                         </li>
