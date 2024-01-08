@@ -16,6 +16,7 @@ class PatientAppoinntments extends Model
     protected $fillable = [
         'patientId',
         'nextappointment',
+        'status_to_send_doctor'
     ];
     public static function createRecord($newData)
     {
@@ -35,8 +36,9 @@ class PatientAppoinntments extends Model
     public static function getAllRecords()
     {
         try {
-            $patientAppointmentsData = Patients::select('patients.token', 'patientAppointments.*')
-                ->join('patientAppointments', 'patients.id', '=', 'patientAppointments.patientId')->get();
+            $patientAppointmentsData = Patients::select('patients.token', 'patient_appointments.*')
+                ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
+                ->where("patient_appointments.status_to_send_doctor", false)->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
@@ -45,6 +47,7 @@ class PatientAppoinntments extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
+
     public static function getAllPatientsHaveAppoinntmentToday()
     {
         try {
@@ -53,11 +56,19 @@ class PatientAppoinntments extends Model
             $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
                 ->whereDate('patient_appointments.nextappointment', '=', $today)
-                ->get();
+                ->where("patient_appointments.status_to_send_doctor", false)->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
+    public static function changeStatusToSendDoctor($patient, $newStatus)
+    {
+        try {
+            PatientAppoinntments::where("patientId", $patient["id"])->firstOrFail()->update(["status_to_send_doctor" => $newStatus]);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
@@ -68,6 +79,7 @@ class PatientAppoinntments extends Model
             $patientAppointmentsData = Patients::select('patients.token', 'patientAppointments.*')
                 ->join('patientAppointments', 'patients.id', '=', 'patientAppointments.patientId')
                 ->where("patients.id", $patientId)->firstOrFail();
+            die(json_encode($patientAppointmentsData));
             return  $patientAppointmentsData;
         } catch (\Throwable $th) {
             return false;

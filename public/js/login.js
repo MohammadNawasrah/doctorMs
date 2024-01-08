@@ -19,6 +19,7 @@ class LoginPage {
             Message.addMessage(response.message, selectedButton, "success");
             sessionStorage.setItem("userName", response.data.userName);
             sessionStorage.setItem("nameOfUser", response.data.name);
+            sessionStorage.setItem("userToken", response.data.token);
             setTimeout(() => {
                 Loader.removeLoader();
                 window.location.href = Dashboard.dashboard;

@@ -17,6 +17,7 @@ class Dashboard {
     static userPermission = Dashboard.dashboard + "/userPermission"
     static patients = Dashboard.dashboard + "/patients";
     static patientAppointment = Dashboard.dashboard + "/patientAppointments";
+    static patientsToDoctor = Dashboard.dashboard + "/patientsToDoctor";
     // Add more routes as needed
 }
 
@@ -84,11 +85,10 @@ class PatientAppointments {
 }
 
 class PatientsToDoctor {
-    static showtoDoctors = Dashboard.dashboard + "/patientsToDoctor";  // Added
-    static showtoDoctor = Dashboard.dashboard + "/patientsToDoctor/toDoctor";  // Added
-    static addtoDoctor = Dashboard.dashboard + "/patientsToDoctor/toDoctor/add";  // Added
-    static updatetoDoctor = Dashboard.dashboard + "/patientsToDoctor/toDoctor/update";  // Added
-    static deletetoDoctor = Dashboard.dashboard + "/patientsToDoctor/toDoctor/delete";  // Added
+    static showtoDoctor = Dashboard.patientsToDoctor + "/showToDoctor";  // Added
+    static addtoDoctor = Dashboard.patientsToDoctor + "/toDoctor/add";  // Added
+    static updatetoDoctor = Dashboard.patientsToDoctor + "/toDoctor/update";  // Added
+    static deletetoDoctor = Dashboard.patientsToDoctor + "/toDoctor/delete";  // Added
     // Add more routes as needed
 }
 // export { UrlData, Login, Dashboard, HtmlCodePage, Users, UserPermission, Permissions, Patients, PatientRecords, PatientAppointments, PatientsToDoctor };

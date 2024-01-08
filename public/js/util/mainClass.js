@@ -23,6 +23,7 @@ class Loader {
 }
 class Message {
     static token;
+    static modalToken;
     static addMessage(messageText, button, type) {
 
         Message.token = "setUniqerMosdlkfjDDFasfideruioutrdfjkl4349843f";
@@ -45,6 +46,32 @@ class Message {
         }
         messageToken.removeClass("alert-success")
         messageToken.addClass("alert-danger")
+    }
+    static addModalMessage(response, timeToDeleteModal) {
+        Message.modalToken = "asdlkfjlkjadslkfjlkdsjaf";
+        console.log(Message.modalToken)
+        $("html").append(`
+        <div class="modal fade" id="${Message.modalToken}" tabindex="-1" aria-labelledby="notificationmodalMabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin:10px; display: flex;justify-content: center;align-items: center;">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `);
+        if (response.status === 200) {
+            $(`#${Message.modalToken} .modal-body div`).addClass("alert alert-success")
+        } else {
+            $(`#${Message.modalToken} .modal-body div`).addClass("alert alert-danger")
+        }
+        $(`#${Message.modalToken} .modal-body div`).text(response.message)
+        $(`#${Message.modalToken}`).modal("show")
+        setTimeout(() => {
+            $(`#${Message.modalToken}`).modal("hide")
+            $(`#${Message.modalToken}`).remove();
+        }, timeToDeleteModal)
     }
 
 }

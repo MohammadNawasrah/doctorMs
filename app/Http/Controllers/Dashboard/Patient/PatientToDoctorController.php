@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Patient;
 
+use App\Models\PatientAppoinntments;
 use App\Models\Patients;
 use App\Models\PatientToDoctor;
 use App\Models\Users;
@@ -13,23 +14,48 @@ class PatientToDoctorController
 {
     public function addtoDoctor(Request $request)
     {
-        $patientToken = $request->get('token');
+        $patientToken = $request->get('patientToken');
+        $userToken = $request->get('userToken');
+        $userId = Users::getUserIdByToken($userToken);
         $patient = Patients::getPatientByToken($patientToken);
-        $userId = $request->get('userId');
         $newData = [
             'userId' => $userId,
-            'patientId' =>  $patient["id"],
+            'patientId' => $patient["id"],
             'status' => true,
         ];
+        PatientAppoinntments::changeStatusToSendDoctor($patient, true);
         PatientToDoctor::createRecord($newData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient send To Doctor " . $userId);
     }
 
-    public function showtoDoctors()
+    public function showPatientsToAllDoctors()
     {
         $patientData = PatientToDoctor::getAllRecords();
         RequsetHelper::addResponseData("data", $patientData);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient data with appointments retrieved successfully');
+    }
+    public function showPatientsToDoctor()
+    {
+        $patientsData = PatientToDoctor::getPatientsToDoctor();
+        $table = '';
+        foreach ($patientsData as $patient) {
+            $table .= '<tr style="text-align: center;">
+            <td><div style="padding-top:10px">' . $patient["patientId"] . '</div></td>
+            <td style="text-align: center;"><div style="padding-top:10px">' . $patient["fullName"] . '</div></td>
+            <td ><div style="padding-top:10px">' . $patient["created_at"] . '</div></td>
+            <td style="display: flex;justify-content: space-evenly;">
+            ';
+            $table .= '<button class="btn btn-primary" data-token="' . $patient["token"] . '" data-toggle="tooltip" data-placement="top" title="Add Record"><i class="bi bi-card-checklist"></i></button>';
+
+            $table .= '<button class="btn btn-success" id="sendToDoctorButton" data-token="' . $patient["token"] . '"  data-toggle="tooltip" data-placement="top" title="Finish"><i class="bi bi-calendar2-check"></i></button>';
+
+            $table .= "</td></tr>";
+        }
+        $actions = [
+            "patientsAppointmentBody" => $table
+        ];
+        RequsetHelper::addResponseData("data", $actions);
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patients data with appointments retrieved successfully');
     }
     // public function showRecord(Request $request)
     // {
