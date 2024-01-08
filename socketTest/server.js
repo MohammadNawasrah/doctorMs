@@ -16,7 +16,6 @@ io.on("connection", (socket) => {
 
     socket.on("sendPatientToServer", (response) => {
         let data = JSON.stringify({
-
             "userToken": response.toDoctor,
 
             "patientToken": response.patientToken

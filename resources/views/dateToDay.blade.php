@@ -60,7 +60,7 @@
         <!-- You can retain your existing HTML content here -->
     </main>
     </div>
-    </div>
+
     <!-- You can retain your existing HTML content here -->
   </main>
   </div>
