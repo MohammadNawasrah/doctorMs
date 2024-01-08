@@ -118,7 +118,7 @@ CREATE TABLE `password_reset_tokens` (
 CREATE TABLE `patient_appointments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `patientId` bigint(20) UNSIGNED NOT NULL,
-  `nextappointment` datetime NOT NULL,
+  `next_appointment` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

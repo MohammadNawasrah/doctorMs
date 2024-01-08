@@ -4,14 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        // patientId currentAppointment  nextappointment
+        // patientId currentAppointment  next_appointment
         Schema::create('patient_appointments', function (Blueprint $table) {
             $table->id();
             $table->boolean('status_to_send_doctor')->default(false);
