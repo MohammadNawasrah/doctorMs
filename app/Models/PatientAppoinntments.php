@@ -20,12 +20,12 @@ class PatientAppoinntments extends Model
     public static function createRecord($newData)
     {
         try {
-
-            if (!self::getPatientRecord($newData["patientId"])) {
+            if (!self::isPatientRecordAlreadyExist($newData["patientId"])) {
                 if (!DateHelper::isDateTodayOrInFuture($newData["nextappointment"])) {
                     die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
                 }
                 self::create($newData);
+                return;
             }
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, "you can add appoinntment one for patent"));
         } catch (\Throwable $th) {
@@ -50,9 +50,9 @@ class PatientAppoinntments extends Model
         try {
             $today = Carbon::now()->toDateString();
 
-            $patientAppointmentsData = Patients::select('patients.*', 'patientAppointments.*')
-                ->join('patientAppointments', 'patients.id', '=', 'patientAppointments.patientId')
-                ->whereDate('patientAppointments.nextappointment', '=', $today)
+            $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
+                ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
+                ->whereDate('patient_appointments.nextappointment', '=', $today)
                 ->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
@@ -69,6 +69,15 @@ class PatientAppoinntments extends Model
                 ->join('patientAppointments', 'patients.id', '=', 'patientAppointments.patientId')
                 ->where("patients.id", $patientId)->firstOrFail();
             return  $patientAppointmentsData;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+    public static function isPatientRecordAlreadyExist($patientId)
+    {
+        try {
+            PatientAppoinntments::where("patientId", $patientId)->firstOrFail();
+            return  true;
         } catch (\Throwable $th) {
             return false;
         }

@@ -72,6 +72,8 @@ class PatientController
             <td style="display: flex;justify-content: space-evenly;">
             ';
 
+            $table .= '<button class="btn btn-success" data-token="' . $patient["token"] . '" id="addAppointmentButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Add Appointment" data-bs-toggle="modal" data-bs-target="#addAppointmetModal"><i class="bi bi-calendar"></i></button>';
+
             $table .= '<button class="btn btn-success" data-token="' . $patient["token"] . '" id="updatePatientModalButton" data-phone_number="' . $patient["phoneNumber"] . '" data-age="' . $patient["age"] . '" data-full_name="' . $patient["fullName"] . '"  style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update" ><i class="bi bi-arrow-down-up"></i></button>';
 
             $table .= '<a class="btn btn-warning" href="/dashboard/patientRecords/record/show/' . $patient["token"] . '" target="_blank"  data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="record" ><i class="bi bi-files"></i></a>';
