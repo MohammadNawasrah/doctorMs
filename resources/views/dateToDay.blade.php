@@ -61,40 +61,45 @@
     </main>
     </div>
     </div>
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
-        integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
-        crossorigin="anonymous"></script>
-    <script>
-        function fetchPatientsHaveDateToday() {
-            var settings = {
-                "url": PatientAppointments.patientsHaveAppoinntment,
-                "method": "POST",
-                "timeout": 0,
-            };
-            $.ajax(settings).done(function (response) {
-                response = JSON.parse(response);
-                $("#patientsAppointmentBody").html("");
-                if (response.status === 200) {
-                    $("#patientsAppointmentBody").html("");
-                    $("#patientsAppointmentBody").append(response.data.patientsAppointmentBody)
-                }
-            });
+    <!-- You can retain your existing HTML content here -->
+  </main>
+  </div>
+  </div>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
+  <script>
+    function fetchPatientsHaveDateToday() {
+      var settings = {
+        "url": PatientAppointments.patientsHaveAppoinntment,
+        "method": "POST",
+        "timeout": 0,
+      };
+      $.ajax(settings).done(function(response) {
+        console.log(response)
+        response = JSON.parse(response);
+        $("#patientsAppointmentBody").html("");
+        if (response.status === 200) {
+          $("#patientsAppointmentBody").html("");
+          $("#patientsAppointmentBody").append(response.data.patientsAppointmentBody)
         }
-        fetchPatientsHaveDateToday();
-        let ipAddress = "127.0.0.1";
-        let socketPort = "3000";
-        let socket = io(ipAddress + ":" + socketPort);
-        $(document).on("click", "#sendToDoctorButton", function () {
-            socket.emit("sendPatientToServer", {
-                toDoctor: sessionStorage.getItem("userToken"),
-                patientToken: $(this).data("token")
-            });
-        })
-        socket.on("responsSendToServer", (response) => {
-            fetchPatientsHaveDateToday();
-            Message.addModalMessage(response, 1500);
-        })
-    </script>
+      });
+    }
+    fetchPatientsHaveDateToday();
+    let ipAddress = "127.0.0.1";
+    let socketPort = "3000";
+    let socket = io(ipAddress + ":" + socketPort);
+    $(document).on("click", "#sendToDoctorButton", function() {
+      socket.emit("sendPatientToServer", {
+        toDoctor: sessionStorage.getItem("userToken"),
+        patientToken: $(this).data("token"),
+        baseUrl: UrlData.baseUrl
+      });
+    })
+    socket.on("responsSendToServer", (response) => {
+      fetchPatientsHaveDateToday();
+      Message.addModalMessage(response, 1500);
+    })
+  </script>
+
 </main>
 
 @endsection

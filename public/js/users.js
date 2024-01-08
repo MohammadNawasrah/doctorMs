@@ -34,10 +34,10 @@ $(function () {
             if (response.status === 200) {
                 Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
-                    $("#addNewUserModal").modal("hide")
                     Loader.removeLoader();
-                    fetch();
                 }, 1000);
+                $("#addNewUserModal").modal("hide");
+                fetch();
                 return;
             }
             Loader.removeLoader();
@@ -70,6 +70,7 @@ $(function () {
                 pagesName.forEach(pageName => {
                     let actions = Object.keys(jsonPermission[pageName])
                     let pagesName = `<option value="${pageName}">${pageName}</options>`;
+                    console.log(pagesName)
                     pagesNamePermission.append(pagesName);
                     actions.forEach(action => {
                         isChecked = jsonPermission[pageName][action] === 1 ? true : false;
