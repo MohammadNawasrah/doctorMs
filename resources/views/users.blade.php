@@ -159,7 +159,7 @@
                                     }),
                                 };
                                 $.ajax(settings).done(function(response) {
-                                    console.log(response);
+                                    ;
                                     socket.emit("getData", {
                                         "userName": response.data.userName
                                     })

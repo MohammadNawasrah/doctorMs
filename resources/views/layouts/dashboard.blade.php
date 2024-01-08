@@ -164,6 +164,34 @@
                     </ul>
                 </div>
             </nav>
+            <body>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">photo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body w-100" style="height: 50;">
+            <div class="container mt-5">
+                <h2 class="mb-4">Image Upload Profile personly</h2>
+
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Choose Image</label>
+                        <input type="file" class="form-control w-50" id="image" name="image" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Upload Image</button>
+                </form>
+            </div>
+            <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
             <script>
@@ -174,7 +202,7 @@
                         "timeout": 0,
                     };
                     $.ajax(settings).done(function(response) {
-                        console.log(response)
+
                         response = JSON.parse(response);
                         if (response.status == 200) {
                             data = response.data;
@@ -185,7 +213,6 @@
                                 });
                             })
                         }
-                        console.log(lastSegment)
                         $(`[data-url="${lastSegment}"]`).addClass("menu-active");
                     });
                     $("#userName").text(sessionStorage.getItem("userName"))
