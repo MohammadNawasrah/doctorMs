@@ -8,19 +8,19 @@ use Trait\Helpers\RequsetHelper;
 
 class HtmlCode extends Model
 {
-    protected $table = "html_code_for_page";
+    protected $table = "html_code";
     protected $fillable = [
         'pageName',
         "actionName",
-        'htmlCode',
+        "html_code",
     ];
     public static function getHtmlCodeForPage($pageName)
     {
         try {
-            $htmlCodesPageData = self::where("pageName", $pageName)->select("actionName", "htmlCode")->get();
+            $htmlCodesPageData = self::where("pageName", $pageName)->select("actionName", "html_code")->get();
             $actions = array();
             foreach ($htmlCodesPageData as $key => $value) {
-                $actions[$value["actionName"]] = $value["htmlCode"];
+                $actions[$value["actionName"]] = $value["html_code"];
             }
             return $actions;
         } catch (\Throwable $th) {
@@ -32,7 +32,7 @@ class HtmlCode extends Model
         try {
             $htmlCodesPageData = self::where("pageName", $pageName)->where("actionName", $actionName)->firstOrFail();
             $htmlCodesPageData->update([
-                "htmlCode" => $newData
+                "html_code" => $newData
             ]);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
@@ -43,7 +43,7 @@ class HtmlCode extends Model
         try {
             $htmlCodesPageData = self::where("actionName", $actionName)->firstOrFail();
             $htmlCodesPageData->update([
-                "htmlCode" => $newData
+                "html_code" => $newData
             ]);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
