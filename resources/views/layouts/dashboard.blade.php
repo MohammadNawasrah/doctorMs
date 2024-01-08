@@ -154,6 +154,13 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="nav-item" data-permission="doctorPage">
+                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/doctor">
+                                <div class="menu-btn">
+                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>settings</p>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

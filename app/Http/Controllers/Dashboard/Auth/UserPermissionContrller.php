@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
-use Trait\Helpers\SessionHelper;
 use Trait\Helpers\UtileHelper;
 
 class UserPermissionContrller
@@ -16,63 +15,25 @@ class UserPermissionContrller
     public function setPermissionForUser(Request $request)
     {
         $userName = $request->input('userName');
-        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         $jsonPermission = $request->input('jsonPermission');
-        try {
-            $user = Users::where('userName', $userName)->firstOrFail();
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist");
-        }
-        try {
-            $userPermission = UserPermission::where('userId', $user["id"])->firstOrFail();
-            $userPermission->update([
-                "jsonPermission" => json_encode($jsonPermission)
-            ]);
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission already Added Successfully Then Updated");
-        } catch (Exception $e) {
-            $userPermission = UserPermission::create([
-                'userId' => $user["id"],
-                'jsonPermission' => json_encode($jsonPermission),
-            ]);
-        }
-        return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission added Successfully");
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
+        $user = Users::getUserByUsername($userName);
+        UserPermission::updateOrAddUserPermission($user["id"], $jsonPermission);
     }
     public function getPermissionForUser(Request $request)
     {
         $userName = $request->input('userName');
         UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
-        try {
-            $user = Users::where('userName', $userName)->firstOrFail();
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist");
-        }
-        try {
-            $userPermission = UserPermission::where('userId', $user["id"])->firstOrFail();
-            RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission For $userName");
-            RequsetHelper::addResponseData("data", ["jsonPermission" => json_decode($userPermission["jsonPermission"])]);
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not have Permission");
-        }
-        return  RequsetHelper::getResponse();
+        $user = Users::getUserByUsername($userName);
+        UserPermission::getPermissionByUser($user);
     }
     public function updatePermissionForUser(Request $request)
     {
         $userName = $request->input('userName');
         $jsonPermission = $request->input('jsonPermission');
         UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
-        try {
-            $user = Users::where('userName', $userName)->firstOrFail();
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist");
-        }
-        try {
-            $userPermission = UserPermission::where('userId', $user["id"])->firstOrFail();
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not have Permission");
-        }
-        $userPermission->update([
-            "jsonPermission" => json_encode($jsonPermission)
-        ]);
+        $user = Users::getUserByUsername($userName);
+        UserPermission::updateUserPermissionByUserId($user["id"], $jsonPermission);
         return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission updated Successfully");
     }
 }

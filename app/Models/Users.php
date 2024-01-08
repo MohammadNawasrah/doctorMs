@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
@@ -12,20 +13,19 @@ class Users extends Model
     protected $fillable = [
         'firstName',
         'lastName',
-        'socketId',
-        'isOnline',
         'userName',
         'email',
         'status',
         'isAdmin',
         'password',
-        'token'
+        'token',
+        'type'
     ];
     public static function getUserIdByUserName($userName)
     {
         try {
             if (session()->has('token')) {
-                $user = Users::where("userName", $userName)->select("id")->firstOrFail();
+                $user = self::where("userName", $userName)->select("id")->firstOrFail();
                 return $user->id;
             }
         } catch (\Throwable $th) {
@@ -35,49 +35,88 @@ class Users extends Model
     public static function getUserIdByToken($userToken)
     {
         try {
-
-            $user = Users::where("token", $userToken)->select("id")->firstOrFail();
+            $user = self::where("token", $userToken)->select("id")->firstOrFail();
             return $user->id;
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
+        }
+    }
+    public static function getUserByUsername($userName)
+    {
+        try {
+            $user = self::where("userName", $userName)->firstOrFail();
+            return $user;
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist"));
         }
     }
     public static function getAdminUsers()
     {
         try {
             if (session()->has('token')) {
-                $users = Users::where('isAdmin', 1)->where("status", true)->where("userName", "!=", session()->get('userName'))->where("userName", "!=", "_nawasrah")->pluck('userName');
+                $users = self::where('isAdmin', 1)->where("status", true)->where("userName", "!=", session()->get('userName'))->where("userName", "!=", "nawasrah")->pluck('userName');
                 return $users;
             }
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
         }
     }
-    // public static function isUserDeleted()
-    // {
-    //     try {
-    //         // if (session()->has('userName')) {
-    //         $users = Users::where('token', session("token"))->where("status", true)->get();
-    //         if (count($users) != 0) {
-    //             false;
-    //         }
-    //         // }
-    //         return false;
-    //     } catch (\Throwable $th) {
-    //         return true;
-    //     }
-    // }
     public static function deleteUser($userName)
     {
         try {
             if (session()->has('token')) {
-                $users = Users::where('userName', $userName)->where("status", true)->firstOrFail();
+                $users = self::where('userName', $userName)->where("status", true)->firstOrFail();
                 $users->update([
                     "status" => false
                 ]);
             }
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
+        }
+    }
+    public static function checkIfAccountDelted($userName)
+    {
+        try {
+            $user = self::where('userName', $userName)->firstOrFail();
+            if (!$user["status"])
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your Account Deleted"));
+        } catch (Exception $e) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist"));
+        }
+    }
+    public static function checkIfUserNameAleradyExist($userName)
+    {
+        try {
+            self::where('userName', $userName)->firstOrFail();
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name already Exist"));
+        } catch (Exception $e) {
+        }
+    }
+    public static function checkIfUserNameNotExist($userName)
+    {
+        try {
+            self::where('userName', $userName)->firstOrFail();
+        } catch (Exception $e) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not Exist"));
+        }
+    }
+    public static function updateTokenByUserName($userName, $token)
+    {
+        try {
+            $user = self::where('userName', $userName)->firstOrFail();
+            $user->update([
+                "token" => $token
+            ]);
+        } catch (Exception $e) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name already Exist"));
+        }
+    }
+    public static function createNewUser($newData)
+    {
+        try {
+            self::create($newData);
+        } catch (Exception $e) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $e->getMessage()));
         }
     }
 }

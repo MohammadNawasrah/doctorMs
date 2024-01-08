@@ -14,7 +14,6 @@ class HtmlCodeController
     public function index()
     {
         return SessionHelper::checkIfLogedinForView("htmlCode");
-        // return View("HtmlCodPage");
     }
     public function getAllHtmlCode()
     {
