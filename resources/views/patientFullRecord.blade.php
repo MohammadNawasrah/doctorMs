@@ -65,6 +65,7 @@
     </style>
 </head>
 <body>
+    <h1 style="text-align: center;" class="m-4">Records page</h1>
             <!-- Main Content -->
             <main role="main" class="col">
                 <!-- Content Goes Here -->
@@ -159,61 +160,18 @@
                                     <thead class="table-bordered-custom">
                                         <tr>
                                             <th scope="col" class="col-1" style="padding-left: 5%;">id</th>
-                                            <th scope="col" class="col-4" style="padding-left: 5%;">Name</th>
+                                            <th scope="col" class="col-4" style="padding-left: 5%;">Note</th>
                                             <th scope="col" class="col-4" style="padding-left: 5%;">Time and Date</th>
                                             <th scope="col" class="col-5" style="padding-left: 5%;">Events</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td style="padding-left: 5%;">aseel</td>
+                                            <td><textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" rows="3"></textarea></td>
                                             <td style="padding-left: 5%;">aseel</td>
                                             <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>
-                                                <button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>
-                                                <button class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td style="padding-left: 5%;">nawasrah</td>
-                                            <td style="padding-left: 5%;">nawasrah</td>
-                                                <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>
-                                                <button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>
-                                                <button class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td style="padding-left: 5%;">naeem</td>
-                                            <td style="padding-left: 5%;">naeem</td>
-                                                <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>
-                                                <button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>
-                                                <button class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td style="padding-left: 5%;">ali</td>
-                                            <td style="padding-left: 5%;">ali</td>
-                                            <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>
-                                                <button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>
-                                                <button class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td style="padding-left: 5%;">Ahmad</td>
-                                            <td style="padding-left: 5%;">Ahmad</td>
-                                                <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>
-                                                <button class="btn btn-success" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="send" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-arrow-right"></i></button>
-                                                <button class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>
+                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="view image"><i class="bi bi-file-image"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>

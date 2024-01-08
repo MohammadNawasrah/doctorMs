@@ -253,6 +253,7 @@
         Message.addMessage(response.message, selectedButton, "danger");
       });
     })
+    
   })
 </script>
 @endsection
