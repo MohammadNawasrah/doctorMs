@@ -29,6 +29,9 @@ Route::group(['prefix' => '/dashboard'],  function () {
     Route::get('/dateToDay', function () {
         return View('dateToDay');
     });
+    Route::get('/doctor', function () {
+        return View('doctorPage');
+    });
     Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
@@ -88,8 +91,8 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/appointment/haveAppoinntment', [PatientAppointmentController::class, 'patientsHaveAppoinntment']);
     });
     Route::group(['prefix' => '/patientsToDoctor'], function () {
-        Route::post('/', [PatientToDoctorController::class, 'showtoDoctors']);
-        Route::post('/toDoctor', [PatientToDoctorController::class, 'showtoDoctor']);
+        Route::post('/', [PatientToDoctorController::class, 'showPatientsToAllDoctors']);
+        Route::post('/showToDoctor', [PatientToDoctorController::class, 'showPatientsToDoctor']);
         Route::post('/toDoctor/add', [PatientToDoctorController::class, 'addtoDoctor']);
         Route::post('/toDoctor/update', [PatientToDoctorController::class, 'updatetoDoctor']);
         Route::post('/toDoctor/delete', [PatientToDoctorController::class, 'deletetoDoctor']);

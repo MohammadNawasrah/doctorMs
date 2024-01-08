@@ -15,65 +15,48 @@ class PatientToDoctor extends Model
         'patientId',
         'status',
     ];
+    public static function getPatientsToDoctor()
+    {
+        try {
+            $userId = Users::getUserIdByToken(session()->get("token"));
+            $patientData = Patients::select('patients.fullName', 'patients.token', 'patient_to_doctor.*')
+                ->join('patient_to_doctor', 'patients.id', '=', 'patient_to_doctor.patientId')
+                ->where("patient_to_doctor.status", true)->where("userId", $userId)->get();
+            return $patientData;
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
     public static function createRecord($newData)
     {
         try {
-            self::create($newData);
+            if (!self::isPatientAlreadySendToDoctor($newData["patientId"])) {
+                self::create($newData);
+            }
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
+    public static function isPatientAlreadySendToDoctor($patientId)
+    {
+        try {
+            self::where("patientId", $patientId)->firstOrFail();
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, "patient Already send"));
+        } catch (\Throwable $th) {
+            return false;
         }
     }
     public static function getAllRecords()
     {
         try {
-            $patientData = Patients::select('patients.*', 'patientToDoctor.id as patientToDoctorId', 'patientToDoctor.status', 'patientToDoctor.userId')
-                ->join('patientToDoctor', 'patients.id', '=', 'patientToDoctor.patientId')->get();
+            $patientData = Patients::select('patients.*', 'patient_to_doctor.id as patient_to_doctorId', 'patient_to_doctor.status', 'patient_to_doctor.userId')
+                ->join('patient_to_doctor', 'patients.id', '=', 'patient_to_doctor.patientId')->get();
             if (count($patientData) != 0) {
                 return $patientData;
             }
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
-        }
-    }
-    public static function getAllPatientRecords($patientId)
-    {
-        try {
-            $patientData = Patients::select('patients.token', 'patientRecords.*')
-                ->join('patientRecords', 'patients.id', '=', 'patientRecords.patientId')
-                ->where("patients.id", $patientId)->get();
-            if (count($patientData) != 0) {
-                return  $patientData;
-            }
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Patient Record not found'));
-        } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
-        }
-    }
-    public static function deletePatientRecord($patientId, $recordId)
-    {
-        try {
-            self::getPatientRecordByRecordId($patientId, $recordId)->delte();
-        } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
-        }
-    }
-    public static function updatePatientRecord($patientId, $recordId, $newData)
-    {
-        try {
-            self::getPatientRecordByRecordId($patientId, $recordId)->update($newData);
-        } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
-        }
-    }
-    public static function getPatientRecordByRecordId($patientId, $recordId)
-    {
-        try {
-            $patientRecord = PatientRecords::where("patientId", $patientId)
-                ->Where("id", $recordId)->firstOrFail();
-            return   $patientRecord;
-        } catch (\Throwable $th) {
-            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Record not found');
         }
     }
 }

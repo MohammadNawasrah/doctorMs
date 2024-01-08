@@ -159,7 +159,7 @@ CREATE TABLE `patients` (
 -- Table structure for table `patienttodoctor`
 --
 
-CREATE TABLE `patient_todoctor` (
+CREATE TABLE `patient_to_doctor` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `userId` bigint(20) UNSIGNED NOT NULL,
   `patientId` bigint(20) UNSIGNED NOT NULL,
@@ -314,9 +314,9 @@ ALTER TABLE `patients`
   ADD UNIQUE KEY `patients_phonenumber_unique` (`phoneNumber`);
 
 --
--- Indexes for table `patient_todoctor`
+-- Indexes for table `patient_to_doctor`
 --
-ALTER TABLE `patient_todoctor`
+ALTER TABLE `patient_to_doctor`
   ADD PRIMARY KEY (`id`),
   ADD KEY `patienttodoctor_userid_foreign` (`userId`),
   ADD KEY `patienttodoctor_patientid_foreign` (`patientId`);
@@ -389,9 +389,9 @@ ALTER TABLE `patients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `patient_todoctor`
+-- AUTO_INCREMENT for table `patient_to_doctor`
 --
-ALTER TABLE `patient_todoctor`
+ALTER TABLE `patient_to_doctor`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -437,9 +437,9 @@ ALTER TABLE `patient_records`
 --
 -- Constraints for table `patienttodoctor`
 --
-ALTER TABLE `patient_todoctor`
-  ADD CONSTRAINT `patient_todoctor_patientid_foreign` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `patient_todoctor_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `patient_to_doctor`
+  ADD CONSTRAINT `patient_to_doctor_patientid_foreign` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `patient_to_doctor_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
