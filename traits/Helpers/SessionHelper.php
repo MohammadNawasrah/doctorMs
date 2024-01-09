@@ -4,11 +4,17 @@
 namespace Trait\Helpers;
 
 use App\Models\UserPermission;
-use App\Models\Users;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request as HttpRequest;
 
 class SessionHelper
 {
+    public static function baseUrl(HttpRequest $request)
+    {
+        $protocol = $request->secure() ? 'https://' : 'http://';
+        $hostname = $request->getHost();
+        $port = $request->getPort();
+        return "$protocol$hostname:$port";
+    }
     public static function checkIfLogedinForApi()
     {
         if (!session()->has('token')) {

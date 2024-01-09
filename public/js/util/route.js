@@ -4,6 +4,11 @@ class UrlData {
     static protocol = window.location.protocol;
     static baseUrl = UrlData.protocol + "//" + UrlData.host + (UrlData.port ? ":" + UrlData.port : "");
 }
+function baseUrl() {
+    let text = window.location.protocol + "//" + window.location.hostname + (window.location.port || 80 ? ":" + window.location.port || 80 : "");
+    return text;
+
+}
 
 class Login {
     static login = UrlData.baseUrl + "/login";
@@ -35,7 +40,8 @@ class Users {
     static getUserByUserName = Dashboard.users + "/user";  // Added
     static deleteUser = Dashboard.users + "/user/delete";  // Added
     static getUserPermissions = Dashboard.users + "/getUserPermissions";  // Added
-    static getHtmlByPermission = Dashboard.users + "/getHtmlByPermission";  // Added
+    static addTypeUser = Dashboard.users + "/user/type/add";
+    static getHtmlByPermission = Dashboard.users + "/getHtmlByPermission";
     // Add more routes as needed
 }
 

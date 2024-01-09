@@ -2,10 +2,9 @@
 // web.php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Dashboard\Auth\HtmlCodController;
 use App\Http\Controllers\Dashboard\Auth\HtmlCodeController;
-use App\Http\Controllers\Dashboard\Auth\HtmlCodPageController;
 use App\Http\Controllers\Dashboard\Auth\LogOutController;
+use App\Http\Controllers\Dashboard\UploadImageController;
 use App\Http\Controllers\Dashboard\Patient\PatientController;
 use App\Http\Controllers\Dashboard\Patient\PatientRecordController;
 use App\Http\Controllers\Dashboard\Auth\PermissionController;
@@ -14,7 +13,6 @@ use App\Http\Controllers\Dashboard\Auth\UserPermissionContrller;
 use App\Http\Controllers\Dashboard\Auth\UsersController;
 use App\Http\Controllers\Dashboard\Patient\PatientAppointmentController;
 use App\Http\Controllers\Dashboard\Patient\PatientToDoctorController;
-use App\Models\HtmlCod;
 use Illuminate\Support\Facades\Route;
 use Trait\Helpers\SessionHelper;
 
@@ -32,6 +30,8 @@ Route::group(['prefix' => '/dashboard'],  function () {
     Route::get('/doctor', function () {
         return View('doctorPage');
     });
+    Route::get('/image/profile/getUserProfileImage', [UploadImageController::class, 'getUserProfileImage']);
+    Route::post('/image/profile/add', [UploadImageController::class, 'uploadProfileImage']);
     Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
@@ -47,6 +47,7 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/register', [RegisterController::class, 'addNewUser']);
         Route::get('/getAllAdminUsers', [UsersController::class, 'getAllAdminUsers']);
         Route::post('/user/online', [UsersController::class, 'setSocketIdForUserOnline']);
+        Route::post('/user/type/add', [UsersController::class, 'addType']);
         Route::post('/user/offline', [UsersController::class, 'setSocketIdForUserOffline']);
         Route::post('/user', [UsersController::class, 'getUserByUserName']);
         Route::post('/user/delete', [UsersController::class, 'deleteUser']);

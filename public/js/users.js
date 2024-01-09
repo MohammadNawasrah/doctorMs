@@ -1,6 +1,7 @@
 
 var selectedUser = ""
 var pagesName;
+
 $(function () {
 
     $(document).off("click", '#addNewUserButton')
@@ -36,7 +37,7 @@ $(function () {
                 setTimeout(() => {
                     Loader.removeLoader();
                 }, 1000);
-                $("#addNewUserModal").modal("hide");
+                $(".close").trigger("click")
                 fetch();
                 return;
             }
@@ -189,6 +190,7 @@ $(function () {
                     $("#deleteUserModal").modal("hide")
                     Loader.removeLoader();
                 }, 1000);
+                fetch();
                 return;
             }
             Loader.removeLoader();
