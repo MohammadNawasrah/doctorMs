@@ -52,4 +52,29 @@ class UploadImageController
 
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, $responseMessages);
     }
+    public function getAllImgeToPatient(Request $request)
+    {
+        $patientToken = $request->input("patientToken");
+        $recordId = $request->input("recordId");
+        $directoryPath = public_path("image/$patientToken/$recordId");
+
+        $files = File::glob($directoryPath . "/*");
+
+        $imageUrls = [];
+        $imageName = [];
+
+        foreach ($files as $file) {
+            $imageUrls[] = SessionHelper::baseUrl($request) . "/image/$patientToken/$recordId/" . basename($file);
+            $imageName[] = basename($file);
+        }
+
+        // Check if any images were found
+        if (!empty($imageUrls)) {
+            RequsetHelper::addResponseData("data", [$imageUrls,  $imageName]);
+            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "done fetch image");
+        }
+
+        // Return a default image URL if no images were found
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, SessionHelper::baseUrl($request) . "/image/profile/tokenusdafiosdajlodsafj.png");
+    }
 }
