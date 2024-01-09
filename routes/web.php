@@ -32,6 +32,8 @@ Route::group(['prefix' => '/dashboard'],  function () {
     });
     Route::get('/image/profile/getUserProfileImage', [UploadImageController::class, 'getUserProfileImage']);
     Route::post('/image/profile/add', [UploadImageController::class, 'uploadProfileImage']);
+    Route::post('/image/patient/show', [UploadImageController::class, 'getAllImgeToPatient']);
+    Route::post('/image/patient/add', [UploadImageController::class, 'uploadProfileImageForPatient']);
     Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
@@ -53,6 +55,7 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/user/delete', [UsersController::class, 'deleteUser']);
         Route::post('/getUserPermissions', [UsersController::class, 'getUserPermissions']);
         Route::post('/getHtmlByPermission', [UsersController::class, 'getHtmlByPermission']);
+        Route::post('/getUsersType', [UsersController::class, 'getUsersType']);
     });
     Route::group(['prefix' => '/userPermission'], function () {
         Route::post('/setPermissionForUser', [UserPermissionContrller::class, 'setPermissionForUser']);
@@ -78,6 +81,7 @@ Route::group(['prefix' => '/dashboard'],  function () {
     Route::group(['prefix' => '/patientRecords'], function () {
         Route::post('/', [PatientRecordController::class, 'showRecords']);
         Route::get('/record/{token}', [PatientRecordController::class, 'fullRecord']);
+        Route::post('/record', [PatientRecordController::class, 'getAllRecordForPatient']);
         Route::post('/record/add', [PatientRecordController::class, 'addRecord']);
         Route::post('/record/update', [PatientRecordController::class, 'updateRecord']);
         Route::post('/record/delete', [PatientRecordController::class, 'deleteRecord']);

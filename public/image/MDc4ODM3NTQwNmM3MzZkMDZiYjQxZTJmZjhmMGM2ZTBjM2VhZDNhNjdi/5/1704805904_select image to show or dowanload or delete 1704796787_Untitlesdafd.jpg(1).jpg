@@ -174,7 +174,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="downloadImage">Download</button>
+                <button type="button" class="btn btn-success" id="downloadImage" data-bs-dismiss="modal">Download</button>
                 <button type="button" class="btn btn-danger">Delete</button>
               </div>
             </div>
@@ -278,7 +278,7 @@
       })
       $("#downloadImage").on("click", function() {
         // Get the selected image filename
-        if ($("#imageSelect").val() === "select image to show or dowanload or delete") {
+        if ($("#imageSelect").val() === "") {
           alert("please select image")
           return;
         }

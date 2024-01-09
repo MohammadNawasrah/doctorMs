@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientAppoinntments;
 use App\Models\Patients;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Trait\Helpers\DateHelper;
 use Trait\Helpers\HttpStatusCodes;
@@ -57,16 +58,22 @@ class PatientAppointmentController
     }
     public function patientsHaveAppoinntment()
     {
+        $doctors = Users::getAllDoctor();
+        $options = "";
+        foreach ($doctors as $key => $value) {
+            $options .= '<option value="' . $value["token"] . '">' . $value["userName"] . '</option>';
+        }
         $patientAppointmentsData = PatientAppoinntments::getAllPatientsHaveAppoinntmentToday();
         $table = '';
         foreach ($patientAppointmentsData as $patient) {
             $table .= '<tr style="text-align: center;">
             <td><div style="padding-top:10px">' . $patient["id"] . '</div></td>
             <td style="text-align: center;"><div style="padding-top:10px">' . $patient["fullName"] . '</div></td>
-            <td ><div style="padding-top:10px">' . $patient["next_appointment"] . '</div></td>
-            <td style="display: flex;justify-content: space-evenly;">
-            ';
-            $table .= '<button class="btn btn-primary" data-token="' . $patient["token"] . '" data-toggle="tooltip" data-placement="top" title="Modify appointments"><i class="bi bi-pen"></i></button>';
+            <td ><div style="padding-top:10px">' . $patient["next_appointment"] . '</div></td>';
+            $table .= '<td > <select  id="selectDoctorToken">
+            ' . $options . '
+                </select></td>';
+            $table .= '<td style="display: flex;justify-content: space-evenly;">';
 
             $table .= '<button class="btn btn-success" id="sendToDoctorButton" data-token="' . $patient["token"] . '"  data-toggle="tooltip" data-placement="top" title="send"><i class="bi bi-arrow-right"></i></button>';
 

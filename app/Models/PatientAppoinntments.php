@@ -107,8 +107,7 @@ class PatientAppoinntments extends Model
     public static function deletePatientRecord($patientId)
     {
         try {
-            $patient = self::getPatientRecord($patientId);
-            PatientAppoinntments::find($patient["id"])->delete();
+            PatientAppoinntments::where("patientId", $patientId)->delete();
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }

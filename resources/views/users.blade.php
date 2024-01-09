@@ -132,6 +132,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
+        $(document).on("click", "#addUserButtonModal", function() {
+            var settings = {
+                "url": baseUrl() + "/dashboard/users/getUsersType",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json",
+                }
+            };
+            $.ajax(settings).done(function(response) {
+                response = JSON.parse(response)
+                var options = "";
+                if (response.status === 200) {
+                    response.types.forEach((element, index) => {
+                        options += '<option value=' + element.id + '>' + element.type + "</option>";
+                    });
+                    $('#usersType').html(options)
+                }
+            })
+        })
+
         $(document).on("click", "#addNewUserType", function() {
             var selectedButton = $(this)
             var settings = {

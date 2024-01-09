@@ -40,39 +40,6 @@ class UsersController
         Users::deleteUser($userName);
         return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Delete User successfully");
     }
-    public function setSocketIdForUserOnline(Request $request)
-    {
-        $userName = $request->get("userName");
-        $socketId = $request->get("socketId");
-        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
-        try {
-            $user = Users::where('userName', $userName)->firstOrFail();
-            $user->update([
-                "socketId" => $socketId,
-                "isOnline" => true
-            ]);
-            RequsetHelper::addResponseData("data", $user);
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Return Admins successfully");
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Not Exist");
-        }
-    }
-    public function setSocketIdForUserOffline(Request $request)
-    {
-        $socketId = $request->get("socketId");
-        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
-        try {
-            $user = Users::where('socketId', $socketId)->firstOrFail();
-            $user->update([
-                "socketId" => null,
-                "isOnline" => false
-            ]);
-            RequsetHelper::addResponseData("data", $user);
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Return Admins successfully");
-        } catch (Exception $e) {
-            return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Not Exist");
-        }
-    }
     public function getUserByUserName(Request $request)
     {
         $userName = $request->get("userName");
@@ -147,5 +114,10 @@ class UsersController
         $type = $request->input("type");
         UtileHelper::checkIfDataEmptyOrNull($type);
         UserType::addType($type);
+    }
+    public function getUsersType()
+    {
+        RequsetHelper::addResponseData("types", UserType::all());
+        die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Good Luck"));
     }
 }

@@ -27,6 +27,16 @@ class PatientToDoctor extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
+    public static function changeStatusToFalse($patientId)
+    {
+        try {
+            self::where("patientId", $patientId)->where("status", true)->firstOrFail()->update([
+                "status" => false
+            ]);
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
     public static function createRecord($newData)
     {
         try {
@@ -40,7 +50,7 @@ class PatientToDoctor extends Model
     public static function isPatientAlreadySendToDoctor($patientId)
     {
         try {
-            self::where("patientId", $patientId)->firstOrFail();
+            self::where("patientId", $patientId)->where("status", true)->firstOrFail();
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, "patient Already send"));
         } catch (\Throwable $th) {
             return false;
