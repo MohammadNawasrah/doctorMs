@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\HtmlCode;
-use App\Models\HtmlCodeForPage;
 use App\Models\Permission;
 use App\Models\UserPermission;
 use Illuminate\Http\Request;

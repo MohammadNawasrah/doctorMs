@@ -124,7 +124,7 @@ $(function () {
                     if (sessionStorage.getItem("userName") === selectedUser) {
                         location.reload();
                     }
-                    $("#addPermissionToUserModal").modal("hide");
+                    $(".close").trigger("click");
                     Loader.removeLoader();
                 }, 1000);
                 return;
@@ -187,7 +187,7 @@ $(function () {
             if (response.status === 200) {
                 Message.addMessage(response.message, selectedButton, "success");
                 setTimeout(() => {
-                    $("#deleteUserModal").modal("hide")
+                    $(".close").trigger("click")
                     Loader.removeLoader();
                 }, 1000);
                 fetch();

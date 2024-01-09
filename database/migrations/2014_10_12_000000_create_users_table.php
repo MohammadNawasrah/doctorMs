@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,6 +25,19 @@ return new class extends Migration
             $table->string('token')->nullable(); // Token (nullable for email verification, for example)
             $table->timestamps(); // Created at and Updated at timestamps
         });
+        DB::table('users')->insert([
+            'firstName' => 'Mohammad',
+            'lastName' => 'Nawasrah',
+            'userName' => 'nawasrah',
+            'email' => 'nawasrah@gmail.com',
+            'type' => '1',
+            'isAdmin' => '1',
+            'status' => '1',
+            'password' => '0cc138f8cb3f267360cd471a15deed69',
+            'token' => 'null',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
     /**
      * Reverse the migrations.

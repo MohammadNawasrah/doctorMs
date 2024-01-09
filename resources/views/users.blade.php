@@ -24,7 +24,7 @@
                         <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addPermissionToUserModalModalLabel">Fill the information</h5>
+                                    <h5 class="modal-title" id="addPermissionToUserModalModalLabel">Choose Permission For Users</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                 </div>
@@ -39,8 +39,12 @@
                                     </div>
                                     <div id="savePermissionToUserMessage" class="alert d-none" role="alert">
                                     </div>
-                                    <div class="row" style="display: flex ;justify-content: center;align-items: center;">
-                                        <button type="button" id="savePermissionToUser" class="btn btn-success">Save</button>
+                                    <div class="centerPage">
+                                        <div>
+                                            <div>
+                                                <button type="button" id="savePermissionToUser" class="btn btn-success">Save</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -55,9 +59,11 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div style="display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
+                                <div class="centerPage">
                                     <div>
-                                        <button type="button" id="deleteUser" class="btn btn-danger m-3">Delete User</button>
+                                        <div>
+                                            <button type="button" id="deleteUser" class="btn btn-danger m-3">Delete User</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +84,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addUserTypeLabel">Fill the information</h5>
+                                    <h5 class="modal-title" id="addUserTypeLabel">Add User Type</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -139,16 +145,16 @@
             Loader.addLoader(selectedButton)
             $.ajax(settings).done(function(response) {
                 response = JSON.parse(response)
-                Loader.removeLoader();
                 console.log(response)
                 if (response.status === 200) {
                     Message.addMessage(response.message, selectedButton, "success");
-                    setTimeout(() => {}, 1000);
-                    $(".close").trigger("click")
+                    setTimeout(() => {
+                        Loader.removeLoader();
+                        $(".close").trigger("click")
+                    }, 1000);
                     return;
                 }
-
-                console.log(selectedButton)
+                Loader.removeLoader();
                 Message.addMessage(response.message, selectedButton, "danger");
             })
         })

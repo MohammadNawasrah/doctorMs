@@ -13,7 +13,7 @@
                 <div class="col">
                     <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
                         <!-- ====================================================================================== -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- ===================================================================================== -->
                         <!-- ==========================================delete modal============================================ -->
                         <!-- Modal -->

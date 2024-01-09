@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("pageName");
             $table->text("actionName");
-            $table->text("html_code");
+            $table->text("html_code")->nullable();
             $table->timestamps();
         });
     }

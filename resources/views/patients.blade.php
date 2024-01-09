@@ -23,7 +23,7 @@
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="addNewPatientModalLabel">Fill the information</h5>
+                      <h5 class="modal-title" id="addNewPatientModalLabel">Fill Patient Info</h5>
                       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -62,7 +62,7 @@
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="updatePatientModalLabel">Fill the information</h5>
+                      <h5 class="modal-title" id="updatePatientModalLabel">Fill Update Patient Data</h5>
                       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -211,7 +211,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#deletePatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
             location.reload();
             fetchPatients();
@@ -245,7 +245,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#addNewPatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
           }, 1000);
           fetchPatients();
@@ -285,7 +285,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#updatePatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
             fetchPatients();
           }, 1000);
@@ -321,7 +321,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#addAppointmetModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
           }, 1000);
           return;
