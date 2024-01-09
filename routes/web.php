@@ -55,6 +55,7 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/user/delete', [UsersController::class, 'deleteUser']);
         Route::post('/getUserPermissions', [UsersController::class, 'getUserPermissions']);
         Route::post('/getHtmlByPermission', [UsersController::class, 'getHtmlByPermission']);
+        Route::post('/getUsersType', [UsersController::class, 'getUsersType']);
     });
     Route::group(['prefix' => '/userPermission'], function () {
         Route::post('/setPermissionForUser', [UserPermissionContrller::class, 'setPermissionForUser']);

@@ -61,6 +61,18 @@ class Users extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
         }
     }
+    public static function getAllDoctor()
+    {
+        try {
+            $userType = UserType::where("type", "doctor")->select("id")->get();
+            if (session()->has('token')) {
+                $users = self::where('type', $userType[0]["id"])->where("status", true)->where("userName", "!=", session()->get('userName'))->where("userName", "!=", "nawasrah")->get();
+                return $users;
+            }
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
+        }
+    }
     public static function deleteUser($userName)
     {
         try {

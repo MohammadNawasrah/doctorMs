@@ -88,7 +88,7 @@
   let socket = io(ipAddress + ":" + socketPort);
   $(document).on("click", "#sendToDoctorButton", function() {
     socket.emit("sendPatientToServer", {
-      toDoctor: sessionStorage.getItem("userToken"),
+      toDoctor: $("#selectDoctorToken").val(),
       patientToken: $(this).data("token"),
       baseUrl: UrlData.baseUrl
     });
