@@ -145,7 +145,30 @@
                   </div>
                 </div>
               </div>
-
+              <div class="modal fade" tabindex="-1" role="dialog" id="updateAppointmentModal" aria-labelledby="updateAppointmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="updateAppointmentTitle">Add New Appointment</h5>
+                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="date" id="dateAppointmentUpdate" min="<?php echo date('Y-m-d'); ?>">
+                      <input type="time" id="timeAppointmentUpdate">
+                    </div>
+                    <div class="centerPage">
+                      <div class="centerPage">
+                        <div>
+                          <button type="button" id="updateAppointment" class="btn btn-danger m-3">Update Appointments
+                            Appointmet</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!-- ====================================================================================== -->
 
               <!-- ====================================================================================== -->
@@ -153,12 +176,12 @@
               <table class="table table-bordered">
                 <thead class="table-bordered-custom">
                   <tr>
-                    <th scope="col" class="col-1" style="padding-left: 5%;">id</th>
-                    <th scope="col" class="col-3" style="padding-left: 5%;">Name</th>
-                    <th scope="col" class="col-4" style="padding-left: 5%;">Events</th>
+                    <th scope="col" class="col-1 text-center">id</th>
+                    <th scope="col" class="col-3 text-center">Name</th>
+                    <th scope="col" class="col-4 text-center">Events</th>
                   </tr>
                 </thead>
-                <tbody id="patientsBody">
+                <tbody id="patientsBody" class="text-center">
                 </tbody>
               </table>
             </div>
@@ -188,6 +211,46 @@
     }
     fetchPatients();
     var selectedUser;
+    $(document).on("click", "#updateAppointmetButton", function() {
+      $("#dateAppointmentUpdate").val($(this).data("date"))
+      $("#timeAppointmentUpdate").val($(this).data("time"))
+      selectedUser = $(this).data("token")
+      $("#updateAppointmentModal").modal("show");
+    })
+    $(document).on("click", "#updateAppointment", function() {
+      {
+        var settings = {
+          "url": PatientAppointments.updateAppointment,
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2puUER1VVZYcEJ2bXJsd2MrWjlESjh4K1E5aWZPdE5FTERMbWk5bkhMc2xTK0ttbHNhRzJHd2J1Sk81VHJ1M1hnWGVFYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZWMxYjdiNmExIiwidGFnIjoiIn0%3D"
+          },
+          "data": JSON.stringify({
+            "token": selectedUser,
+            "next_appointment": $("#dateAppointmentUpdate").val() + "  " + $("#timeAppointmentUpdate").val()
+          }),
+        };
+
+        var selectedButton = $(this);
+        Loader.addLoader(selectedButton);
+        $.ajax(settings).done(function(response) {
+          response = JSON.parse(response)
+          if (response.status === 200) {
+            Message.addMessage(response.message, selectedButton, "success");
+            setTimeout(() => {
+              $(".close").trigger("click");
+              Loader.removeLoader();
+              fetchPatients();
+            }, 1000);
+            return;
+          }
+          Loader.removeLoader();
+          Message.addMessage(response.message, selectedButton, "danger");
+        });
+      }
+    })
     $(document).on("click", "#deletePatientButton", function() {
       selectedUser = $(this).data("token")
       $("#deletePatientModal").modal("show")
@@ -322,6 +385,7 @@
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
             $(".close").trigger("click");
+            fetchPatients();
             Loader.removeLoader();
           }, 1000);
           return;
