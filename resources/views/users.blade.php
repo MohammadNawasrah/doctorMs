@@ -105,6 +105,9 @@
                             </div>
                         </div>
                     </div>
+                    <form class="d-flex mb-3"style=" justify-content: center; align-items: center;">
+                    <input class="form-control" style="width: 90%;" type="search" id="searchInput" placeholder="Search" aria-label="Search" oninput="performSearch()">
+                </form>
                     <div class="container" style="height: 500px;overflow-y: scroll;">
                         <div class="table-responsive">
                             <table id="myTable" class="table table-bordered">
