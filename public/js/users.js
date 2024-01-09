@@ -25,7 +25,8 @@ $(function () {
                 "userName": $("#userNameInput").val(),
                 "email": $("#emailInput").val(),
                 "isAdmin": $("#userTypeInput").val(),
-                "password": $("#passwordInput").val()
+                "password": $("#passwordInput").val(),
+                "type": $("#usersType").val()
             }),
         };
 

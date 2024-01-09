@@ -21,6 +21,10 @@ class RegisterController
         $password = $request->input('password');
         $email = $request->input('email');
         $type = $request->input('type');
+        if (!ctype_digit($type)) {
+            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Please fill this user type");
+        }
+
         UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         Users::checkIfUserNameAleradyExist($userName);
         $this->registerValidation($userName, $password, $email);
@@ -31,9 +35,9 @@ class RegisterController
             'password' => md5($password),
             'isAdmin' => $isAdmin,
             'email' => $email,
-            'type' => 1 //fix
+            'type' => $type
         ];
         Users::createNewUser($newUser);
-        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Welcom " . $userName);;
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Welcom " . $userName);
     }
 }
