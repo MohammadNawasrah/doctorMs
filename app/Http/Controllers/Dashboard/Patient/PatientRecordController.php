@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard\Patient;
 
+use App\Models\PatientAppoinntments;
 use App\Models\PatientRecords;
 use App\Models\Patients;
-use Illuminate\Contracts\View\View;
+use App\Models\PatientToDoctor;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;
+use Trait\Helpers\UtileHelper;
 
 class PatientRecordController
 {
@@ -15,8 +17,14 @@ class PatientRecordController
     {
         $patientToken = $request->get('token');
         $patientNote = $request->get('patientNote');
+        $patientNote = $request->get('doctorTableId');
+        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
+
         $patient = Patients::getPatientByToken($patientToken);
+        PatientToDoctor::changeStatusToFalse($patient["id"]);
+        PatientAppoinntments::deletePatientRecord($patient["id"]);
         $data = [
+            "doctorTableId" => $patientNote,
             'patientId' =>  $patient["id"],
             'patientNote' => $patientNote,
         ];

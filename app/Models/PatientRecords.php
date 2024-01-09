@@ -14,6 +14,7 @@ class PatientRecords extends Model
     protected $fillable = [
         'patientId',
         'patientNote',
+        "doctorTableId"
     ];
     public static function createRecord($newData)
     {

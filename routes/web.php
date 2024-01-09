@@ -32,6 +32,7 @@ Route::group(['prefix' => '/dashboard'],  function () {
     });
     Route::get('/image/profile/getUserProfileImage', [UploadImageController::class, 'getUserProfileImage']);
     Route::post('/image/profile/add', [UploadImageController::class, 'uploadProfileImage']);
+    Route::post('/image/patient/add', [UploadImageController::class, 'uploadProfileImageForPatient']);
     Route::post('/userPageToAccess', [UsersController::class, 'getUserPageAllowToAccess']);
     Route::get('/', function () {
         return SessionHelper::checkIfLogedinForView('layouts.dashboard');
