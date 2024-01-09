@@ -74,15 +74,19 @@ class PatientController
         $buttonHtml = '<button data-token="{PATIENT_TOKEN}" id="deletePatientButton" class="btn btn-danger" data-toggle="tooltip" style="margin-left: 4%;" data-placement="top" title="Delete"><i class="bi bi-trash"></i></button>';
         $patients = Patients::getAllPatients();
         $table = '';
-        $patientsAppointment = PatientAppoinntments::getAllUserIdHaveAppoinntment();
+        $patientsAppointmentIds = PatientAppoinntments::getAllUserIdHaveAppoinntment();
         foreach ($patients as $patient) {
             $table .= '<tr>
             <td>' . $patient["id"] . '</td>
             <td style="text-align: center;">' . $patient["fullName"] . '</td>
             <td style="display: flex;justify-content: space-evenly;">
             ';
-            if (in_array($patient["id"], $patientsAppointment)) {
-                $table .= '<button class="btn btn-success" data-type="haveAppointment" data-token="' . $patient["token"] . '" id="addAppointmentButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update Appointment" data-bs-toggle="modal" data-bs-target="#updateAppointmetModal"><i class="bi bi-arrow-clockwise"></i></button>';
+            if (in_array($patient["id"], $patientsAppointmentIds)) {
+                $patientDateAppointment = PatientAppoinntments::getRecordByPatientId($patient["id"]);
+                $carbonDatetime = \Carbon\Carbon::parse($patientDateAppointment["next_appointment"]);
+                $date = $carbonDatetime->toDateString();
+                $time = $carbonDatetime->toTimeString();
+                $table .= '<button class="btn btn-warning" data-time="' . $time . '" data-date="' . $date . '" data-type="haveAppointment" data-token="' . $patient["token"] . '" id="updateAppointmetButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update Appointment" ><i class="bi bi-arrow-clockwise"></i></button>';
             } else {
                 $table .= '<button class="btn btn-success" data-type="haveNotAppointment" data-token="' . $patient["token"] . '" id="addAppointmentButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Add Appointment" data-bs-toggle="modal" data-bs-target="#addAppointmetModal"><i class="bi bi-calendar-plus"></i></button>';
             }
