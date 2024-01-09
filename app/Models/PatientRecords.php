@@ -14,6 +14,7 @@ class PatientRecords extends Model
     protected $fillable = [
         'patientId',
         'patientNote',
+        "doctorTableId"
     ];
     public static function createRecord($newData)
     {
@@ -39,8 +40,8 @@ class PatientRecords extends Model
     public static function getAllPatientRecords($patientId)
     {
         try {
-            $patientData = Patients::select('patients.token', 'patientRecords.*')
-                ->join('patientRecords', 'patients.id', '=', 'patientRecords.patientId')
+            $patientData = Patients::select('patients.*', 'patient_records.*', "patient_records.created_at as created_at")
+                ->join('patient_records', 'patients.id', '=', 'patient_records.patientId')
                 ->where("patients.id", $patientId)->get();
             if (count($patientData) != 0) {
                 return  $patientData;

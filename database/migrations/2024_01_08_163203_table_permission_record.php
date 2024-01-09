@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('patient_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("patientId")->constrained("patients")->onDelete('cascade');
+            $table->int("patientId");
+            $table->integer("doctorTableId");
             $table->text('patientNote')->nullable();
             $table->timestamps();
         });
