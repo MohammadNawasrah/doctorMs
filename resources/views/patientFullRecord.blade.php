@@ -65,7 +65,9 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;" class="m-4">Records page</h1>
+<div class="container-fluid" >
+            <!-- Sidebar -->
+
             <!-- Main Content -->
             <main role="main" class="col">
                 <!-- Content Goes Here -->
@@ -155,31 +157,163 @@
     </div>
   </div>
 <!-- ====================================================================================== -->
+<!-- ==========================================date modal============================================ -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="datetime-local" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ====================================================================================== -->
+<!-- ==========================================Nots modal============================================ -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body h-50">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments</label>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ====================================================================================== -->
+<!-- ==========================================photo modal============================================ -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">photo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="height: 50;">
+
+
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+
+            <div class="card" style="width: 100%;margin-top: 3%; height: 60vh;">
+
+
+                <div class="card-body">
+
+
+                </div>
+            </div>
+              </div><div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Download</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<!-- ====================================================================================== -->
+<!-- ========================================update========================================= -->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Update Notes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments</label>
+              </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+          <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ====================================================================================== -->
+<!-- ===================================search============================================== -->
+<form class="d-flex mb-3">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+    <input class="form-control ms-2 w-50" type="search" placeholder="Search" aria-label="Search">
+</form>
+<!-- ====================================================================================== -->
 
                                     <table class="table table-bordered">
                                     <thead class="table-bordered-custom">
-                                        <tr>
-                                            <th scope="col" class="col-1" style="padding-left: 5%;">id</th>
-                                            <th scope="col" class="col-4" style="padding-left: 5%;">Note</th>
-                                            <th scope="col" class="col-4" style="padding-left: 5%;">Time and Date</th>
-                                            <th scope="col" class="col-5" style="padding-left: 5%;">Events</th>
+                                        <tr style="text-align: center;">
+                                            <th scope="col" class="col-1">id</th>
+                                            <th scope="col" class="col-3">Name</th>
+                                            <th scope="col" class="col-2">Nots</th>
+                                            <th scope="col" class="col-2">Photo</th>
+                                            <th scope="col" class="col-4">Events</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td><textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" rows="3"></textarea></td>
-                                            <td style="padding-left: 5%;">aseel</td>
+                                            <td>aseel</td>
                                             <td>
-                                                <button class="btn btn-primary" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="view image"><i class="bi bi-file-image"></i></button>
+                                                <button class="btn btn-secondary w-100" data-toggle="tooltip" data-placement="top" title="Add Nots" data-bs-toggle="modal" data-bs-target="#noteModal"><i class="bi bi-plus"></i></button>
+
+                                                </td>
+                                            <td>
+                                                <button class="btn btn-warning w-100"  data-toggle="tooltip" data-placement="top" title="Photo" data-bs-toggle="modal" data-bs-target="#photoModal"><i class="bi bi-image"></i></button>
                                             </td>
+                                            <td>
+                                                <div class="row">
+                                                <div class="col"><button class="btn btn-success w-100"  data-toggle="tooltip" data-placement="top" title="Update" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-arrow-down-up"></i></button>
+                                                </div>
+                                                <div class="col"><button class="btn btn-danger w-100"  data-toggle="tooltip" data-placement="top" title="Delete" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-trash"></i></button>
+                                                </div>
+
+                                            </div>
+                                        </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </div>
+
                 <!-- You can retain your existing HTML content here -->
             </main>
         </div>
