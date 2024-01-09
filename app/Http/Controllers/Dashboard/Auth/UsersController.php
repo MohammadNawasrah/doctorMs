@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Models\HtmlCode;
-use App\Models\HtmlCodeForPage;
 use App\Models\UserPermission;
 use App\Models\Users;
 use App\Models\UserType;
 use Exception;
 use Illuminate\Http\Request;
-use Nette\Utils\Html;
 use Trait\Helpers\GenerateHelper;
 use Trait\Helpers\HttpStatusCodes;
 use Trait\Helpers\RequsetHelper;

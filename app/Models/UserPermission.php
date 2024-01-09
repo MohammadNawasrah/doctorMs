@@ -113,7 +113,6 @@ class UserPermission extends Model
             self::updateUserPermissionByUserId($userId, [
                 "jsonPermission" => json_encode($newPermission)
             ]);
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Permission already Added Successfully Then Updated"));
         } catch (Exception $e) {
             $userPermission = UserPermission::create([
                 'userId' => $userId,
@@ -130,7 +129,10 @@ class UserPermission extends Model
                 "jsonPermission" => json_encode($jsonPermission)
             ]);
         } catch (Exception $e) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name Not have Permission"));
+            self::create([
+                "userId" => $userId,
+                "jsonPermission" => json_encode($jsonPermission)
+            ]);
         }
     }
 }

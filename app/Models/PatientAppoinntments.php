@@ -47,7 +47,10 @@ class PatientAppoinntments extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
-
+    public static function getAllUserIdHaveAppoinntment()
+    {
+        return  self::pluck('patientId')->toArray();
+    }
     public static function getAllPatientsHaveAppoinntmentToday()
     {
         try {

@@ -11,22 +11,22 @@ class UtileHelper
         try {
 
             if (empty($data)) {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your empty"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data empty"));
             }
             if (($data) == null) {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your null"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data null"));
             }
             if ($data == "") {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your empty"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data empty"));
             }
             if (($data) == "null") {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your null"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data null"));
             }
             if (($data) == "Null") {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your null"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data null"));
             }
             if (($data) == Null) {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Your null"));
+                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "$data null"));
             }
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th));
