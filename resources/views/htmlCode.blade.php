@@ -28,6 +28,8 @@
 <script src="/js/bootstrap/bootstrap.min.js"></script>
 <script>
     $(function() {
+        Loader.removeLoadPage();
+
         class GetAllHmtlCode {
             static $
             static get(selectButton) {

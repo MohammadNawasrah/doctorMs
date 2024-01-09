@@ -13,9 +13,8 @@
     }
 </style>
 <script src="/js/users.js"></script>
-<!-- Main Content -->
 <main role="main" class="col-9">
-    <!-- Content Goes Here -->
+
     <div class="container mt-5  ">
         <div class="row justify-content-center ">
             <div class="col-md-8  ">
@@ -65,33 +64,41 @@
                         </div>
                     </div>
                     <!-- ===================================================================================== -->
-                    <div class="row" data-permission="addUser" style="justify-content: center;display: flex; margin: 20px;">
+                    <div class="row" style="justify-content: space-between;display: flex; margin: 20px;">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addUserType">
+                            Add Users Type
+                        </button>
+                        <div data-permission="addUser" style="justify-content: center;display: flex;">
 
+                        </div>
                     </div>
-<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    User type
-</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Fill the information</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- Modal -->
+                    <div class="modal fade" id="addUserType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUserTypeLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addUserTypeLabel">Fill the information</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-        </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" placeholder="write the type">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="userType" class="form-control" placeholder="write the type user">
+                                </div>
+                                <div class="modal-footer centerPage">
+                                    <div class="">
+                                        <div>
+                                            <div>
+                                                <button type="button" id="addNewUserType" class="btn btn-success">Save</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container" style="height: 500px;overflow-y: scroll;">
                         <div class="table-responsive">
                             <table id="myTable" class="table table-bordered">
@@ -111,62 +118,40 @@
             </div>
         </div>
     </div>
-    <!-- You can retain your existing HTML content here -->
 </main>
-<!-- Bootstrap JS and Popper.js and jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<!-- <script>
-                        let socket = io(ipAddress + ":" + socketPort);
-                        // socket.emit("setUserId", {
-                        //     "userId": "51e0273e-a221-43c1-b3bc-1046e5b4fbc7",
-                        //     "status": "online"
-                        // });
-                        socket.emit("connectUser", {
-                            "userName": localStorage.getItem("userName")
-                        })
-                        socket.on("getTable", (data) => {
-                            console.log(data)
-                            $('#tableBody').html(data.html);
-                        });
-                        // document.getElementById("sendMessageButton").addEventListener("click", () => {
-                        //     const recipientUserId = document.getElementById("recipientUserId").value;
-                        //     const message = document.getElementById("message").value;
-                        //     console.log("je;;p")
-                        //     // Emit the event with user ID, recipient user ID, and message
-                        //     socket.emit("sendChatToServer", {
-                        //         recipientUserId,
-                        //         message
-                        //     });
-                        // });
-                        // socket.on("sendChatToServer", (data) => {
-                        //     $("#ul").append(`<li> Received message from user  to ${data.recipientUserId}: ${data.message} </li>`)
-                        //     // alert(`Received message from user  to ${data.recipientUserId}: ${data.message}`)
-                        //     // console.log();
-                        //     // Handle the received message as needed
-                        // });
-                        $(function() {
-                            $(document).on("change", ".sendTo", function() {
-                                var settings = {
-                                    "url": "http://localhost/dashboard/users/user",
-                                    "method": "POST",
-                                    "timeout": 0,
-                                    "headers": {
-                                        "Content-Type": "application/json",
-                                    },
-                                    "data": JSON.stringify({
-                                        "userName": $(this).val()
-                                    }),
-                                };
-                                $.ajax(settings).done(function(response) {
-                                    ;
-                                    socket.emit("getData", {
-                                        "userName": response.data.userName
-                                    })
-                                });
+<script>
+    $(document).ready(function() {
+        $(document).on("click", "#addNewUserType", function() {
+            var selectedButton = $(this)
+            var settings = {
+                "url": baseUrl() + "/dashboard/users/user/type/add",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+                "data": JSON.stringify({
+                    "type": $("#userType").val(),
+                }),
+            };
+            Loader.addLoader(selectedButton)
+            $.ajax(settings).done(function(response) {
+                response = JSON.parse(response)
+                Loader.removeLoader();
+                console.log(response)
+                if (response.status === 200) {
+                    Message.addMessage(response.message, selectedButton, "success");
+                    setTimeout(() => {}, 1000);
+                    $(".close").trigger("click")
+                    return;
+                }
 
-                            })
-                        })
-                    </script> -->
-
+                console.log(selectedButton)
+                Message.addMessage(response.message, selectedButton, "danger");
+            })
+        })
+    })
+</script>
 @endsection

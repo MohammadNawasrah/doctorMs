@@ -4,6 +4,7 @@ class Loader {
     static token;
     static HtmlCodButton;
     static buttonId;
+    static pageToken
     static addLoader(button) {
         Loader.getButtonString(button);
         Loader.token = "setUniqerMosdlkfjDDFasdfjkl4349843f";
@@ -19,6 +20,16 @@ class Loader {
     static getButtonString(button) {
         Loader.HtmlCodButton = button[0].outerHTML
         Loader.buttonId = button.attr("id")
+    }
+    static addLoadPage = () => {
+        Loader.pageToken = "dsklafjlkdsjfklewioudsjflkadsjf";
+        $("main").prepend(`
+            <div id= "${Loader.pageToken}" style="position: relative;  display: flex;justify-content: center;align-items: center; height: 100vh; z-index: 5; background-color: white;">
+                <img src="${UrlData.baseUrl}/image/loading.gif" alt="">
+            </div>`)
+    }
+    static removeLoadPage() {
+        $(`#${Loader.pageToken}`).remove();
     }
 }
 class Message {

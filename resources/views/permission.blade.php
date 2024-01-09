@@ -66,7 +66,6 @@
     });
 </script>
 <script>
-    console.log("hello")
     var permissions;
     var pagesName;
     $(function() {
@@ -80,6 +79,7 @@
                 const permissionTableBody = $("#permissionTableBody");
                 permissionTableBody.html("");
                 response = JSON.parse(response)
+                Loader.removeLoadPage();
                 if (response.status === 200) {
                     permissions = JSON.parse(response.data.jsonPermission);
                     pagesName = Object.keys(permissions)
@@ -107,14 +107,15 @@
                     return;
                 }
                 permissionTableBody.append(`
-                        <tr>
-                            <td colspan="2" >
-                                <div style="display:flex;justify-content:center">
-                                    ${response.message}
-                                </div>
-                            </td>
-                        </tr>
-                            `)
+                
+                <tr>
+                <td colspan="2" >
+                <div style="display:flex;justify-content:center">
+                ${response.message}
+                </div>
+                </td>
+                </tr>
+                `)
             });
         }
         fetchPermission();
@@ -165,7 +166,7 @@
                     Message.addMessage(response.message, selectedButton, "success");
                     setTimeout(() => {
                         Loader.removeLoader();
-                        $("#addNewPermissionModal").modal("hide")
+                        $(".close").trigger("click")
                         fetchPermission();
                     }, 1000);
                     return;
@@ -209,7 +210,7 @@
                     Message.addMessage(response.message, selectedButton, "success");
                     setTimeout(() => {
                         Loader.removeLoader();
-                        $("#addNewActionModal").modal("hide")
+                        $(".close").trigger("click")
                         fetchPermission();
                     }, 1000);
                     return;
@@ -218,6 +219,7 @@
                 Message.addMessage(response.message, selectedButton, "danger");
             });
         })
+
     })
 </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\HtmlCode;
 use App\Models\HtmlCodeForPage;
 use App\Models\UserPermission;
 use App\Models\Users;
+use App\Models\UserType;
 use Exception;
 use Illuminate\Http\Request;
 use Nette\Utils\Html;
@@ -142,5 +143,11 @@ class UsersController
         }
         RequsetHelper::addResponseData("data", $actionsSend);
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Good Luck");
+    }
+    public function addType(Request $request)
+    {
+        $type = $request->input("type");
+        UtileHelper::checkIfDataEmptyOrNull($type);
+        UserType::addType($type);
     }
 }
