@@ -47,6 +47,14 @@ class PatientAppoinntments extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
+    public static function getRecordByPatientId($patientId)
+    {
+        try {
+            return self::where("patientId", $patientId)->firstOrFail();
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
     public static function getAllUserIdHaveAppoinntment()
     {
         return  self::pluck('patientId')->toArray();
@@ -82,7 +90,6 @@ class PatientAppoinntments extends Model
             $patientAppointmentsData = Patients::select('patients.token', 'patientAppointments.*')
                 ->join('patientAppointments', 'patients.id', '=', 'patientAppointments.patientId')
                 ->where("patients.id", $patientId)->firstOrFail();
-            die(json_encode($patientAppointmentsData));
             return  $patientAppointmentsData;
         } catch (\Throwable $th) {
             return false;
@@ -109,11 +116,11 @@ class PatientAppoinntments extends Model
     public static function updatePatientRecord($patientId, $newData)
     {
         try {
+
             if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
                 die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
             }
-            $patient = self::getPatientRecord($patientId);
-            PatientAppoinntments::find($patient["id"])->update($newData);
+            PatientAppoinntments::where("patientId", $patientId)->firstOrFail()->update($newData);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
