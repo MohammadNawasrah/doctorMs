@@ -58,6 +58,7 @@ class PatientAppointmentController
     }
     public function patientsHaveAppoinntment()
     {
+
         $doctors = Users::getAllDoctor();
         $options = "";
         foreach ($doctors as $key => $value) {

@@ -108,6 +108,10 @@
         html {
             overflow: hidden;
         }
+        .table-container {
+            max-height: 70vh; /* تحديد قيمة أكبر حسب حاجتك */
+            overflow-y: auto; /* جعل العنصر قابلًا للتمرير عند الحاجة */
+        }
     </style>
 
 </head>
