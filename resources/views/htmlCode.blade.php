@@ -11,8 +11,8 @@
 </style>
 
 
-<main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col-9 ">
-    <main role="main" class="col-9 md-ml-sm-auto">
+<main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col">
+    <main role="main" class="col">
         <select name="" id="selectActionName">
             <option value="0">Select Action Name</option>
         </select>
@@ -20,7 +20,7 @@
     </main>
     <div style="width: 120px; display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
         <div>
-            <button id="saveChangeHtml">save chenges</button>
+            <button class="btn btn-success" id="saveChangeHtml">save chenges</button>
         </div>
     </div>
 </main>
