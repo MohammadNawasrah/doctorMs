@@ -254,7 +254,6 @@
                         "timeout": 0,
                     };
                     $.ajax(settings).done(function(response) {
-                        console.log(response)
                         response = JSON.parse(response);
                         if (response.status == 200) {
                             data = response.data;
@@ -265,7 +264,6 @@
                                 });
                             })
                         }
-                        console.log(lastSegment)
                         $(`[data-url="${lastSegment}"]`).addClass("menu-active");
                     });
                     $("#userName").text(sessionStorage.getItem("userName"))

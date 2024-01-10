@@ -64,8 +64,8 @@ class Permission extends Model
     public static function addOnJsonPermission($newJsonPermissions)
     {
         $allPermissions = json_decode(self::getAllPermission()["jsonPermission"], true);
-        foreach ($newJsonPermissions as $key => $value) {
-            $allPermissions[$key] = $value;
+        foreach ($newJsonPermissions["actions"] as $key => $value) {
+            $allPermissions[$newJsonPermissions["pageName"]][$value] = 0;
         }
         return $allPermissions;
     }
@@ -73,7 +73,7 @@ class Permission extends Model
     {
         $allPermissions = json_decode(self::getAllPermission()["jsonPermission"], true);
         foreach ($newActions as $key => $value) {
-            $allPermissions[$pageName][$key] = $value;
+            $allPermissions[$pageName][$value] = 0;
         }
         return $allPermissions;
     }

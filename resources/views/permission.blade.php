@@ -39,31 +39,22 @@
 <!-- Bootstrap JS and Popper.js and jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    var settings = {
-        "url": Permissions.getHtmlByPermission,
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/json",
-            "Cookie": "laravel_session=eyJpdiI6IldHR2hob2ZMaFM1NWhuMkdrMGRqcXc9PSIsInZhbHVlIjoiQUZheG12eDBlTnJsOUpuelovbDY5a2IrcW1yZ21PaHhwSXJQVTZJT1pNTjczZmgyRkNqOVpaellKQnV3WVJmZGlKZ0tLRTFNRUl2LzN5dzg5L2pYeCtROWpQS3ZLZ1A2SitWODlQc3BnQzhCTlJMTU1McEJlMXl6Nm9IaUl3OVciLCJtYWMiOiJhZTcxMzg5OWQxMmQwNGU0MzlkMDQ4YzIxNWNhM2YzNGYyMWJiNmRmZjEwMTE0N2QzN2IzMTFkMjYwZGQwZWQ3IiwidGFnIjoiIn0%3D"
-        },
-        "data": JSON.stringify({
-            "userName": sessionStorage.getItem("userName")
-        }),
-    };
-    $.ajax(settings).done(function(response) {
-        response = JSON.parse(response);
-        if (response.status == 200) {
-            data = response.data;
-            data.forEach(permission => {
-                keys = Object.keys(permission)
-                keys.forEach(element => {
-                    $(`[data-permission=${element}]`).append(permission[element])
-                });
-            })
-        }
-    });
+<!-- <script>
+    const whenPermissionPageLoad = () => {
+        ajax({
+            URL: Permissions.getHtmlByPermission,
+            METHOD: "POST",
+            callBackFunction: response => {
+                data = response.data;
+                data.forEach(permission => {
+                    let keys = Object.keys(permission)
+                    keys.forEach(element => {
+                        $(`[data-permission=${element}]`).append(permission[element])
+                    });
+                })
+            }
+        });
+    }
 </script>
 <script>
     var permissions;
@@ -221,5 +212,5 @@
         })
 
     })
-</script>
+</script> -->
 @endsection

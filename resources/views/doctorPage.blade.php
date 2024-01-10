@@ -131,7 +131,6 @@
                 };
 
                 $.ajax(settings).done(function(response) {
-                    console.log(response)
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         $('.close').trigger('click');
