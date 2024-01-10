@@ -52,10 +52,9 @@ class UsersController
             return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Not Exist");
         }
     }
-    public function getUserPermissions(Request $request)
+    public function getUserPermissions()
     {
-        $userName = $request->input("userName");
-        UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
+        $userName = session()->get("userName");
         $userPermissions = UserPermission::getUserPermissions($userName);
         RequsetHelper::addResponseData("data", $userPermissions);
         return  RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Return User successfully");

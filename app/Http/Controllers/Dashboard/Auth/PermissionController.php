@@ -27,11 +27,11 @@ class PermissionController
     }
     public function addNewPermission(Request $request)
     {
+
         SessionHelper::checkIfLogedinForApi();
-        $jsonPermission = $request->input('jsonPermission');
+        $jsonPermission = $request->input();
         UtileHelper::checkIfDataEmptyOrNullJsonData($jsonPermission);
-        $pageName = JsonHelper::getFirstKey($jsonPermission);
-        if (Permission::checkIfPageNameAlreadyExist($pageName)) {
+        if (Permission::checkIfPageNameAlreadyExist($jsonPermission["pageName"])) {
             return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name already Exist');
         }
         $newData = [
@@ -50,7 +50,7 @@ class PermissionController
         if (!Permission::checkIfPageNameAlreadyExist($pageName)) {
             return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Page Name Not Exist');
         }
-        $isActionExist = Permission::checkIfActionsInPageNameAlreadyExist($pageName, $actionsKeys);
+        $isActionExist = Permission::checkIfActionsInPageNameAlreadyExist($pageName, $actions);
         if ($isActionExist !== false) {
             return RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Page $isActionExist Already Exist");
         }

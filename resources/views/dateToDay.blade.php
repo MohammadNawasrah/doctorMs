@@ -71,7 +71,6 @@
       "timeout": 0,
     };
     $.ajax(settings).done(function(response) {
-      console.log(response)
       response = JSON.parse(response);
       $("#patientsAppointmentBody").html("");
       if (response.status === 200) {

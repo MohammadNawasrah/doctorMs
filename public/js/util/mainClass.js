@@ -60,10 +60,9 @@ class Message {
     }
     static addModalMessage(response, timeToDeleteModal) {
         Message.modalToken = "asdlkfjlkjadslkfjlkdsjaf";
-        console.log(Message.modalToken)
         $("html").append(`
-        <div class="modal fade" id="${Message.modalToken}" tabindex="-1" aria-labelledby="notificationmodalMabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="${Message.modalToken}" tabindex="-1" aria-labelledby="notificationmodalMabel" aria-hidden="true">
+            <div class="modal-dialog " role="document">
                 <div class="modal-content">
                     <div class="modal-body" style="margin:10px; display: flex;justify-content: center;align-items: center;">
                         <div></div>
@@ -86,50 +85,87 @@ class Message {
     }
 
 }
-class AjaxHelper {
-    url;
-    constructor(url) {
-        this.url = url;
-    }
-    mainSettings(data, method, headers) {
-        let settings = {};
-        if (this.url === "null") {
-            alert("Please Add Url")
-        }
-        settings["url"] = this.url;
-        settings["method"] = method;
-        if (headers["json"] !== null)
-            settings["headers"] = {
-                "Content-Type": "application/json",
-            }
-        if (headers["token"] !== null) {
-            settings["headers"] = {
-                "XSRF-TOKEN": "eyJpdiI6IjJ0UUFmMVBFNkdCMS94Rm5JeXBVMFE9PSIsInZhbHVlIjoibWNqS1I2MEUzcDZlT0VQRmpNSDhyUHRrWC8vVlM0c3FUQklTS1prOEN5ZlI4N0JNeW5hWFNHTExKNi9kNGU4TVY5M3U5WW5oNTZZSHFSNXBMTEdMSGJETHZTdmRBcTRVKzhWcmU4TGJNdW9ZYWxUTVJ3dW02ZjVtTWtFNXpEL1UiLCJtYWMiOiIzNjNjOWRmZTgwM2ViYzcxZmEzNzhiZmVmOTc3YjMxMjM0ZDc3NjllYzJlNmQ5Y2YxNTEwZGY4YTUxN2UxMWY4IiwidGFnIjoiIn0%3D",
-            }
-        }
-        if (data !== null) {
-            settings["data"] = data
-        }
-        return settings;
-    }
-    sendPost(data = {}, headers = [], methodOnAjaxResponse, methodBeforAjax) {
-        if (typeof methodBeforAjax === 'function') {
-            methodBeforAjax();
-        }
-        $.ajax(this.mainSettings(data, 'POST', headers)).done(response => {
-            if (typeof (methodOnAjaxResponse) === "function") {
-                methodOnAjaxResponse(response);
-            }
-        });
-    }
-    sendGet(data = {}, headers = [], methodOnAjaxResponse, methodBeforAjax) {
-        if (typeof methodBeforAjax === 'function') {
-            methodBeforAjax();
-        }
-        $.ajax(this.mainSettings(data, 'Get', headers)).done(response => {
-            if (typeof (methodOnAjaxResponse) === "function") {
-                methodOnAjaxResponse(response);
-            }
-        });
-    }
+const showAlert = (message, type = 202) => {
+    if (typeof Message !== 'undefined')
+        Message.addModalMessage(addResponse(type, message), 1500)
+    else
+        alert(message)
 }
+const addResponse = (statusData, messageData) => {
+    return { status: statusData, message: messageData }
+}
+const ajax = (options = {}) => {
+
+    const send = (options) => {
+        $.ajax({
+            url: options.URL,
+            type: options.METHOD,
+            data: options.DATA,
+            success: function (response) {
+                response = JSON.parse(response);
+                if (options.showAlert === true) {
+                    showAlert(response.message, response.status);
+                }
+                if (options.callBackFunction)
+                    options.callBackFunction(response);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                showAlert(202, errorThrown);
+            }
+        });
+    };
+
+    const getFormData = (FORMID) => {
+        let selectedForm = $(`#${FORMID}`);
+        let inputs = selectedForm.find('[name]');
+        let data = {};
+
+        $.each(inputs, (index, value) => {
+            let inputName = $(value).attr("name");
+            let inputValue = $(value).val();
+
+            if (data[inputName]) {
+                // If the key already exists, treat it as an array
+                if (!Array.isArray(data[inputName])) {
+                    // If it's not already an array, convert it
+                    data[inputName] = [data[inputName]];
+                }
+                // Push the new value to the array
+                data[inputName].push(inputValue);
+            } else {
+                // If the key doesn't exist, create a new entry
+                data[inputName] = inputValue;
+            }
+        });
+
+        return data;
+    };
+
+    if (options.FORMID) {
+        const FORM = $(`#${options.FORMID}`);
+        options.URL = FORM.prop("action");
+        options.METHOD = FORM.prop("method");
+        options.DATA = getFormData(options.FORMID);
+    }
+    if (!options.URL) {
+        showAlert("Please Add FORM ID or URL");
+        return;
+    }
+    if (!options.METHOD) {
+        showAlert("Please Add FORM ID or METHOD");
+        return;
+    }
+    if (options.functionBeforSend) {
+        options.functionBeforSend();
+    }
+    if (!options.FORMID) {
+        send(options);
+        return;
+    }
+
+    $(document).off("submit", `#${options.FORMID}`);
+    $(document).on("submit", `#${options.FORMID}`, function (event) {
+        event.preventDefault();
+        send(options);
+    });
+};
