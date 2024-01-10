@@ -39,7 +39,6 @@
             }
             static onResponse(response) {
                 response = JSON.parse(response);
-                console.log(response)
                 if (response.status == 200) {
                     var data = response.data;
                     var selectPageName = GetAllHmtlCode.$('#selectActionName');

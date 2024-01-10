@@ -12,6 +12,8 @@
     <script src="/js/login.js"></script>
     <script src="/js/util/mainClass.js"></script>
     <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -22,12 +24,12 @@
                     <div class="card-body text-center">
                         <h3 class="card-title header-text">Welcome Back!</h3>
                         <p class="card-text sub-text mb-5">Login with your details to continue</p>
-                        <form id="login" method="POST">
+                        <form id="loginForm" method="POST">
                             <div class="mb-5">
-                                <input type="text" id="userName" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="username" required>
+                                <input type="text" name="userName" id="userName" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="username" required>
                             </div>
                             <div class="mb-5">
-                                <input type="password" id="password" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="Password" required>
+                                <input type="password" name="password" id="password" style=" width:80%; margin-left: 10%;" class="form-control" placeholder="Password" required>
                             </div>
                             <div id="loginMessage" class="alert alert-danger d-none" role="alert">
                             </div>

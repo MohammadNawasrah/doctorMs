@@ -317,7 +317,6 @@
           }),
         };
         $.ajax(settings).done(function(response) {
-          console.log(response)
           response = JSON.parse(response);
           $("#patientsRecordBody").html("");
           if (response.status === 200) {

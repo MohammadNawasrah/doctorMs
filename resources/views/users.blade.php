@@ -82,106 +82,54 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addUserTypeLabel">Add User Type</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <h5 class="modal-title">Add User Type</h5>
+                                    <button type="button" class="close" id="addUserTypea" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <input type="text" id="userType" class="form-control" placeholder="write the type user">
-                                </div>
-                                <div class="modal-footer centerPage">
-                                    <div class="">
-                                        <div>
-                                            <div>
-                                                <button type="button" id="addNewUserType" class="btn btn-success">Save</button>
-                                            </div>
-                                        </div>
-
+                                <form method="post" id="addNewUserTypeForm" action="users/user/type/add">
+                                    <div class="modal-body">
+                                        <input type="text" name="type" id="userType" class="form-control" placeholder="write the type user" required>
                                     </div>
-                                </div>
+                                    <div class="modal-footer centerPage">
+                                        <div class="">
+                                            <div>
+                                                <div>
+                                                    <button type="submit" id="addNewUserType" class="btn btn-success">Save</button>
+                                                </div>
+                                            </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-<!--========================================================================================================-->
-                    <form class="d-flex mb-3" style="justify-content: center; align-items: center;">
-        <input class="form-control" style="width: 96.5%;" type="search" id="searchInput" placeholder="Search" aria-label="Search" oninput="performSearch()">
-                </form>
-<!--========================================================================================================-->
-                <div class="container table-container">
-                        <div class="table-responsive">
-                            <table id="originalTable" class="table table-bordered">
-                                <thead class="table-bordered-custom">
-                                    <tr>
-                                        <th scope="col" class="col-4" style="padding-left: 5%;">Name</th>
-                                        <th scope="col" class="col-3" style="padding-left: 5%;">Events</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-permission="usersTableShow" id="usersTableBody">
-                                    <!-- fill from ajax -->
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
+                </div>
+            </div>
+            <div class="container" style="height: 500px;overflow-y: scroll;">
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-bordered">
+                        <thead class="table-bordered-custom">
+                            <tr>
+                                <th scope="col" class="col-4" style="padding-left: 5%;">Name</th>
+                                <th scope="col" class="col-3" style="padding-left: 5%;">Events</th>
+                            </tr>
+                        </thead>
+                        <tbody data-permission="usersTableShow" id="usersTableBody">
+                            <!-- fill from ajax -->
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
-        $(document).on("click", "#addUserButtonModal", function() {
-            var settings = {
-                "url": baseUrl() + "/dashboard/users/getUsersType",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Content-Type": "application/json",
-                }
-            };
-            $.ajax(settings).done(function(response) {
-                response = JSON.parse(response)
-                var options = "";
-                if (response.status === 200) {
-                    response.types.forEach((element, index) => {
-                        options += '<option value=' + element.id + '>' + element.type + "</option>";
-                    });
-                    $('#usersType').html(options)
-                }
-            })
-        })
 
-        $(document).on("click", "#addNewUserType", function() {
-            var selectedButton = $(this)
-            var settings = {
-                "url": baseUrl() + "/dashboard/users/user/type/add",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Content-Type": "application/json",
-                },
-                "data": JSON.stringify({
-                    "type": $("#userType").val(),
-                }),
-            };
-            Loader.addLoader(selectedButton)
-            $.ajax(settings).done(function(response) {
-                response = JSON.parse(response)
-                console.log(response)
-                if (response.status === 200) {
-                    Message.addMessage(response.message, selectedButton, "success");
-                    setTimeout(() => {
-                        Loader.removeLoader();
-                        $(".close").trigger("click")
-                    }, 1000);
-                    return;
-                }
-                Loader.removeLoader();
-                Message.addMessage(response.message, selectedButton, "danger");
-            })
-        })
     })
 </script>
 <script>

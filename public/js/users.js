@@ -3,90 +3,123 @@ var selectedUser = ""
 var pagesName;
 
 $(function () {
-
-    $(document).off("click", '#addNewUserButton')
-    $(document).on("click", '#addNewUserButton', function (event) {
-        event.preventDefault();
-        selectedButton = $(this)
-        if ($("#userTypeInput").val() === "Choose an account type") {
-            Message.addMessage("Please Fill user type", selectedButton, "danger");
-            return;
-        }
-        var settings = {
-            "url": Users.register,
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-                "Content-Type": "application/json",
-            },
-            "data": JSON.stringify({
-                "firstName": $("#firstNameInput").val(),
-                "lastName": $("#lastNameInput").val(),
-                "userName": $("#userNameInput").val(),
-                "email": $("#emailInput").val(),
-                "isAdmin": $("#userTypeInput").val(),
-                "password": $("#passwordInput").val(),
-                "type": $("#usersType").val()
-            }),
-        };
-
-        Loader.addLoader(selectedButton)
-        $.ajax(settings).done(function (response) {
-            response = JSON.parse(response)
-            if (response.status === 200) {
-                Message.addMessage(response.message, selectedButton, "success");
-                setTimeout(() => {
-                    Loader.removeLoader();
-                }, 1000);
-                $(".close").trigger("click")
-                fetch();
-                return;
+    const getUserTypes = () => {
+        $(document).on("click", "#addUserButtonModal", function () {
+            ajax({
+                URL: baseUrl() + "/dashboard/users/getUsersType",
+                METHOD: "POST",
+                callBackFunction: function (response) {
+                    var options = "";
+                    if (response.status === 200) {
+                        response.types.forEach((element, index) => {
+                            options += '<option value=' + element.id + '>' + element.type + "</option>";
+                        });
+                        console.log(options)
+                        $('#usersType').html(options)
+                    }
+                }
+            })
+        })
+    }
+    const addNewUserType = () => {
+        $(document).on("click", "#addNewUserType", function () {
+            ajax({
+                FORMID: "addNewUserTypeForm",
+                showAlert: true,
+                callBackFunction: function (response) {
+                    if (response.status === 200) {
+                        $(".close").trigger("click")
+                        fetchHtmlPage();
+                    }
+                }
+            });
+        })
+    }
+    const addNewUser = () => {
+        $(document).off("click", '#addNewUserButton')
+        $(document).on("click", '#addNewUserButton', function (event) {
+            ajax({
+                FORMID: "addNewUserForm",
+                showAlert: true,
+                callBackFunction: function (response) {
+                    if (response.status === 200) {
+                        $(".close").trigger("click");
+                        fetchHtmlPage();
+                    }
+                }
+            })
+        })
+    }
+    const getPermissionToShowForUser = () => {
+        $(document).off("click", ".addPermissionsToUserModal")
+        $(document).on("click", ".addPermissionsToUserModal", function () {
+            selectedUser = $(this).data("user_name");
+            ajax({
+                URL: Users.getUserPermissions,
+                METHOD: "POST",
+                DATA: { "userName": selectedUser },
+                callBackFunction: function (response) {
+                    jsonPermission = response.data;
+                    const pagesNamePermission = $("#pagesNamePermission");
+                    pagesNamePermission.html("<option selected>Choose Page</option>");
+                    actionsPermissionForUsers = $("#actionsPermissionForUsers");
+                    actionsPermissionForUsers.html("")
+                    pagesName = Object.keys(jsonPermission);
+                    pagesName.forEach(pageName => {
+                        let actions = Object.keys(jsonPermission[pageName])
+                        let pagesName = `<option value="${pageName}">${pageName}</options>`;
+                        pagesNamePermission.append(pagesName);
+                        actions.forEach(action => {
+                            isChecked = jsonPermission[pageName][action] === 1 ? true : false;
+                            let actionValue = `                       
+                            <div class="custom-control custom-switch mb-3 d-none baseOfActions" data-page_name_base="${"base" + pageName}">
+                                <input type="checkbox" class="custom-control-input" ${isChecked ? "checked" : ""} data-page_name="${pageName}" data-action_name="${action}"  id="${pageName + action}">
+                                <label class="custom-control-label" for="${pageName + action}">${action}</label>
+                            </div>`
+                            actionsPermissionForUsers.append(actionValue)
+                        });
+                    })
+                }
+            });
+        })
+    }
+    const fetchHtmlPage = () => {
+        ajax({
+            URL: Users.getHtmlByPermission,
+            METHOD: 'POST',
+            callBackFunction: function (response) {
+                if (response.status == 200) {
+                    data = response.data;
+                    data.forEach(permission => {
+                        keys = Object.keys(permission)
+                        keys.forEach(element => {
+                            $(`[data-permission=${element}]`).html("")
+                            $(`[data-permission=${element}]`).append(permission[element])
+                        });
+                    })
+                }
             }
-            Loader.removeLoader();
-            Message.addMessage(response.message, selectedButton, "danger");
-        });
-    })
-    $(document).off("click", ".addPermissionsToUserModal")
-    $(document).on("click", ".addPermissionsToUserModal", function () {
-        selectedUser = $(this).data("user_name");
-        var settings = {
-            "url": Users.getUserPermissions,
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-                "Content-Type": "application/json",
-            },
-            "data": JSON.stringify({
-                "userName": selectedUser
-            }),
-        };
-        $.ajax(settings).done(function (response) {
-            response = JSON.parse(response);
-            if (response.status === 200) {
-                jsonPermission = response.data;
-                const pagesNamePermission = $("#pagesNamePermission");
-                pagesNamePermission.html("<option selected>Choose Page</option>");
-                actionsPermissionForUsers = $("#actionsPermissionForUsers");
-                actionsPermissionForUsers.html("")
-                pagesName = Object.keys(jsonPermission);
-                pagesName.forEach(pageName => {
-                    let actions = Object.keys(jsonPermission[pageName])
-                    let pagesName = `<option value="${pageName}">${pageName}</options>`;
-                    console.log(pagesName)
-                    pagesNamePermission.append(pagesName);
-                    actions.forEach(action => {
-                        isChecked = jsonPermission[pageName][action] === 1 ? true : false;
-                        let actionValue = `                       
-                        <div class="custom-control custom-switch mb-3 d-none baseOfActions" data-page_name_base="${"base" + pageName}">
-                            <input type="checkbox" class="custom-control-input" ${isChecked ? "checked" : ""} data-page_name="${pageName}" data-action_name="${action}"  id="${pageName + action}">
-                            <label class="custom-control-label" for="${pageName + action}">${action}</label>
-                        </div>`
-                        actionsPermissionForUsers.append(actionValue)
-                    });
-                })
-            }
-        });
-    })
+        })
+    }
+    fetchHtmlPage();
+    addNewUser();
+    getUserTypes();
+    addNewUserType();
+    getPermissionToShowForUser();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $(document).on("change", "#pagesNamePermission", function () {
         let pageName = $(this).val();
         let actions = $(`[data-page_name_base='${"base" + pageName}']`);
@@ -134,37 +167,7 @@ $(function () {
             Message.addMessage(response.message, selectedButton, "danger");
         });
     })
-    function fetch() {
-        var settings = {
-            "url": Users.getHtmlByPermission,
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-                "Content-Type": "application/json",
-                "Cookie": "laravel_session=eyJpdiI6IldHR2hob2ZMaFM1NWhuMkdrMGRqcXc9PSIsInZhbHVlIjoiQUZheG12eDBlTnJsOUpuelovbDY5a2IrcW1yZ21PaHhwSXJQVTZJT1pNTjczZmgyRkNqOVpaellKQnV3WVJmZGlKZ0tLRTFNRUl2LzN5dzg5L2pYeCtROWpQS3ZLZ1A2SitWODlQc3BnQzhCTlJMTU1McEJlMXl6Nm9IaUl3OVciLCJtYWMiOiJhZTcxMzg5OWQxMmQwNGU0MzlkMDQ4YzIxNWNhM2YzNGYyMWJiNmRmZjEwMTE0N2QzN2IzMTFkMjYwZGQwZWQ3IiwidGFnIjoiIn0%3D"
-            },
-            "data": JSON.stringify({
-                "userName": sessionStorage.getItem("userName")
-            }),
 
-        };
-
-        $.ajax(settings).done(function (response) {
-            response = JSON.parse(response);
-            if (response.status == 200) {
-                data = response.data;
-                data.forEach(permission => {
-                    keys = Object.keys(permission)
-                    keys.forEach(element => {
-                        $(`[data-permission=${element}]`).html("")
-                        $(`[data-permission=${element}]`).append(permission[element])
-                    });
-                })
-            }
-
-        });
-    }
-    fetch();
     $(document).on("click", "#delteUserModalButton", function () {
         selectedUser = $(this).data("user_name");
         $("#deleteUserModal").modal("show")
@@ -191,7 +194,7 @@ $(function () {
                     $(".close").trigger("click")
                     Loader.removeLoader();
                 }, 1000);
-                fetch();
+                fetchHtmlPage();
                 return;
             }
             Loader.removeLoader();
