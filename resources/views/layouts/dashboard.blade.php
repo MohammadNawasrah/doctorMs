@@ -51,6 +51,7 @@
 
         p {
             color: black;
+            justify-self: center;
         }
 
         .menu-active {
@@ -112,6 +113,23 @@
             max-height: 70vh; /* تحديد قيمة أكبر حسب حاجتك */
             overflow-y: auto; /* جعل العنصر قابلًا للتمرير عند الحاجة */
         }
+        /* تخصيص شكل السكرول بار */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f100;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #98d8ff;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #42b5fd;
+        }
     </style>
 
 </head>
@@ -131,7 +149,7 @@
                     </div>
                 </div>
                 <div style="margin-top:15px;display: flex;justify-content: center;align-items: center;"> <a style="width: 80%;" href="{{ url('/dashboard/logOut') }}" class="btn btn-blue btn-block hover-effect">Log out</a> </div>
-                <hr class="my-4 border"> <!-- Menu Items -->
+                <hr class="my-3 border-primary" style="border: 1px solid #000; width:90%;"> <!-- Menu Items -->
 
                 <div class="sidebar-sticky" style="overflow: auto;margin-top:5px">
                     <ul class="nav flex-column">
@@ -140,31 +158,32 @@
                         <li class="nav-item" data-permission="permissionPage"> </li>
                         <li class="nav-item" data-permission="usersPage"> </li>
                         <li class="nav-item" data-permission="htmlCodePage"> </li>
+
                         <li class="nav-item" data-permission="patientsPage">
-                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/patients">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="patient" href="/dashboard/patients">
                                 <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Patients</p>
+                                    <p class="menu-text mt-2"><i class="bi bi-people-fill custom-icon"></i> Patients</p>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="secertarPage">
-                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/dateToDay">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="patient" href="/dashboard/dateToDay">
                                 <div class="menu-btn">
-                                    <div class="menu-text sideBarButton"><i class="bi bi-calendar-check"></i> Date To Day</div>
+                                    <div class="menu-text sideBarButton mt-2"><i class="bi bi-clock-fill custom-icon"></i> Date To Day</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
-                            <a class="nav-link hover-link" data-url="patient" href="/dashboard/doctor">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="patient" href="/dashboard/doctor">
                                 <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>Doctor</p>
+                                    <p class="menu-text mt-2"><i class="bi bi-person-lines-fill custom-icon"></i> Doctor</p>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
-                            <a class="nav-link hover-link" id="settingsButton" data-url="patient">
+                            <a class="nav-link hover-link" style="height:70px;" id="settingsButton" data-url="patient">
                                 <div class="menu-btn">
-                                    <p class="menu-text"><i class="bi bi-key custom-icon"></i>settings</p>
+                                    <p class="menu-text mt-2"><i class="bi bi-gear-fill custom-icon"></i> Settings</p>
                                 </div>
                             </a>
                         </li>
@@ -177,16 +196,19 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="ModalLabel">photo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="modal-body w-100" style="height: 50;">
-                            <div class="container mt-5">
-                                <h2 class="mb-4">Image Upload Profile personly</h2>
-                                <div class="mb-3">
+                        <div class="modal-body">
+                            <div class="container mt-3">
+                                <h3 class="mb-4" style="text-align: center;">Image Upload Profile personly</h3>
+                                <div class="mb-3" style="text-align: center;">
                                     <label for="image" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control w-50" id="profileImage" accept="image/*">
+                                    <input type="file" class="form-control w-100" id="profileImage" accept="image/*">
                                 </div>
-                                <button type="button" id="uplodeImage" class="btn btn-primary">Upload Image</button>
+                                <button type="button" id="uplodeImage" class="btn btn-primary w-100">Upload Image</button>
                             </div>
                         </div>
                     </div>
