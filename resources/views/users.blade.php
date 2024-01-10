@@ -13,13 +13,12 @@
     }
 </style>
 <script src="/js/users.js"></script>
-<main role="main" class="col-9">
+<main role="main" class="col">
 
     <div class="container mt-5  ">
         <div class="row justify-content-center ">
-            <div class="col-md-8  ">
-                <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
-                    <!-- ====================================================================================== -->
+            <div class="col">
+<!-- ==================================================================================================================== -->
                     <div class="modal fade" id="addPermissionToUserModal" tabindex="-1" aria-labelledby="addPermissionToUserModalModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
@@ -54,7 +53,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteUserModalLabel">are you sure to delete ??</h5>
+                                    <h5 class="modal-title" id="deleteUserModalLabel">Are You Sure To Delete ?</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -69,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ===================================================================================== -->
+<!-- ===================================================================================== -->
                     <div class="row" style="justify-content: space-between;display: flex; margin: 20px;">
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addUserType">
                             Add Users Type
@@ -78,8 +77,7 @@
 
                         </div>
                     </div>
-
-                    <!-- Modal -->
+<!--=================================================== Modal================================================================== -->
                     <div class="modal fade" id="addUserType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUserTypeLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -105,12 +103,14 @@
                             </div>
                         </div>
                     </div>
-                    <form class="d-flex mb-3"style=" justify-content: center; align-items: center;">
-                    <input class="form-control" style="width: 90%;" type="search" id="searchInput" placeholder="Search" aria-label="Search" oninput="performSearch()">
+<!--========================================================================================================-->
+                    <form class="d-flex mb-3" style="justify-content: center; align-items: center;">
+        <input class="form-control" style="width: 96.5%;" type="search" id="searchInput" placeholder="Search" aria-label="Search" oninput="performSearch()">
                 </form>
-                    <div class="container" style="height: 500px;overflow-y: scroll;">
+<!--========================================================================================================-->
+                <div class="container table-container">
                         <div class="table-responsive">
-                            <table id="myTable" class="table table-bordered">
+                            <table id="originalTable" class="table table-bordered">
                                 <thead class="table-bordered-custom">
                                     <tr>
                                         <th scope="col" class="col-4" style="padding-left: 5%;">Name</th>
@@ -122,7 +122,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -183,5 +183,32 @@
             })
         })
     })
+</script>
+<script>
+    // Save the original table HTML
+    var originalTableHTML = document.getElementById('originalTable').outerHTML;
+
+    function performSearch() {
+        var searchInput = document.getElementById('searchInput').value.toLowerCase();
+        var tableRows = document.querySelectorAll('#originalTable tbody tr');
+
+        if (searchInput.trim() === '') {
+            // If the search input is empty, show all rows in the original table
+            tableRows.forEach(function (row) {
+                row.style.display = '';
+            });
+            return;
+        }
+
+        tableRows.forEach(function (row) {
+            var rowData = row.textContent.toLowerCase();
+
+            if (rowData.includes(searchInput)) {
+                row.style.display = ''; // Show the row if it matches the search
+            } else {
+                row.style.display = 'none'; // Hide the row if it doesn't match the search
+            }
+        });
+    }
 </script>
 @endsection

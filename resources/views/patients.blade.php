@@ -146,15 +146,22 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="addAppointmentTitle">Add New Appointment</h5>
+                                            <h5 class="modal-title" id="addAppointmentTitle">Set Appointment</h5>
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="date" id="dateAppointment" min="<?php echo date('Y-m-d'); ?>">
-                                            <input type="time" id="timeAppointment">
+                                            <div class="mb-3">
+                                                <label for="dateAppointment" class="form-label">Appointment Date</label>
+                                                <input type="date" id="dateAppointment" class="form-control"
+                                                    min="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeAppointment" class="form-label">Appointment Time</label>
+                                                <input type="time" id="timeAppointment" class="form-control">
+                                            </div>
                                         </div>
                                         <div class="centerPage">
                                             <div>
@@ -180,9 +187,15 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="date" id="dateAppointmentUpdate"
-                                                min="<?php echo date('Y-m-d'); ?>">
-                                            <input type="time" id="timeAppointmentUpdate">
+                                            <div class="mb-3">
+                                                <label for="dateAppointment" class="form-label">Appointment Date</label>
+                                                <input type="date" class="form-label" id="dateAppointmentUpdate"
+                                                    min="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeAppointment" class="form-label">Appointment Time</label>
+                                                <input type="time" class="form-label" id="timeAppointmentUpdate">
+                                            </div>
                                         </div>
                                         <div class="centerPage">
                                             <div class="centerPage">
@@ -200,7 +213,7 @@
 
                             <!-- ====================================================================================== -->
 
-                            <table class="table table-bordered" id="originalTable">
+                            <table class="table table-bordered">
                                 <thead class="table-bordered-custom">
                                     <tr>
                                         <th scope="col" class="col-1 text-center">id</th>
@@ -221,125 +234,127 @@
 </main>
 
 <script>
-    $(nction()  {
-        function fetchPatients() {
-            var settin                               "url": Patients                ients,
-                         "timeout": 0,
-            };
-                            ettings).done(function (response)                           response = JSON.pars);
- if === 00) {
-        $("#patientsBody").html                                                    patientsBody").ap        (response.data.pat        sBody)
-    }
+      $(functi on ()               function fetchPatien            
+            var                  = {
+                "url": Pa                howPatients,
+                        "method": "            
+                      "timeout": 0,
+             };
+                      ajax(settings).done(function (res                
+                response = JSO                    sponse);
+                if (                    tatus === 200) {
+                    $("#patientsBody"                ")                                    $("#patientsBod        append(response.da        atientsBody)
+                }
             });
         }
-         fetch            ts();
-    var selectedUser;
-    $(document).on            k", "#updateAppointmetButton", function () {
-    #dateAppointmentUpdate").val($(this).            date"))
-    $("#timeAppointmentUpdat        val        his).data("time"))
-            selectedUser = $(this).data(")                     $("#updateAp                    odal").modal("show");
+                    Patients();
+        var selectedUser;
+        $(docume            ("click", "#updateAppointmetButton", function () {
+                  $("#dateAppointmentUpdate").val($(            data("date"))
+            $("#timeAppointmen        ate        al($(this).data("time"))
+            selectedUser = $( this)            "t                           $("#up                    tmentModal").modal("show");
         })
-        $(doc                    "click", "#updateA                    ", function () {
-                              r settings = {
-            "                        tAppointments.updateAppointment,
+                           t).on("click", "#u                    ntment", funct                               {
+                            var settings = {
+                                       PatientAppointments.updateAppointment,
                     "method": "POST",
-            "timeout": 0,
+                    "timeout": 0,
                     "headers": {
                         "Content-Type": "application/json",
-                        "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2                    cEJ                    jlESjh4K1E5aWZPdE5FTERMbW                        ttbHNhRzJHd2J1Sk81VHJ1M                        mlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZW                    Iiwi                In0%                                },
+                        "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVL                    R1V                    sd2MrWjlESjh4K1E5aWZPdE5F                        c2xTK0ttbHNhRzJHd2J1Sk8                        FYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0                    diNm                FnIj                "
+                    },
                             "data": JSON.stringify({
-                    "token": selectedUser,
-                                  "next_appointment": $("#dateAp                    pdate").val() + "  " + $("#time                        pdate").val()
+                                "token": selecte dUser,
+                                  "next_appointment": $("#                    tmentUpdate").val() + "  " + $(                        tmentUpdate").val()
                     }),
                 };
 
-            selectedButton = $                                      Loader.addLoader(sel                                            $.ajax((function (respon = JSON.on                                  if(respo                     === 200) {
-                Message.addMessage(response.sel            ut         "s        ss");
+                            var selectedButt                                            Loader.addLoad                            ton);
+                $                            ).done(function (                                                          sponse =                    e(                                        if                     status === 200) {
+                        Message.addMessage(res                ssag            ec        utt        "success");
                         setTimeout(() => {
-        $(".close").trigger("click"                                     Loader.removeL        r()                                  fetchPatients();
-    }, 1000);
-    return;
+                                   $(".close").trigger("            );
+                            Loader.r        eLo        ();
+                            fetchPatients();
+                               }, 10                                     return;
                             }
-    Loader.removeL
-    ssage.addMessage(response.message, But                nger");
-                }                         }
+                            Loader.r                der();
+                              Message.addMessage(response.mes                lec                n, "danger");
+                                          }
+        }                  $(            nt)            lick", "#deletePatientButton",            ion () {
+            selectedUser             is).data("token")
+             $("#deletePat                l").modal("show")
         })
-
-                selectedUser = $(th            ta("token")
-            $("#de letePatientMo                dal("show")
-        })
-        $                t).on("click", "#deletePatient"() {
-        var settings = {
-                    "url": Patient                    tient,
-                                        : "POST",
-            "tim
-                              },
-        "dat                .s                ({
-                                         selectedUser
-                }),
-            };
-    var tedB        n = his);
-    Loader.addLoader(selectedButton);
-        $.ajax(setting                function (response) {
-        response = JSON.sponse)
-    if (respons == 200) {
-                    Messag                    ge(response.message, selectedButton, "success");
-        setTimeout(() => {
-            $(".close").trigger("click");
-                Loader.removeLoader();
-            location.reload();
-                     fetchPatients();
-               }, 1000);
-             return;
-            }
-                Loader                oad                              Message.add                    sponse.message, selectedButton, "danger")                        });
-        })
-    $(do ("click", "#addNewPatient", function () {
-           var gs = "url": Patients.a            ent,
-        "method": "PO                           "timeout": 0,
-                               rs": {
-        "Cont                ": "application/json",
-               "Cookie": "lar a vel_session=eyJpdiI6ImpLa255QmpqZmcyRjhlRVJoOVkz                    ZhbHVlIjoiMWhRbVQ5M                        Th4S1VUdlEwSlYrd1Y1Y0NsTWtrMjZ                        2MTRVTWFOVWZoQVlacEowYk                    VDZkZ25EVn                    VG9qUWp4citHS1NIa                    wUUNlS0J                JU                EIiLCJtYWMiOiI1ZWE0NTk1                MjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM5Yjk3MDdhNTI0NmFk            widG        oiI        D"
-    },
-        "data": JSON.stringify({
-               "fullName": $("#patientFul            ).val(),
-                "age": $("            ntAge").val(),
-                "phoneNumber": $("#patien            Number").val()
-            }),
-            }; var selectedButton = $(this);
-    Loader.addLoader        ect        tton);
-    $.ajax(settings).done(function (resp            {
-            e =JSON.parse(response)
-                    (response.status = {
-                   Message.addMe                    onse.message, selectedButton, "succe                                    setTimeout(() => {
-                    $(".close").trigger("click");
-                Loader.removeLoader();
-               }, 1000);
-    fetchPatients();
-        return;
-                }
-    Loader.removeLoader();
-       Message.addMessage(response.message, selectedButton, "danger");
-                    })                  })
-    $(document).                    , "#updatePatientModalB                    nction () {
-    selectedUser = $(this).n")
-            $("#updatePatientModa                    "show")
-                $("#patientFullNameUpdate").val(data            _na
-            $("#patientAgeUpd            val($(this).data("age"));
-                    "#patientPhoneNumberUpdate").v al($(this).da                e_number"));
-        })
-                        nt).on("click", "#updatePatient                    n () {
+                   ocument).on("click", "#deletePa                    nction () {
             var settings = {
-        "url": `${Pat                    tePatient
-}`,
+                "url": P                    letePatient,
                               ethod": "POST",
                                        0,
-                "he                                                             Type": "ap                    json",
-                                    "Cookie": "laravel_ses                pdiI6ImpLa255QmpqZmcyRjhlRVJoOVkzYUE9PSIsInZhbHVlIjoiMWhRbVQ5MWt            XhkN        1VU        SlYrd1Y1Y0NsTWtrMjZ4ajNpeU5Td1B2MTRVTWFOVWZoQVlacEowYkRBZ UpUK2            Z25EVncwODcwWXh6VG9qUWp4citHS1NIamdhW        HFw        S0JDZjRKa3dJUDZGK3Y0WEIiLCJtYWMiOiI1ZWE0NTk1        MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM 5Yjk3            I0NmFkOTkwIiwidGF                %3D"
+                "he                                          "                        ": "application/j                                                                          :                 ingify({
+                              oken": selectedUser
+                }),
+            };
+                      sel        dBu         = $(this);
+            Loader.addLoader(selectedB utton                     $.ajax(s                .done(function (response) {
+                        response =                rse(response)
+                        if (r                    atus === 200) {
+                                        dMessage(response.message, selectedButton, "success");
+                    setTimeout(() => {
+                        $(".close").trigger("click");
+                        Loader.removeLoader();
+                        location.reload();
+                        fetchPatients();
+                    }, 1000);
+                    return;
+                }
+                                emo                ();
+                Messa                    age(response.message, selectedButton, "da                              });
+        })
+                          nt).on("click", "#addNewPatient", function ()                                 sett             {
+                "url": Pati            ddPatient,
+                "method            ST",
+                "timeout" : 0,
+                        "headers": {
+                                   t-Type": "application/json",
+                              "Cookie": "laravel_session=eyJpdiI6ImpLa255QmpqZmcyRjhlRV                    PSIsInZhbHVlIjoiMWh                        4OXhkNTh4S1VUdlEwSlYrd1Y1Y0NsT                        U5Td1B2MTRVTWFOVWZoQVla                    pUK29nVDZk                    cwWXh6VG9qUWp4cit                    ExJSHFwU                jR                GK3Y0WEIiLCJtYWMiOiI1ZW                M4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM5Yjk3MDdhNT            OTkw        dGF        iIn0%3D"
                 },
-                "da                N.stringify({
-                            "token                tedUser,
-                              "fullName": $("#patientFullNam                    val(),
+                "data": JSON.stri ngify                             "fullName": $("#pati            lName").val(),
+                    "age            #patientAge").val(),
+                    "phoneNumber": $("#            tPhoneNumber").val()
+                }),
+                    
+
+            var selectedButton = $(this);
+            Loader.add        er(        ctedButton);
+            $.ajax(settings).done(fun ction            onse) {
+                         esponse = JSON.parse(response)
+                        if (response.st                 200) {
+                            Message                    e(response.message, selectedButton,                     ;
+                    setTimeout(() => {
+                        $(".close").trigger("click");
+                        Loader.removeLoader();
+                    }, 1000);
+                    fetchPatients();
+                    return;
+                }
+                Loader.removeLoader();
+                Message.addMessage(response.message, selectedButton, "danger"                                           })
+        $(docu                    click", "#updatePatient                    n", function () {
+            selectedUser = $(                    ("token")
+            $("#updatePatie                    modal("show")
+            $("#patientFullNameUpdate"                this            ("f            me"));
+            $("#patient            ate").val($(this).data("age"));
+                  $("#patientPhoneNumberUpda te").val($(th                ("phone_number"));
+        })
+                  document).on("click", "#updateP                    unction () {
+            var settings = {
+                "url":                     s.updatePatient}`,
+                            "method": "POST",
+                                eout": 0,
+                                     : {
+                                 ntent-Type                    ation/js                                         "Cookie": "larav                on=eyJpdiI6ImpLa255QmpqZmcyRjhlRVJoOVkzYUE9PSIsInZhbHVlIjoiMWhRb            MZHA        kNT        VUdlEwSlYrd1Y1Y0NsTWtrMjZ4ajNpeU5Td1B2MTRVTWFOVWZoQVlacEo wYkRB            9nVDZkZ25EVncwODcwWXh6VG9qUWp4citHS1N        hWE        FwUUNlS0JDZjRKa3dJUDZGK3Y0WEIiLCJtYWMiOiI1ZW        k1MjM4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2N jgzZW            MDdhNTI0NmFkOTkwI                joiIn0%3D"
+                },
+                             ": JSON.stringify(                                               selectedUser                                "fullName": $("#patientF                    ate").val(),
                     "age": $("#patientAgeUpdate").val(),
                     "phoneNumber": $("#patientPhoneNumberUpdate").val()
                 }),
@@ -348,22 +363,21 @@
             Loader.addLoader(selectedButton);
             $.ajax(settings).done(function (response) {
                 response = JSON.parse(response)
-                        if                 e.status === 200) {
-                              Message.addMessage                    message, selectedButton, "success");
+                                     esponse.status === 200) {                               Message.addM                    ponse.message, selectedButton, "success");
                     setTimeout(() => {
-                                         .clo            rigger("click");
+                                      $            se").trigger("click");
                               Loader.removeLoader();
-                              fetchPatients();
-                                1000);
-                    retu                            }
-                L                    veLoader();
-                Message.addMessage(response.message,                     tton, "danger");
-                          ;
+                              fetchPatient s();
+                            }, 1000);
+                                  ;
+                }
+                               r.removeLoader();
+                Message.addMessage(response.mes                    ctedButton, "danger                            });
         })
-        $(documen                        ", "#addAppointme                        unction () {
-                              User = $(t                    "token")                 }                  $(document).off("clic                dAppointment")
-        $(document).on("click", "#addAppointment"            tion        {
-          settings = {
+        $(d                        "click", "#addApp                        on", function () {
+                        lectedUser                    .data("t                                          $(document).off                , "#addAppointment")
+        $(document).on("click", "#addAppoin            , fu        on      {
+ var settings = {
                 "url": PatientAppointments.addAppointment,
                 "method": "POST",
                 "timeout": 0,
@@ -382,7 +396,7 @@
             $.ajax(settings).done(function (response) {
                 response = JSON.parse(response)
                 if (response.status === 200) {
-                    Message.addMessage(response.lectedButton, "success");
+                    Message.addMessage(response.message, selectedButton, "success");
                     setTimeout(() => {
                         $(".close").trigger("click");
                         fetchPatients();
