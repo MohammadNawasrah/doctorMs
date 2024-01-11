@@ -110,16 +110,9 @@
             overflow: hidden;
         }
 
-        .table-container {
-            max-height: 70vh;
-            /* تحديد قيمة أكبر حسب حاجتك */
-            overflow-y: auto;
-            /* جعل العنصر قابلًا للتمرير عند الحاجة */
-        }
-
         /* تخصيص شكل السكرول بار */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 5px;
         }
 
         ::-webkit-scrollbar-track {
@@ -134,9 +127,17 @@
         ::-webkit-scrollbar-thumb:hover {
             background-color: #42b5fd;
         }
+        .sti {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #fff;
+        }
     </style>
 
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row" style="height: 100vh;">
@@ -164,11 +165,12 @@
                         <li class="nav-item" data-permission="permissionPage"> </li>
                         <li class="nav-item" data-permission="usersPage"> </li>
                         <li class="nav-item" data-permission="htmlCodePage"> </li>
+
                         <li class="nav-item" data-permission="patientsPage">
                             <a class="nav-link hover-link" style="height:70px;" data-url="patients"
                                 href="/dashboard/patients">
-                                <div class="menu-btn">
-                                    <p class="menu-text mt-2"><i class="bi bi-people-fill custom-icon"></i> Patients</p>
+                                <div class="menu-btn mt-2">
+                                    <i class="bi bi-people-fill custom-icon"></i> Patients
                                 </div>
                             </a>
                         </li>
@@ -176,24 +178,24 @@
                             <a class="nav-link hover-link" style="height:70px;" data-url="dateToDay"
                                 href="/dashboard/dateToDay">
                                 <div class="menu-btn">
-                                    <div class="menu-text sideBarButton mt-2"><i
-                                            class="bi bi-clock-fill custom-icon"></i> Date To Day</div>
+                                    <div class="menu-text  mt-2">
+                                        <i class="bi bi-clock-fill custom-icon"></i> Date To Day
+                                    </div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
                             <a class="nav-link hover-link" style="height:70px;" data-url="doctor"
                                 href="/dashboard/doctor">
-                                <div class="menu-btn">
-                                    <p class="menu-text mt-2"><i class="bi bi-person-lines-fill custom-icon"></i> Doctor
-                                    </p>
+                                <div class="menu-btn mt-2">
+                                    <i class="bi bi-person-lines-fill custom-icon"></i> Doctor
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
                             <a class="nav-link hover-link" style="height:70px;" id="settingsButton" data-url="patient">
-                                <div class="menu-btn">
-                                    <p class="menu-text mt-2"><i class="bi bi-gear-fill custom-icon"></i> Settings</p>
+                                <div class="menu-btn mt-2">
+                                    <i class="bi bi-gear-fill custom-icon"></i> Settings
                                 </div>
                             </a>
                         </li>
@@ -236,7 +238,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
             <script>
 
-                $(function() {
+                $(function () {
                     toActiveLinks();
                     fetchAllPermissionDashboard();
 

@@ -13,7 +13,7 @@
         <div class="col">
           <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
             <!-- ===================================================================================== -->
-            
+
             <!-- ===================================================================================== -->
             <!-- ==========================================delete modal============================================ -->
             <!-- Modal -->
@@ -21,11 +21,13 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="ModalLabel">Are you sure to delete it?</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal"aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                   </div>
                   <div class="modal-body">
-                    Are you sure to delete it?
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

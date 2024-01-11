@@ -104,9 +104,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container" style="height: 500px;overflow-y: scroll;">
+            <div class="container" style="height:60vh;overflow-y: scroll;">
                 <div class="table-responsive">
-                    <table id="myTable" class="table table-bordered">
+                    <table id="myTable" class="table table-bordered sti">
                         <thead class="table-bordered-custom">
                             <tr>
                                 <th scope="col" class="col-4" style="padding-left: 5%;">Name</th>
