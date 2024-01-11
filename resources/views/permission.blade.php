@@ -8,7 +8,7 @@
 <main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col">
     <main role="main" class="col">
         <!-- Content Goes Here -->
-        <div class="container ">
+        <div class="container">
             <div class="row justify-content-center ">
                 <div class="col">
                     <div class="container table-container">
@@ -21,11 +21,10 @@
 
                             </div>
                         </div>
-                        <!-- Modal -->
+                            <!-- Modal -->
 
                         <!-- ====================================================================================== -->
                         <div class="container" data-permission="showPermission">
-
                         </div>
                     </div>
                 </div>
