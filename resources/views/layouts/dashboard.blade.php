@@ -190,8 +190,8 @@
             </div>
 
             <script src="/js/jquery/jquery-3.7.1.min.js"></script>
-            <script src="/js/util/mainClass.js"></script>
             <script src="/js/util/route.js"></script>
+            <script src="/js/util/mainClass.js"></script>
             <script>
                 $(function() {
                     Loader.addLoadPage();
@@ -201,6 +201,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
             <script>
                 $(function() {
+                    toActiveLinks();
+                    fetchAllPermissionDashboard();
                     var settings = {
                         "url": baseUrl() +
                             "/dashboard/image/profile/getUserProfileImage",
@@ -248,29 +250,6 @@
                                 1000)
                         });
                     })
-                    var settings = {
-                        "url": Dashboard.userPageToAccess,
-                        "method": "POST",
-                        "timeout": 0,
-                    };
-                    $.ajax(settings).done(function(response) {
-                        response = JSON.parse(response);
-                        if (response.status == 200) {
-                            data = response.data;
-                            data.forEach(permission => {
-                                keys = Object.keys(permission)
-                                keys.forEach(element => {
-                                    $(`[data-permission=${element}]`).append(permission[element])
-                                });
-                            })
-                        }
-                        $(`[data-url="${lastSegment}"]`).addClass("menu-active");
-                    });
-                    $("#userName").text(sessionStorage.getItem("userName"))
-                    $("#nameOfUser").text(sessionStorage.getItem("nameOfUser"))
-                    const urlSegments = window.location.pathname.split('/');
-                    const lastSegment = urlSegments[urlSegments.length - 1];
-
                 })
             </script>
             @yield('content')

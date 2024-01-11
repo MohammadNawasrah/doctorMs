@@ -169,3 +169,29 @@ const ajax = (options = {}) => {
         send(options);
     });
 };
+const urlSegments = window.location.pathname.split('/');
+const lastSegment = urlSegments[urlSegments.length - 1];
+const toActiveLinks = () => {
+    $("#userName").text(sessionStorage.getItem("userName"))
+    $("#nameOfUser").text(sessionStorage.getItem("nameOfUser"))
+
+}
+const fetchAllPermissionDashboard = () => {
+    ajax({
+        URL: Dashboard.userPageToAccess,
+        METHOD: "POST",
+        callBackFunction: (response) => {
+            if (response.status == 200) {
+                data = response.data;
+                data.forEach(permission => {
+                    keys = Object.keys(permission)
+                    keys.forEach(element => {
+                        $(`[data-permission=${element}]`).html("")
+                        $(`[data-permission=${element}]`).append(permission[element])
+                    });
+                })
+            }
+            $(`[data-url="${lastSegment}"]`).addClass("menu-active");
+        }
+    });
+}
