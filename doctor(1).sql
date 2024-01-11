@@ -1,11 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1-2.fc39
+-- version 5.2.1deb2
 -- https://www.phpmyadmin.net/
 --
+
 -- Host: localhost
 -- Generation Time: Jan 11, 2024 at 05:45 AM
 -- Server version: 10.5.23-MariaDB
 -- PHP Version: 8.2.14
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +26,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+
 -- Table structure for table `html_code`
 --
 
@@ -53,6 +56,7 @@ INSERT INTO `html_code` (`id`, `pageName`, `actionName`, `html_code`, `created_a
 -- --------------------------------------------------------
 
 --
+
 -- Table structure for table `migrations`
 --
 
@@ -75,6 +79,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2024_01_08_162821_table_user_permission', 1),
 (18, '2024_01_08_163203_table_permission_record', 1),
 (19, '2024_01_08_163233_patient_appointments', 1),
+
 (20, '2024_01_08_174946_permission_table', 1);
 
 -- --------------------------------------------------------
@@ -295,15 +300,10 @@ INSERT INTO `user_permission` (`id`, `userId`, `jsonPermission`, `created_at`, `
 (3, 4, '{\"users\":{\"0\":0,\"1\":0,\"showUsers\":1,\"addUser\":1,\"addUserPermission\":1,\"usersPage\":1,\"deleteUser\":1,\"updateUser\":1,\"dsafweqr\":0},\"permission\":{\"permissionPage\":1,\"addPermission\":0,\"addAction\":0,\"showPermission\":1},\"htmlCode\":{\"0\":0,\"htmlCodePage\":1},\"sdafasdf\":{\"sdafsdaf\":0},\"test\":{\"asdfasdf\":0},\"testd\":{\"asdfasdf\":0,\"dzvdxzcvcxvz\":0},\"sdsadf\":{\"dsaf\":0},\"jkhjkhjkh\":{\"uhjkhjgh\":0},\"asdf\":{\"sdaf\":0},\"sdaf\":{\"fsadfsdaf\":0},\"fgjhhgj\":{\"fgjhhgfj\":0,\"jfjffgjgfj\":0,\"hjfghfj\":0,\"fjfghjf\":0,\"ghjhfjghf\":0}}', '2024-01-10 10:22:42', '2024-01-10 10:22:42'),
 (4, 2, '{\"users\":{\"0\":0,\"1\":0,\"showUsers\":1,\"addUser\":1,\"addUserPermission\":1,\"usersPage\":1,\"deleteUser\":1,\"updateUser\":1,\"dsafweqr\":0},\"permission\":{\"permissionPage\":1,\"addPermission\":1,\"addAction\":1,\"showPermission\":1},\"htmlCode\":{\"0\":1,\"htmlCodePage\":1},\"sdafasdf\":{\"sdafsdaf\":0},\"test\":{\"asdfasdf\":0},\"testd\":{\"asdfasdf\":0,\"dzvdxzcvcxvz\":0},\"sdsadf\":{\"dsaf\":0},\"jkhjkhjkh\":{\"uhjkhjgh\":0},\"asdf\":{\"sdaf\":0},\"sdaf\":{\"fsadfsdaf\":0},\"fgjhhgj\":{\"fgjhhgfj\":0,\"jfjffgjgfj\":0,\"hjfghfj\":0,\"fjfghjf\":0,\"ghjhfjghf\":0}}', '2024-01-10 10:29:12', '2024-01-10 10:29:12');
 
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `html_code`
---
-ALTER TABLE `html_code`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -312,80 +312,14 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `patients`
---
-ALTER TABLE `patients`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `patients_phonenumber_unique` (`phoneNumber`);
-
---
--- Indexes for table `patient_appointments`
---
-ALTER TABLE `patient_appointments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `patient_appointments_patientid_foreign` (`patientId`);
-
---
--- Indexes for table `patient_records`
---
-ALTER TABLE `patient_records`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `patient_to_doctor`
---
-ALTER TABLE `patient_to_doctor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `patient_to_doctor_userid_foreign` (`userId`),
-  ADD KEY `patient_to_doctor_patientid_foreign` (`patientId`);
-
---
--- Indexes for table `permission`
---
-ALTER TABLE `permission`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Indexes for table `type_of_user`
---
-ALTER TABLE `type_of_user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`userName`);
-
---
--- Indexes for table `user_permission`
---
-ALTER TABLE `user_permission`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `html_code`
---
-ALTER TABLE `html_code`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
+
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
@@ -464,6 +398,7 @@ ALTER TABLE `patient_records`
 ALTER TABLE `patient_to_doctor`
   ADD CONSTRAINT `patient_to_doctor_patientid_foreign` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `patient_to_doctor_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -5,13 +5,13 @@
 @section('content')
 <script src="/js/permission.js"></script>
 <!-- Main Content -->
-<main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col-9 ">
-    <main role="main" class="col-9 md-ml-sm-auto">
+<main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col">
+    <main role="main" class="col">
         <!-- Content Goes Here -->
-        <div class="container ">
+        <div class="container">
             <div class="row justify-content-center ">
-                <div class="col-md-8  ">
-                    <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
+                <div class="col">
+                    <div class="container table-container">
                         <!-- ====================================================================================== -->
                         <div class="row mb-5">
                             <div class="col" data-permission="addAction" style="display: flex;justify-content: center;">
@@ -21,11 +21,10 @@
 
                             </div>
                         </div>
-                        <!-- Modal -->
+                            <!-- Modal -->
 
                         <!-- ====================================================================================== -->
-                        <div class="container" data-permission="showPermission" style="height: 500px;overflow-y: scroll;">
-
+                        <div class="container" data-permission="showPermission">
                         </div>
                     </div>
                 </div>
@@ -98,7 +97,7 @@
                     return;
                 }
                 permissionTableBody.append(`
-                
+
                 <tr>
                 <td colspan="2" >
                 <div style="display:flex;justify-content:center">
@@ -214,3 +213,4 @@
     })
 </script> -->
 @endsection
+

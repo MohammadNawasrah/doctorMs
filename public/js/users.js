@@ -101,31 +101,26 @@ $(function () {
             }
         })
     }
+    const onChangePageNameToChangePermissionForUser = () => {
+        $(document).on("change", "#pagesNamePermission", function () {
+            let pageName = $(this).val();
+            let actions = $(`[data-page_name_base='${"base" + pageName}']`);
+            $(".baseOfActions").addClass("d-none");
+            actions.removeClass("d-none");
+        })
+    }
     fetchHtmlPage();
     addNewUser();
     getUserTypes();
     addNewUserType();
     getPermissionToShowForUser();
+    onChangePageNameToChangePermissionForUser();
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-    $(document).on("change", "#pagesNamePermission", function () {
-        let pageName = $(this).val();
-        let actions = $(`[data-page_name_base='${"base" + pageName}']`);
-        $(".baseOfActions").addClass("d-none");
-        actions.removeClass("d-none");
-    })
     $(document).on("click", "#savePermissionToUser", function () {
         let JsonPermaission = {};
         pagesName.forEach(pageName => {
