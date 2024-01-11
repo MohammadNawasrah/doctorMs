@@ -84,7 +84,6 @@
             };
             $.ajax(settings).done(function(response) {
                 Loader.removeLoadPage();
-
                 response = JSON.parse(response);
                 $("#patientsAppointmentBody").html("");
                 if (response.status === 200) {

@@ -232,182 +232,166 @@
         </div>
     </div>
 </main>
-
 <script>
-      $(functi on ()               function fetchPatien            
-            var                  = {
-                "url": Pa                howPatients,
-                        "method": "            
-                      "timeout": 0,
-             };
-                      ajax(settings).done(function (res                
-                response = JSO                    sponse);
-                if (                    tatus === 200) {
-                    $("#patientsBody"                ")                                    $("#patientsBod        append(response.da        atientsBody)
-                }
-            });
+  $(function() {
+    function fetchPatients() {
+      var settings = {
+        "url": Patients.showPatients,
+        "method": "POST",
+        "timeout": 0,
+      };
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response);
+        if (response.status === 200) {
+          $("#patientsBody").html("");
+          $("#patientsBody").append(response.data.patientsBody)
         }
-                    Patients();
-        var selectedUser;
-        $(docume            ("click", "#updateAppointmetButton", function () {
-                  $("#dateAppointmentUpdate").val($(            data("date"))
-            $("#timeAppointmen        ate        al($(this).data("time"))
-            selectedUser = $( this)            "t                           $("#up                    tmentModal").modal("show");
-        })
-                           t).on("click", "#u                    ntment", funct                               {
-                            var settings = {
-                                       PatientAppointments.updateAppointment,
-                    "method": "POST",
-                    "timeout": 0,
-                    "headers": {
-                        "Content-Type": "application/json",
-                        "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVL                    R1V                    sd2MrWjlESjh4K1E5aWZPdE5F                        c2xTK0ttbHNhRzJHd2J1Sk8                        FYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0                    diNm                FnIj                "
-                    },
-                            "data": JSON.stringify({
-                                "token": selecte dUser,
-                                  "next_appointment": $("#                    tmentUpdate").val() + "  " + $(                        tmentUpdate").val()
-                    }),
-                };
-
-                            var selectedButt                                            Loader.addLoad                            ton);
-                $                            ).done(function (                                                          sponse =                    e(                                        if                     status === 200) {
-                        Message.addMessage(res                ssag            ec        utt        "success");
-                        setTimeout(() => {
-                                   $(".close").trigger("            );
-                            Loader.r        eLo        ();
-                            fetchPatients();
-                               }, 10                                     return;
-                            }
-                            Loader.r                der();
-                              Message.addMessage(response.mes                lec                n, "danger");
-                                          }
-        }                  $(            nt)            lick", "#deletePatientButton",            ion () {
-            selectedUser             is).data("token")
-             $("#deletePat                l").modal("show")
-        })
-                   ocument).on("click", "#deletePa                    nction () {
-            var settings = {
-                "url": P                    letePatient,
-                              ethod": "POST",
-                                       0,
-                "he                                          "                        ": "application/j                                                                          :                 ingify({
-                              oken": selectedUser
-                }),
-            };
-                      sel        dBu         = $(this);
-            Loader.addLoader(selectedB utton                     $.ajax(s                .done(function (response) {
-                        response =                rse(response)
-                        if (r                    atus === 200) {
-                                        dMessage(response.message, selectedButton, "success");
-                    setTimeout(() => {
-                        $(".close").trigger("click");
-                        Loader.removeLoader();
-                        location.reload();
-                        fetchPatients();
-                    }, 1000);
-                    return;
-                }
-                                emo                ();
-                Messa                    age(response.message, selectedButton, "da                              });
-        })
-                          nt).on("click", "#addNewPatient", function ()                                 sett             {
-                "url": Pati            ddPatient,
-                "method            ST",
-                "timeout" : 0,
-                        "headers": {
-                                   t-Type": "application/json",
-                              "Cookie": "laravel_session=eyJpdiI6ImpLa255QmpqZmcyRjhlRV                    PSIsInZhbHVlIjoiMWh                        4OXhkNTh4S1VUdlEwSlYrd1Y1Y0NsT                        U5Td1B2MTRVTWFOVWZoQVla                    pUK29nVDZk                    cwWXh6VG9qUWp4cit                    ExJSHFwU                jR                GK3Y0WEIiLCJtYWMiOiI1ZW                M4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM5Yjk3MDdhNT            OTkw        dGF        iIn0%3D"
-                },
-                "data": JSON.stri ngify                             "fullName": $("#pati            lName").val(),
-                    "age            #patientAge").val(),
-                    "phoneNumber": $("#            tPhoneNumber").val()
-                }),
-                    
-
-            var selectedButton = $(this);
-            Loader.add        er(        ctedButton);
-            $.ajax(settings).done(fun ction            onse) {
-                         esponse = JSON.parse(response)
-                        if (response.st                 200) {
-                            Message                    e(response.message, selectedButton,                     ;
-                    setTimeout(() => {
-                        $(".close").trigger("click");
-                        Loader.removeLoader();
-                    }, 1000);
-                    fetchPatients();
-                    return;
-                }
-                Loader.removeLoader();
-                Message.addMessage(response.message, selectedButton, "danger"                                           })
-        $(docu                    click", "#updatePatient                    n", function () {
-            selectedUser = $(                    ("token")
-            $("#updatePatie                    modal("show")
-            $("#patientFullNameUpdate"                this            ("f            me"));
-            $("#patient            ate").val($(this).data("age"));
-                  $("#patientPhoneNumberUpda te").val($(th                ("phone_number"));
-        })
-                  document).on("click", "#updateP                    unction () {
-            var settings = {
-                "url":                     s.updatePatient}`,
-                            "method": "POST",
-                                eout": 0,
-                                     : {
-                                 ntent-Type                    ation/js                                         "Cookie": "larav                on=eyJpdiI6ImpLa255QmpqZmcyRjhlRVJoOVkzYUE9PSIsInZhbHVlIjoiMWhRb            MZHA        kNT        VUdlEwSlYrd1Y1Y0NsTWtrMjZ4ajNpeU5Td1B2MTRVTWFOVWZoQVlacEo wYkRB            9nVDZkZ25EVncwODcwWXh6VG9qUWp4citHS1N        hWE        FwUUNlS0JDZjRKa3dJUDZGK3Y0WEIiLCJtYWMiOiI1ZW        k1MjM4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2N jgzZW            MDdhNTI0NmFkOTkwI                joiIn0%3D"
-                },
-                             ": JSON.stringify(                                               selectedUser                                "fullName": $("#patientF                    ate").val(),
-                    "age": $("#patientAgeUpdate").val(),
-                    "phoneNumber": $("#patientPhoneNumberUpdate").val()
-                }),
-            };
-            var selectedButton = $(this);
-            Loader.addLoader(selectedButton);
-            $.ajax(settings).done(function (response) {
-                response = JSON.parse(response)
-                                     esponse.status === 200) {                               Message.addM                    ponse.message, selectedButton, "success");
-                    setTimeout(() => {
-                                      $            se").trigger("click");
-                              Loader.removeLoader();
-                              fetchPatient s();
-                            }, 1000);
-                                  ;
-                }
-                               r.removeLoader();
-                Message.addMessage(response.mes                    ctedButton, "danger                            });
-        })
-        $(d                        "click", "#addApp                        on", function () {
-                        lectedUser                    .data("t                                          $(document).off                , "#addAppointment")
-        $(document).on("click", "#addAppoin            , fu        on      {
- var settings = {
-                "url": PatientAppointments.addAppointment,
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Content-Type": "application/json",
-                    "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2puUER1VVZYcEJ2bXJsd2MrWjlESjh4K1E5aWZPdE5FTERMbWk5bkhMc2xTK0ttbHNhRzJHd2J1Sk81VHJ1M1hnWGVFYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZWMxYjdiNmExIiwidGFnIjoiIn0%3D"
-                },
-                "data": JSON.stringify({
-                    "token": selectedUser,
-                    "next_appointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
-                }),
-            };
-
-            var selectedButton = $(this);
-            Loader.addLoader(selectedButton);
-            $.ajax(settings).done(function (response) {
-                response = JSON.parse(response)
-                if (response.status === 200) {
-                    Message.addMessage(response.message, selectedButton, "success");
-                    setTimeout(() => {
-                        $(".close").trigger("click");
-                        fetchPatients();
-                        Loader.removeLoader();
-                    }, 1000);
-                    return;
-                }
-                Loader.removeLoader();
-                Message.addMessage(response.message, selectedButton, "danger");
-            });
-        })
+      });
+    }
+    fetchPatients();
+    var selectedUser;
+    $(document).on("click", "#deletePatientButton", function() {
+      selectedUser = $(this).data("token")
+      $("#deletePatientModal").modal("show")
     })
+    $(document).on("click", "#deletePatient", function() {
+      var settings = {
+        "url": Patients.deletePatient,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "token": selectedUser
+        }),
+      };
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#deletePatientModal").modal("hide");
+            Loader.removeLoader();
+            location.reload();
+            fetchPatients();
+          }, 1000);
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
+    })
+    $(document).on("click", "#addNewPatient", function() {
+      var settings = {
+        "url": Patients.addPatient,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "laravel_session=eyJpdiI6ImpLa255QmpqZmcyRjhlRVJoOVkzYUE9PSIsInZhbHVlIjoiMWhRbVQ5MWtMZHA4OXhkNTh4S1VUdlEwSlYrd1Y1Y0NsTWtrMjZ4ajNpeU5Td1B2MTRVTWFOVWZoQVlacEowYkRBZUpUK29nVDZkZ25EVncwODcwWXh6VG9qUWp4citHS1NIamdhWExJSHFwUUNlS0JDZjRKa3dJUDZGK3Y0WEIiLCJtYWMiOiI1ZWE0NTk1MjM4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM5Yjk3MDdhNTI0NmFkOTkwIiwidGFnIjoiIn0%3D"
+        },
+        "data": JSON.stringify({
+          "fullName": $("#patientFullName").val(),
+          "age": $("#patientAge").val(),
+          "phoneNumber": $("#patientPhoneNumber").val()
+        }),
+      };
+
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#addNewPatientModal").modal("hide");
+            Loader.removeLoader();
+          }, 1000);
+          fetchPatients();
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
+    })
+    $(document).on("click", "#updatePatientModalButton", function() {
+      selectedUser = $(this).data("token")
+      $("#updatePatientModal").modal("show")
+      $("#patientFullNameUpdate").val($(this).data("full_name"));
+      $("#patientAgeUpdate").val($(this).data("age"));
+      $("#patientPhoneNumberUpdate").val($(this).data("phone_number"));
+    })
+    $(document).on("click", "#updatePatient", function() {
+      var settings = {
+        "url": `${Patients.updatePatient}`,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "laravel_session=eyJpdiI6ImpLa255QmpqZmcyRjhlRVJoOVkzYUE9PSIsInZhbHVlIjoiMWhRbVQ5MWtMZHA4OXhkNTh4S1VUdlEwSlYrd1Y1Y0NsTWtrMjZ4ajNpeU5Td1B2MTRVTWFOVWZoQVlacEowYkRBZUpUK29nVDZkZ25EVncwODcwWXh6VG9qUWp4citHS1NIamdhWExJSHFwUUNlS0JDZjRKa3dJUDZGK3Y0WEIiLCJtYWMiOiI1ZWE0NTk1MjM4MDBiMjA5MjExZDM1MDJjMWM0ODNmODg3NzAyYmUxNWU2NjgzZWM5Yjk3MDdhNTI0NmFkOTkwIiwidGFnIjoiIn0%3D"
+        },
+        "data": JSON.stringify({
+          "token": selectedUser,
+          "fullName": $("#patientFullNameUpdate").val(),
+          "age": $("#patientAgeUpdate").val(),
+          "phoneNumber": $("#patientPhoneNumberUpdate").val()
+        }),
+      };
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#updatePatientModal").modal("hide");
+            Loader.removeLoader();
+            fetchPatients();
+          }, 1000);
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
+    })
+    $(document).on("click", "#addAppointmentButton", function() {
+      selectedUser = $(this).data("token")
+    })
+    $(document).off("click", "#addAppointment")
+    $(document).on("click", "#addAppointment", function() {
+      var settings = {
+        "url": PatientAppointments.addAppointment,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2puUER1VVZYcEJ2bXJsd2MrWjlESjh4K1E5aWZPdE5FTERMbWk5bkhMc2xTK0ttbHNhRzJHd2J1Sk81VHJ1M1hnWGVFYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZWMxYjdiNmExIiwidGFnIjoiIn0%3D"
+        },
+        "data": JSON.stringify({
+          "token": selectedUser,
+          "next_appointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
+        }),
+      };
+
+      var selectedButton = $(this);
+      Loader.addLoader(selectedButton);
+      $.ajax(settings).done(function(response) {
+        response = JSON.parse(response)
+        if (response.status === 200) {
+          Message.addMessage(response.message, selectedButton, "success");
+          setTimeout(() => {
+            $("#addAppointmetModal").modal("hide");
+            Loader.removeLoader();
+          }, 1000);
+          return;
+        }
+        Loader.removeLoader();
+        Message.addMessage(response.message, selectedButton, "danger");
+      });
+    })
+  })
 </script>
 @endsection
