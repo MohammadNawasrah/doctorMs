@@ -120,10 +120,8 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deletePatientModalLabel">are you sure to delete
-                                                ??</h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
+                                            <h5 class="modal-title" id="deletePatientModalLabel">Are You Sure To Delete ?</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -189,20 +187,20 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="dateAppointment" class="form-label">Appointment Date</label>
-                                                <input type="date" class="form-label" id="dateAppointmentUpdate"
+                                                <input type="date" class="form-control" id="dateAppointmentUpdate"
                                                     min="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="timeAppointment" class="form-label">Appointment Time</label>
-                                                <input type="time" class="form-label" id="timeAppointmentUpdate">
+                                                <input type="time" class="form-control" id="timeAppointmentUpdate">
                                             </div>
                                         </div>
                                         <div class="centerPage">
                                             <div class="centerPage">
                                                 <div>
                                                     <button type="button" id="updateAppointment"
-                                                        class="btn btn-danger m-3">Update Appointments
-                                                        Appointmet</button>
+                                                        class="btn btn-success m-3">Update Appointment
+                                                        </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,9 +210,9 @@
                             <!-- ====================================================================================== -->
 
                             <!-- ====================================================================================== -->
-
+                            <div class="container" style="max-height: 60vh; overflow-y: auto;">
                             <table class="table table-bordered">
-                                <thead class="table-bordered-custom">
+                                <thead class="table-bordered-custom sti">
                                     <tr>
                                         <th scope="col" class="col-1 text-center">id</th>
                                         <th scope="col" class="col-3 text-center">Name</th>
@@ -224,6 +222,7 @@
                                 <tbody id="patientsBody" class="text-center">
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -250,6 +249,46 @@
     }
     fetchPatients();
     var selectedUser;
+    $(document).on("click", "#updateAppointmetButton", function() {
+      $("#dateAppointmentUpdate").val($(this).data("date"))
+      $("#timeAppointmentUpdate").val($(this).data("time"))
+      selectedUser = $(this).data("token")
+      $("#updateAppointmentModal").modal("show");
+    })
+    $(document).on("click", "#updateAppointment", function() {
+      {
+        var settings = {
+          "url": PatientAppointments.updateAppointment,
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "Cookie": "laravel_session=eyJpdiI6Ilh1WDdiSWdFYms3QkpWVUUwTExHeVE9PSIsInZhbHVlIjoiUXpjbVV5ekxnQ3V3VzZ2dlVJS255T2ltc2ZMTHgrL1VnMGMyNEI5R3d2UFVLRkp6U2puUER1VVZYcEJ2bXJsd2MrWjlESjh4K1E5aWZPdE5FTERMbWk5bkhMc2xTK0ttbHNhRzJHd2J1Sk81VHJ1M1hnWGVFYnUzemlobDhYMXQiLCJtYWMiOiJhODc3OTRlOTk1NjRiY2NlMzhjZmIwZWZiNzRhZTQxYmEwMDEzMTgwMGY2NTVjN2NmOWU0ZjQxZWMxYjdiNmExIiwidGFnIjoiIn0%3D"
+          },
+          "data": JSON.stringify({
+            "token": selectedUser,
+            "next_appointment": $("#dateAppointmentUpdate").val() + "  " + $("#timeAppointmentUpdate").val()
+          }),
+        };
+
+        var selectedButton = $(this);
+        Loader.addLoader(selectedButton);
+        $.ajax(settings).done(function(response) {
+          response = JSON.parse(response)
+          if (response.status === 200) {
+            Message.addMessage(response.message, selectedButton, "success");
+            setTimeout(() => {
+              $(".close").trigger("click");
+              Loader.removeLoader();
+              fetchPatients();
+            }, 1000);
+            return;
+          }
+          Loader.removeLoader();
+          Message.addMessage(response.message, selectedButton, "danger");
+        });
+      }
+    })
     $(document).on("click", "#deletePatientButton", function() {
       selectedUser = $(this).data("token")
       $("#deletePatientModal").modal("show")
@@ -273,7 +312,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#deletePatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
             location.reload();
             fetchPatients();
@@ -307,7 +346,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#addNewPatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
           }, 1000);
           fetchPatients();
@@ -347,7 +386,7 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#updatePatientModal").modal("hide");
+            $(".close").trigger("click");
             Loader.removeLoader();
             fetchPatients();
           }, 1000);
@@ -383,7 +422,8 @@
         if (response.status === 200) {
           Message.addMessage(response.message, selectedButton, "success");
           setTimeout(() => {
-            $("#addAppointmetModal").modal("hide");
+            $(".close").trigger("click");
+            fetchPatients();
             Loader.removeLoader();
           }, 1000);
           return;
