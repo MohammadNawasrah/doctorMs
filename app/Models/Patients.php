@@ -44,6 +44,22 @@ class Patients extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
+    public static function isPatientInDoctor($patientId){
+        try {
+            PatientToDoctor::where("patientId",$patientId)->where("status","==",1)->firstOrFail();
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+    public static function isPatientHavePayment($patientId){
+        try {
+            Payments::where("fk_patient",$patientId)->firstOrFail();
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
     public static function getAllPatients()
     {
         try {

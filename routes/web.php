@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\Auth\UserPermissionContrller;
 use App\Http\Controllers\Dashboard\Auth\UsersController;
 use App\Http\Controllers\Dashboard\Patient\PatientAppointmentController;
 use App\Http\Controllers\Dashboard\Patient\PatientToDoctorController;
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
 use Trait\Helpers\SessionHelper;
 
@@ -100,6 +101,10 @@ Route::group(['prefix' => '/dashboard'],  function () {
         Route::post('/toDoctor/add', [PatientToDoctorController::class, 'addtoDoctor']);
         Route::post('/toDoctor/update', [PatientToDoctorController::class, 'updatetoDoctor']);
         Route::post('/toDoctor/delete', [PatientToDoctorController::class, 'deletetoDoctor']);
+    });
+    Route::group(['prefix' => '/payment'], function () {
+        Route::post('/addPaymnet', [PaymentsController::class, 'addPaymentForPatient']);
+        Route::post('/updatePaymnet', [PaymentsController::class, 'updatePaymentForPatient']);
     });
     Route::get('/logOut', [LogOutController::class, 'logOut'])->name("logOut");
 });

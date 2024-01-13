@@ -12,7 +12,7 @@
       <div class="row justify-content-center ">
         <div class="col">
           <div class="abc scroll " style="height: 250px; padding: 0; margin: 0;">
-            <!-- ====================================================================================== -->
+            <!-- ===================================================================================== -->
 
             <!-- ===================================================================================== -->
             <!-- ==========================================delete modal============================================ -->
@@ -21,11 +21,13 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="ModalLabel">Are you sure to delete it?</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
                   <div class="modal-body">
-                    Are you sure to delete it?
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -62,7 +64,8 @@
 </main>
 </div>
 </div>
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
+  integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
 <script>
   function fetchPatientsHaveDateToday() {
     var settings = {
@@ -70,7 +73,7 @@
       "method": "POST",
       "timeout": 0,
     };
-    $.ajax(settings).done(function(response) {
+    $.ajax(settings).done(function (response) {
       response = JSON.parse(response);
       $("#patientsAppointmentBody").html("");
       if (response.status === 200) {
@@ -82,10 +85,14 @@
     });
   }
   fetchPatientsHaveDateToday();
-  let ipAddress = "127.0.0.1";
+  let ipAddress = UrlData.host;
   let socketPort = "3000";
   let socket = io(ipAddress + ":" + socketPort);
-  $(document).on("click", "#sendToDoctorButton", function() {
+  $(document).on("click", "#sendToDoctorButton", function () {
+    if ($("#selectDoctorToken").val() === null) {
+      showAlert("please select doctor to send", 201);
+      return;
+    }
     socket.emit("sendPatientToServer", {
       toDoctor: $("#selectDoctorToken").val(),
       patientToken: $(this).data("token"),
