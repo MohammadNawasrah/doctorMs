@@ -104,11 +104,7 @@
                     </div>
                 </div>
             </div>
-            <!--===================================================================================================================== -->
-            <div class="search-box">
-            <input type="text" class="form-control"  id="searchInput" placeholder="Search..." oninput="filterTable()">
-            </div>
-            <!--===================================================================================================================== -->
+
             <div class="container" style="height:60vh;overflow-y: scroll;">
                 <div class="table-responsive">
                     <table id="myTable" class="table table-bordered sti">

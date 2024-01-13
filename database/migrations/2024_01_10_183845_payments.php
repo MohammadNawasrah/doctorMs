@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer("fk_record")->nullable();
-            $table->foreignId("fk_patient")->constrained("patients")->onDelete('cascade');
+            $table->integer("fk_patient");
+
             $table->double('paymet_value', 9, 3)->nullable();
             $table->double('must_be_paid', 9, 3)->nullable();
             $table->boolean("status")->default(false);

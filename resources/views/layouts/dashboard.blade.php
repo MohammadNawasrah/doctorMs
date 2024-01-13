@@ -134,12 +134,14 @@
             top: 0;
             z-index: 1000;
             background-color: #fff;
+
         }
         .search-box {
             margin-bottom: 10px;
             width: 96%;
             margin-left: auto;
             margin-right: auto;
+
         }
     </style>
 

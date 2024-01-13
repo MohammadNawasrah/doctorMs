@@ -8,13 +8,12 @@
     <!-- Main Content -->
     <main role="main" class="col">
         <!-- modal table to add note -->
-        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1"
-            aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel"></h5>
-
                         <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body h-50">
@@ -28,35 +27,49 @@
                 </div>
             </div>
         </div>
-        <!-- modal table to add note -->    
-        <!-- image upload -->
-        <div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">photo</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body w-100" style="height: 50;">
-                        <div class="container mt-2">
-                            <h3 class="mb-4" style="text-align: center; width:100%">Image Upload Profile personly</h3>
-                            <div class="mb-3">
-                                <label for="image" style="text-align: center; width:100%" class="form-label">Choose Image</label>
-                                <input type="file" class="form-control w-100" id="patientImage" multiple accept="image/*">
-                            </div>
-                            <button type="button" id="uplodeImagePatient" style="text-align: center; width:100%" class="btn btn-primary">Upload Image</button>
         <!-- modal table to add note -->
         <main role="main" class="col">
             <!-- modal table to add note -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1"
-                aria-labelledby="paymentsModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1" aria-labelledby="paymentsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="ModalLabel"> اضافة المبلغ الذي على المريض</h5>
                             <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="payment/addPaymnet" id="addPaymentForm" method="post">
+                            <div class="modal-body h-50">
+                                <div class="form-floating">
+                                    <input type="hidden" name="patientToken" id="patientToken" required>
+                                    <input type="hidden" name="recordId" id="recordId" required>
+                                    <input type="number" name="paymentValue" placeholder="add payment for patient" id="paymentInputForPatient" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="addPayment" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- image upload -->
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">photo</h5>
+                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body w-100" style="height: 50;">
+                            <div class="container mt-5">
+                                <h2 class="mb-4">Image Upload Profile personly</h2>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Choose Image</label>
+                                    <input type="file" class="form-control w-50" id="patientImage" multiple accept="image/*">
+                                </div>
+                                <button type="button" id="uplodeImagePatient" class="btn btn-primary">Upload
+                                    Image</button>
+                            </div>
                         </div>
                         <form action="payment/addPaymnet" id="addPaymentForm" method="post">
                             <div class="modal-body h-50">
@@ -71,30 +84,6 @@
                                 <button type="submit" id="addPayment" class="btn btn-success">Save</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <!-- image upload -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1"
-                aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">photo</h5>
-                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body w-100" style="height: 50;">
-                            <div class="container mt-5">
-                                <h2 class="mb-4">Image Upload Profile personly</h2>
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control w-50" id="patientImage" multiple
-                                        accept="image/*">
-                                </div>
-                                <button type="button" id="uplodeImagePatient" class="btn btn-primary">Upload
-                                    Image</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -123,9 +112,7 @@
         </main>
         </div>
         </div>
-        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
-            integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
-            crossorigin="anonymous"></script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
         <script>
             // Loader.removeLoadPage();
             function fetchPatientsHaveDateToday() {
@@ -134,7 +121,8 @@
                     "method": "POST",
                     "timeout": 0,
                 };
-                $.ajax(settings).done(function (response) {
+                $.ajax(settings).done(function(response) {
+
 
                     response = JSON.parse(response);
                     $("#patientsAppointmentBody").html("");
@@ -153,15 +141,16 @@
             })
         </script>
         <script>
-            $(function () {
+            $(function() {
                 var selectedPatient;
                 var recordId;
-                $(document).on("click", "#addNoteButton", function () {
+                $(document).on("click", "#addNoteButton", function() {
                     $("#addPhotoModal").modal("show");
                     selectedPatient = $(this).data("token")
                     recordId = $(this).data("id");
                 })
-                $(document).on("click", "#uplodeImagePatient", function () {
+                $(document).on("click", "#uplodeImagePatient", function() {
+
                     var form = new FormData();
                     var files = $("#patientImage")[0].files;
 
@@ -181,7 +170,8 @@
                         "data": form
                     };
 
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(settings).done(function(response) {
+
                         response = JSON.parse(response);
                         if (response.status === 200) {
                             $('.close').trigger('click');
@@ -200,7 +190,9 @@
                     });
 
                 })
-                $(document).on("click", "#saveNote", function () {
+
+                $(document).on("click", "#saveNote", function() {
+
                     var settings = {
                         "url": baseUrl() + "/dashboard/patientRecords/record/add",
                         "method": "POST",
@@ -217,7 +209,8 @@
                     var selectedButton = $(this);
                     $("#recordId").val(recordId)
                     Loader.addLoader(selectedButton);
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(settings).done(function(response) {
+
                         response = JSON.parse(response)
                         if (response.status === 200) {
                             Message.addMessage(response.message, selectedButton, "success");

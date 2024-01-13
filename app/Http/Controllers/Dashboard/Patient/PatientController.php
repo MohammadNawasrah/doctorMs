@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Patient;
 
 use App\Models\PatientAppoinntments;
 use App\Models\Patients;
+use App\Models\Payments;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -87,6 +88,8 @@ class PatientController
                 $date = $carbonDatetime->toDateString();
                 $time = $carbonDatetime->toTimeString();
                 $table .= '<button class="btn btn-warning" data-time="' . $time . '" data-date="' . $date . '" data-type="haveAppointment" data-token="' . $patient["token"] . '" id="updateAppointmetButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Update Appointment" ><i class="bi bi-arrow-clockwise"></i></button>';
+            } else if (!Payments::isPatientNotPay($patient["id"])["status"]) {
+                $table .= '<button class="btn btn-success" data-doctor="' . Payments::isPatientNotPay($patient["id"])["fk_record"] . '" data-type="mustHePay" data-token="' . $patient["token"] . '" id="mustPay" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Must Pay" data-bs-toggle="modal" data-bs-target="#addPay"><i class="bi bi-credit-card"></i></button>';
             } else {
                 $table .= '<button class="btn btn-success" data-type="haveNotAppointment" data-token="' . $patient["token"] . '" id="addAppointmentButton" style="margin-left: 4%;" data-toggle="tooltip" data-placement="top" title="Add Appointment" data-bs-toggle="modal" data-bs-target="#addAppointmetModal"><i class="bi bi-calendar-plus"></i></button>';
             }

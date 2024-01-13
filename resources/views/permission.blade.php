@@ -8,10 +8,11 @@
 <main role="main" style="display: flex;justify-content: center;align-items: start; margin-top: 5%;" class="col">
     <main role="main" class="col">
         <!-- Content Goes Here -->
-        <div class="container">
+        <div class="container" >
+
             <div class="row justify-content-center ">
                 <div class="col">
-                    <div class="container table-container">
+                    <div class="container table-container" >
                         <!-- ====================================================================================== -->
                         <div class="row mb-5">
                             <div class="col" data-permission="addAction" style="display: flex;justify-content: center;">
@@ -29,6 +30,7 @@
                         </div>
                         <!-- ====================================================================================== -->
                         <div class="container" data-permission="showPermission" style="max-height: 60vh; overflow-y: auto;">
+
                         </div>
                     </div>
                 </div>

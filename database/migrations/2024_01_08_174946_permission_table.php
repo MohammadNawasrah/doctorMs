@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('permission', function (Blueprint $table) {
             $table->id();
-            $table->test('jsonPermission');
+            $table->text('jsonPermission');
+
             $table->timestamps();
         });
     }

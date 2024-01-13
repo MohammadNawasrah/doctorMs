@@ -81,6 +81,24 @@ $(function () {
             });
         })
     }
+
+    const addPayment = () => {
+        $(document).on("submit", "#addPaymentForm", function (e) {
+            e.preventDefault();
+            ajax({
+                FORMID: "updatePaymentForm",
+                showAlert: true,
+                callBackFunction: (response) => {
+                    if (response.status === 200) {
+                        fetchPatients();
+                        $(".close").trigger("click");
+                    }
+                }
+            })
+        })
+    }
+    addPayment()
+
     fetchPatients();
     showUpdateAppointemtModal();
     showDeletePatientModal();
@@ -88,6 +106,10 @@ $(function () {
     deleletePatient();
     addNewPatient();
 
+    $(document).on("click", "#mustPay", function () {
+        $("#patientToken").val($(this).data("token"));
+        $("#recordId").val($(this).data("doctor"));
+    })
 
 
     $(document).on("click", "#updatePatientModalButton", function () {
