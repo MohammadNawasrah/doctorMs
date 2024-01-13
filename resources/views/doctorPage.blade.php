@@ -14,6 +14,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel"></h5>
+
                         <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body h-50">
@@ -27,6 +28,25 @@
                 </div>
             </div>
         </div>
+        <!-- modal table to add note -->    
+        <!-- image upload -->
+        <div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">photo</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100" style="height: 50;">
+                        <div class="container mt-2">
+                            <h3 class="mb-4" style="text-align: center; width:100%">Image Upload Profile personly</h3>
+                            <div class="mb-3">
+                                <label for="image" style="text-align: center; width:100%" class="form-label">Choose Image</label>
+                                <input type="file" class="form-control w-100" id="patientImage" multiple accept="image/*">
+                            </div>
+                            <button type="button" id="uplodeImagePatient" style="text-align: center; width:100%" class="btn btn-primary">Upload Image</button>
         <!-- modal table to add note -->
         <main role="main" class="col">
             <!-- modal table to add note -->

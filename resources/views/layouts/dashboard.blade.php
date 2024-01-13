@@ -135,6 +135,12 @@
             z-index: 1000;
             background-color: #fff;
         }
+        .search-box {
+            margin-bottom: 10px;
+            width: 96%;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 
 </head>
@@ -300,6 +306,32 @@
                 Loader.removeLoadPage();
             })
         </script>
+        <script>
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector("table");
+            tr = table.getElementsByTagName("tr");
+
+            // يمر على كل صف في الجدول ويخفي الذي لا يتناسب مع مدخلات البحث
+            for (i = 0; i < tr.length; i++) {
+                tds = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < tds.length; j++) {
+                    td = tds[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
 </body>
 

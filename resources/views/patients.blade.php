@@ -107,6 +107,92 @@
                 </div>
               </div>
 
+
+                            <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal"
+                                aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addAppointmentTitle">Set Appointment</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="dateAppointment" class="form-label">Appointment Date</label>
+                                                <input type="date" id="dateAppointment" class="form-control"
+                                                    min="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeAppointment" class="form-label">Appointment Time</label>
+                                                <input type="time" id="timeAppointment" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="centerPage">
+                                            <div>
+                                                <div>
+                                                    <button type="button" id="addAppointment"
+                                                        class="btn btn-danger m-3">Add New
+                                                        Appointmet</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="-1" role="dialog" id="updateAppointmentModal"
+                                aria-labelledby="updateAppointmentModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="updateAppointmentTitle">Add New Appointment</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="dateAppointment" class="form-label">Appointment Date</label>
+                                                <input type="date" class="form-control" id="dateAppointmentUpdate"
+                                                    min="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeAppointment" class="form-label">Appointment Time</label>
+                                                <input type="time" class="form-control" id="timeAppointmentUpdate">
+                                            </div>
+                                        </div>
+                                        <div class="centerPage">
+                                            <div class="centerPage">
+                                                <div>
+                                                    <button type="button" id="updateAppointment"
+                                                        class="btn btn-success m-3">Update Appointment
+                                                        </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ====================================================================================== -->
+                            <div class="search-box">
+                        <input type="text" class="form-control"  id="searchInput" placeholder="Search..." oninput="filterTable()">
+                            </div>
+                            <!-- ====================================================================================== -->
+                            <div class="container" style="max-height: 60vh; overflow-y: auto;">
+                            <table class="table table-bordered">
+                                <thead class="table-bordered-custom sti">
+                                    <tr>
+                                        <th scope="col" class="col-1 text-center">id</th>
+                                        <th scope="col" class="col-3 text-center">Name</th>
+                                        <th scope="col" class="col-4 text-center">Events</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patientsBody" class="text-center">
+                                </tbody>
+                            </table>
               <!-- ==========================================delete modal============================================ -->
 
               <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal"
