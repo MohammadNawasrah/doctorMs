@@ -63,7 +63,6 @@ class PatientAppoinntments extends Model
     {
         try {
             $today = Carbon::now()->toDateString();
-
             $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
                 ->whereDate('patient_appointments.next_appointment', '=', $today)
@@ -71,7 +70,25 @@ class PatientAppoinntments extends Model
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
+            return [];
+            // die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
+    public static function getAllPatientsIdHaveAppoinntmentToday()
+    {
+        try {
+            $today = Carbon::now()->toDateString();
+            $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
+                ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
+                ->whereDate('patient_appointments.next_appointment', '=', $today)
+                ->where("patient_appointments.status_to_send_doctor", false)->get();
+            if (count($patientAppointmentsData) != 0) {
+                return $patientAppointmentsData;
+            }
+            return [];
+            // die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }

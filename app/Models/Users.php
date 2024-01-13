@@ -70,7 +70,7 @@ class Users extends Model
                 return $users;
             }
         } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()));
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()."in page Users.php please Add type of users"));
         }
     }
     public static function deleteUser($userName)
