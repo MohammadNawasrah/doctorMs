@@ -28,6 +28,7 @@ class PatientAppointmentController
             'next_appointment' => $next_appointment,
         ];
         PatientAppoinntments::createRecord($newData);
+        $patientAppointmentsData = PatientAppoinntments::getAllPatientsIdHaveAppoinntmentToday();
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Patient added Appointment sucessfully");
     }
     public function showAppointment(Request $request)
@@ -58,7 +59,6 @@ class PatientAppointmentController
     }
     public function patientsHaveAppoinntment()
     {
-
         $doctors = Users::getAllDoctor();
         $options = "";
         foreach ($doctors as $key => $value) {
