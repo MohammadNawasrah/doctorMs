@@ -14,18 +14,18 @@
     /* Add your custom styles here if needed */
     .hover-effect:hover {
       background-color: #0d6efd;
-      /* ÊÍÏíÏ áæä ÇáÎáÝíÉ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
       color: #fff;
-      /* ÊÍÏíÏ áæä ÇáäÕ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
       border-color: #0d6efd;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .hover-link:hover {
       background-color: #e3efff;
-      /* ÊÍÏíÏ áæä ÇáÎáÝíÉ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
       color: #0d6efd;
-      /* ÊÍÏíÏ áæä ÇáäÕ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
     }
 
     a {
@@ -34,9 +34,9 @@
 
     p:hover {
       background-color: #e3efff;
-      /* ÊÍÏíÏ áæä ÇáÎáÝíÉ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
       color: #0d6efd;
-      /* ÊÍÏíÏ áæä ÇáäÕ ÚäÏ åæÝÑ */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
     }
 
     p {
@@ -55,12 +55,12 @@
 
     .custom-icon {
       font-size: 20px;
-      /* ÇáÍÌã ÇáÐí ÊÑíÏå (20px × 20px Ýí åÐÇ ÇáãËÇá) */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ (20px ï¿½ 20px ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) */
     }
 
     .custom-icons {
       font-size: 60px;
-      /* ÇáÍÌã ÇáÐí ÊÑíÏå (20px × 20px Ýí åÐÇ ÇáãËÇá) */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ (20px ï¿½ 20px ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) */
     }
 
     .table-bordered-custom {
@@ -141,7 +141,8 @@
               </div>
               <div class="modal-body h-50">
                 <div class="form-floating">
-                  <textarea class="form-control" readonly placeholder="Leave a comment here" id="noteTextArea"></textarea>
+                  <textarea class="form-control" readonly placeholder="Leave a comment here"
+                    id="noteTextArea"></textarea>
                 </div>
               </div>
             </div>
@@ -183,7 +184,8 @@
         </div>
         <!-- ====================================================================================== -->
         <!-- ========================================update========================================= -->
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+          tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -196,11 +198,11 @@
                   <label for="floatingTextarea">Comments</label>
                 </div>
               </div>
-
-
               <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
-                <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</button>
+                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                  data-bs-dismiss="modal">Back</button>
+                <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                  data-bs-dismiss="modal">Submit</button>
               </div>
             </div>
           </div>
@@ -239,11 +241,11 @@
     var selecedToken;
     var selectedPhoto;
     var selectedNote;
-    $(function() {
-      $(document).on("click", "#showNoteModal", function() {
+    $(function () {
+      $(document).on("click", "#showNoteModal", function () {
         $("#noteTextArea").val($(this).data("note"))
       })
-      $(document).on("click", "#showPhotoModal", function() {
+      $(document).on("click", "#showPhotoModal", function () {
         var settings = {
           "url": baseUrl() + "/dashboard/image/patient/show",
           "method": "POST",
@@ -255,7 +257,7 @@
             "recordId": $(this).data("photo")
           }),
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
           response = JSON.parse(response)
           if (response.status === 200) {
             imagesName = response.data[1]
@@ -266,17 +268,17 @@
           }
         });
       })
-      $("#imageSelect").on("change", function() {
+      $("#imageSelect").on("change", function () {
         // Get the selected image filename
         var selectedImage = $(this).val();
 
         // Update the image container with the selected image
         $("#imageContainer").html("<img src='" + selectedImage + "' alt='Selected Image'>");
       });
-      $("#photoModal").on("hide.bs.modal", function() {
+      $("#photoModal").on("hide.bs.modal", function () {
         $("#imageContainer").html("")
       })
-      $("#downloadImage").on("click", function() {
+      $("#downloadImage").on("click", function () {
         // Get the selected image filename
         if ($("#imageSelect").val() === "select image to show or dowanload or delete") {
           alert("please select image")
@@ -316,7 +318,7 @@
             "patienToken": token
           }),
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
           response = JSON.parse(response);
           $("#patientsRecordBody").html("");
           if (response.status === 200) {

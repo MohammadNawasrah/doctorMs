@@ -127,6 +127,7 @@
         ::-webkit-scrollbar-thumb:hover {
             background-color: #42b5fd;
         }
+
         .sti {
             position: -webkit-sticky;
             position: sticky;
@@ -231,7 +232,7 @@
             <script src="/js/util/mainClass.js"></script>
             <script>
                 $(function () {
-                    Loader.addLoadPage();
+                    // Loader.addLoadPage();
                 })
             </script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
