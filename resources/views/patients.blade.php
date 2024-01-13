@@ -208,7 +208,9 @@
                                 </div>
                             </div>
                             <!-- ====================================================================================== -->
-
+                            <div class="search-box">
+                        <input type="text" class="form-control"  id="searchInput" placeholder="Search..." oninput="filterTable()">
+                            </div>
                             <!-- ====================================================================================== -->
                             <div class="container" style="max-height: 60vh; overflow-y: auto;">
                             <table class="table table-bordered">

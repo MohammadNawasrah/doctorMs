@@ -13,7 +13,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body h-50">
                         <div class="form-floating">
@@ -27,23 +29,25 @@
                 </div>
             </div>
         </div>
-        <!-- modal table to add note -->
+        <!-- modal table to add note -->    
         <!-- image upload -->
         <div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel">photo</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body w-100" style="height: 50;">
-                        <div class="container mt-5">
-                            <h2 class="mb-4">Image Upload Profile personly</h2>
+                        <div class="container mt-2">
+                            <h3 class="mb-4" style="text-align: center; width:100%">Image Upload Profile personly</h3>
                             <div class="mb-3">
-                                <label for="image" class="form-label">Choose Image</label>
-                                <input type="file" class="form-control w-50" id="patientImage" multiple accept="image/*">
+                                <label for="image" style="text-align: center; width:100%" class="form-label">Choose Image</label>
+                                <input type="file" class="form-control w-100" id="patientImage" multiple accept="image/*">
                             </div>
-                            <button type="button" id="uplodeImagePatient" class="btn btn-primary">Upload Image</button>
+                            <button type="button" id="uplodeImagePatient" style="text-align: center; width:100%" class="btn btn-primary">Upload Image</button>
                         </div>
                     </div>
                 </div>

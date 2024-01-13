@@ -47,7 +47,6 @@ class PatientToDoctorController
             ';
             $table .= '<button id="addNoteButton"  data-id="' . $patient["id"] . '" class="btn btn-primary" data-token="' . $patient["token"] . '" data-toggle="tooltip" data-placement="top" title="Add Record"><i class="bi bi-card-checklist"></i></button>';
 
-            $table .= '<button class="btn btn-success" id="sendToDoctorButton" data-token="' . $patient["token"] . '"  data-toggle="tooltip" data-placement="top" title="Finish"><i class="bi bi-calendar2-check"></i></button>';
 
             $table .= "</td></tr>";
         }
