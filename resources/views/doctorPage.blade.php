@@ -9,6 +9,7 @@
     <main role="main" class="col">
         <!-- modal table to add note -->
         <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -70,6 +71,19 @@
                                     Image</button>
                             </div>
                         </div>
+                        <form action="payment/addPaymnet" id="addPaymentForm" method="post">
+                            <div class="modal-body h-50">
+                                <div class="form-floating">
+                                    <input type="hidden" name="patientToken" id="patientToken" required>
+                                    <input type="hidden" name="recordId" id="recordId" required>
+                                    <input type="number" name="paymentValue" placeholder="add payment for patient"
+                                        id="paymentInputForPatient" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="addPayment" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -109,6 +123,7 @@
                 };
                 $.ajax(settings).done(function(response) {
 
+
                     response = JSON.parse(response);
                     $("#patientsAppointmentBody").html("");
                     if (response.status === 200) {
@@ -135,6 +150,7 @@
                     recordId = $(this).data("id");
                 })
                 $(document).on("click", "#uplodeImagePatient", function() {
+
                     var form = new FormData();
                     var files = $("#patientImage")[0].files;
 
@@ -155,6 +171,7 @@
                     };
 
                     $.ajax(settings).done(function(response) {
+
                         response = JSON.parse(response);
                         if (response.status === 200) {
                             $('.close').trigger('click');
@@ -173,7 +190,9 @@
                     });
 
                 })
+
                 $(document).on("click", "#saveNote", function() {
+
                     var settings = {
                         "url": baseUrl() + "/dashboard/patientRecords/record/add",
                         "method": "POST",
@@ -191,6 +210,7 @@
                     $("#recordId").val(recordId)
                     Loader.addLoader(selectedButton);
                     $.ajax(settings).done(function(response) {
+
                         response = JSON.parse(response)
                         if (response.status === 200) {
                             Message.addMessage(response.message, selectedButton, "success");

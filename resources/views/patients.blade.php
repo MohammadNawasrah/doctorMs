@@ -19,6 +19,7 @@
               </div>
               <!-- ============================================Add patient========================================== -->
               <div class="modal fade" id="addNewPatientModal" tabindex="-1" aria-labelledby="addNewPatientModalLabel" aria-hidden="true">
+
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -34,6 +35,7 @@
                           <div class="row">
                             <div class="col">
                               <input type="text" class="form-control" id="patientFullName" name="fullName" placeholder="Full Name" required>
+
                             </div>
                           </div>
                         </div>
@@ -44,6 +46,7 @@
                             </div>
                             <div class="col">
                               <input type="tel" class="form-control " id="patientPhoneNumber" name="phoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+
                             </div>
                           </div>
                         </div>
@@ -61,6 +64,7 @@
               </div>
               <!-- ===================================================================================== -->
               <div class="modal fade" id="updatePatientModal" tabindex="-1" aria-labelledby="updatePatientModalLabel" aria-hidden="true">
+
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -75,6 +79,7 @@
                         <div class="row">
                           <div class="col">
                             <input type="text" class="form-control" id="patientFullNameUpdate" placeholder="Full Name" required>
+
                           </div>
                         </div>
                       </div>
@@ -85,6 +90,7 @@
                           </div>
                           <div class="col">
                             <input type="tel" class="form-control " id="patientPhoneNumberUpdate" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+
                           </div>
                         </div>
                       </div>
@@ -99,6 +105,7 @@
                   </div>
                 </div>
               </div>
+
 
               <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPay" tabindex="-1" aria-labelledby="paymentsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -125,6 +132,7 @@
               <!-- ==========================================delete modal============================================ -->
 
               <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal" aria-labelledby="deletePatientModalLabel" aria-hidden="true">
+
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -146,7 +154,9 @@
               <!-- ====================================================================================== -->
               <!-- ==========================================date modal============================================ -->
 
+
               <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal" aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
+
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -170,6 +180,7 @@
                         <div>
                           <button type="button" id="addAppointment" class="btn btn-danger m-3">Add New
                             Appointmet</button>
+
                         </div>
                       </div>
                     </div>
@@ -206,6 +217,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- ====================================================================================== -->
 
               <!-- ====================================================================================== -->
@@ -230,7 +242,4 @@
     </div>
   </div>
 </main>
-<script>
-
-</script>
 @endsection

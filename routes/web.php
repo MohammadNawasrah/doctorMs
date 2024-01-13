@@ -104,7 +104,9 @@ Route::group(['prefix' => '/dashboard'],  function () {
     });
     Route::group(['prefix' => '/payment'], function () {
         Route::post('/addPaymnet', [PaymentsController::class, 'addPaymentForPatient']);
+
         Route::post('/updatePaymnet', [PaymentsController::class, 'updatePaymentForPatient']);
+
     });
     Route::get('/logOut', [LogOutController::class, 'logOut'])->name("logOut");
 });

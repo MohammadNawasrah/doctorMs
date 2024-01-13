@@ -81,6 +81,7 @@ $(function () {
             });
         })
     }
+
     const addPayment = () => {
         $(document).on("submit", "#addPaymentForm", function (e) {
             e.preventDefault();
@@ -97,6 +98,7 @@ $(function () {
         })
     }
     addPayment()
+
     fetchPatients();
     showUpdateAppointemtModal();
     showDeletePatientModal();
@@ -108,6 +110,7 @@ $(function () {
         $("#patientToken").val($(this).data("token"));
         $("#recordId").val($(this).data("doctor"));
     })
+
 
     $(document).on("click", "#updatePatientModalButton", function () {
         selectedUser = $(this).data("token")

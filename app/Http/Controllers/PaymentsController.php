@@ -24,4 +24,5 @@ class PaymentsController
         $patientId = Patients::getPatientByToken($patientToken)["id"];
         Payments::updatePay($patientId,  $recordId, $paymnet);
     }
+
 }

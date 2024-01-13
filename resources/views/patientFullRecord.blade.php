@@ -167,9 +167,7 @@
                   <option selected>select image to show or dowanload or delete</option>
                 </select>
                 <div>
-                  <div id="imageContainer" style="display: flex;
-  justify-content: center;
-  margin: 30px;">
+                  <div id="imageContainer" style="display: flex; justify-content: center; margin: 30px;">
                     <!-- Image will be displayed here -->
                   </div>
                 </div>
@@ -209,13 +207,18 @@
         </div>
         <!-- ====================================================================================== -->
         <!-- ===================================search============================================== -->
-        <form class="d-flex mb-3">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-          <input class="form-control ms-2 w-50" type="search" placeholder="Search" aria-label="Search">
-        </form>
+                    <h2 class="mb-4" style="width: 100%; text-align: center;">name</h2>
+                    <div class="row mb-3" >
+                        <div class="col-2">
+                    <input type="text" class="form-control" id="textBox" placeholder="Cash">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-2"><input type="text" class="form-control" id="textBox" placeholder="Total">
+                </div>
+                    </div>
         <!-- ====================================================================================== -->
-
-        <table class="table table-bordered">
+        <div class="container" style="max-height: 60vh; overflow-y: auto;">
+        <table class="table table-bordered" >
           <thead class="table-bordered-custom">
             <tr style="text-align: center;">
               <th scope="col" class="col-1">id</th>
@@ -229,7 +232,7 @@
           <tbody id="patientsRecordBody">
           </tbody>
         </table>
-
+        </div>
         <!-- You can retain your existing HTML content here -->
   </main>
 

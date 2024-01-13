@@ -19,6 +19,7 @@ class Payments extends Model
         "status"
     ];
     public static function addPaymentToPatient($patientId, $mony, $recordId)
+
     {
         try {
             self::create([

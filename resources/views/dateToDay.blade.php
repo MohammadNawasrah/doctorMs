@@ -4,7 +4,6 @@
 
 @section('content')
 <main class="col">
-
   <!-- Main Content -->
   <main role="main" class="col">
     <!-- Content Goes Here -->
@@ -38,29 +37,40 @@
             </div>
             <!-- ====================================================================================== -->
 
-            <table class="table table-bordered">
-              <thead class="table-bordered-custom">
-                <tr style="text-align: center;">
-                  <th scope="col" class="col-1">id</th>
-                  <th scope="col" class="col-3">Name</th>
-                  <th scope="col" class="col-3">Time and Date</th>
-                  <th scope="col" class="col-3">Doctor</th>
-                  <th scope="col" class="col-5">Events</th>
-                </tr>
-              </thead>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ====================================================================================== -->
 
-              <tbody id="patientsAppointmentBody">
-              </tbody>
-            </table>
-          </div>
+                        <table class="table table-bordered">
+                            <thead class="table-bordered-custom">
+                                <tr style="text-align: center;">
+                                    <th scope="col" class="col-1">id</th>
+                                    <th scope="col" class="col-3">Name</th>
+                                    <th scope="col" class="col-3">Time and Date</th>
+                                    <th scope="col" class="col-3">Doctor</th>
+                                    <th scope="col" class="col-5">Events</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="patientsAppointmentBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <!-- You can retain your existing HTML content here -->
+    </main>
     </div>
-    <!-- You can retain your existing HTML content here -->
-  </main>
-  </div>
 
-  <!-- You can retain your existing HTML content here -->
+    <!-- You can retain your existing HTML content here -->
 </main>
 </div>
 </div>
@@ -101,8 +111,20 @@
   })
   socket.on("responsSendToServer", (response) => {
     fetchPatientsHaveDateToday();
-    Message.addModalMessage(response, 1500);
-  })
+    let ipAddress = UrlData.host;
+    let socketPort = "3000";
+    let socket = io(ipAddress + ":" + socketPort);
+    $(document).on("click", "#sendToDoctorButton", function () {
+        socket.emit("sendPatientToServer", {
+            toDoctor: $("#selectDoctorToken").val(),
+            patientToken: $(this).data("token"),
+            baseUrl: UrlData.baseUrl
+        });
+    })
+    socket.on("responsSendToServer", (response) => {
+        fetchPatientsHaveDateToday();
+        Message.addModalMessage(response, 1500);
+    })
 </script>
 
 </main>
