@@ -83,8 +83,7 @@ $(function () {
     }
 
     const addPayment = () => {
-        $(document).on("submit", "#addPaymentForm", function (e) {
-            e.preventDefault();
+        $(document).on("click", "#updatePayment", function () {
             ajax({
                 FORMID: "updatePaymentForm",
                 showAlert: true,
@@ -98,7 +97,6 @@ $(function () {
         })
     }
     addPayment()
-
     fetchPatients();
     showUpdateAppointemtModal();
     showDeletePatientModal();

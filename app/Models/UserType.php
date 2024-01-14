@@ -26,4 +26,12 @@ class UserType extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Add Type Successfully"));
         }
     }
+    public static function getUserTypeFromId($userTypeId)
+    {
+        try {
+            return self::where("id", $userTypeId)->firstOrFail()["type"];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

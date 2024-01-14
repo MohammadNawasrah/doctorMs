@@ -108,7 +108,7 @@
 
 
               <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPay" tabindex="-1" aria-labelledby="paymentsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="ModalLabel"> اضافة المبلغ الذي على المريض</h5>
@@ -133,7 +133,7 @@
 
               <div class="modal fade" tabindex="-1" role="dialog" id="deletePatientModal" aria-labelledby="deletePatientModalLabel" aria-hidden="true">
 
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="deletePatientModalLabel">Are You Sure To Delete ?</h5>
@@ -157,7 +157,7 @@
 
               <div class="modal fade" tabindex="-1" role="dialog" id="addAppointmetModal" aria-labelledby="addAppointmetModalLabel" aria-hidden="true">
 
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="addAppointmentTitle">Set Appointment</h5>
@@ -188,7 +188,7 @@
                 </div>
               </div>
               <div class="modal fade" tabindex="-1" role="dialog" id="updateAppointmentModal" aria-labelledby="updateAppointmentModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="updateAppointmentTitle">Add New Appointment</h5>
