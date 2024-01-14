@@ -136,6 +136,7 @@
             background-color: #fff;
 
         }
+
         .search-box {
             margin-bottom: 10px;
             width: 96%;
@@ -151,20 +152,16 @@
     <div class="container-fluid">
         <div class="row" style="height: 100vh;">
             <!-- Sidebar -->
-            <nav class=" bg-light sidebar shadow"
-                style="  height: 100%;width:350px; display:flex; flex-direction: column; ">
+            <nav class=" bg-light sidebar shadow" style="  height: 100%;width:350px; display:flex; flex-direction: column; ">
                 <div style="display: flex; margin:10px">
                     <img loading="lazy" id="userProfileImage" style="width: 100px;border-radius: 50%;" src="" alt="">
                     </img>
-                    <div
-                        style="display: flex;flex-direction: column;justify-content: center;align-items: center;gap: 15px;margin-left: 20px;">
+                    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;gap: 15px;margin-left: 20px;">
                         <div id="userName" class="profile-title"></div>
                         <div class="profile-subtitle" id="nameOfUser" style="display: flex;width: max-content"></div>
                     </div>
                 </div>
-                <div style="margin-top:15px;display: flex;justify-content: center;align-items: center;"> <a
-                        style="width: 80%;" href="{{ url('/dashboard/logOut') }}"
-                        class="btn btn-blue btn-block hover-effect">Log out</a> </div>
+                <div style="margin-top:15px;display: flex;justify-content: center;align-items: center;"> <a style="width: 80%;" href="{{ url('/dashboard/logOut') }}" class="btn btn-blue btn-block hover-effect">Log out</a> </div>
                 <hr class="my-3 border-primary" style="border: 1px solid #000; width:90%;"> <!-- Menu Items -->
 
                 <div class="sidebar-sticky" style="overflow: auto;margin-top:5px">
@@ -176,16 +173,14 @@
                         <li class="nav-item" data-permission="htmlCodePage"> </li>
 
                         <li class="nav-item" data-permission="patientsPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="patients"
-                                href="/dashboard/patients">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="patients" href="/dashboard/patients">
                                 <div class="menu-btn mt-2">
                                     <i class="bi bi-people-fill custom-icon"></i> Patients
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" data-permission="secertarPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="dateToDay"
-                                href="/dashboard/dateToDay">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="dateToDay" href="/dashboard/dateToDay">
                                 <div class="menu-btn">
                                     <div class="menu-text  mt-2">
                                         <i class="bi bi-clock-fill custom-icon"></i> Date To Day
@@ -194,8 +189,7 @@
                             </a>
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="doctor"
-                                href="/dashboard/doctor">
+                            <a class="nav-link hover-link" style="height:70px;" data-url="doctor" href="/dashboard/doctor">
                                 <div class="menu-btn mt-2">
                                     <i class="bi bi-person-lines-fill custom-icon"></i> Doctor
                                 </div>
@@ -239,15 +233,14 @@
             <script src="/js/util/route.js"></script>
             <script src="/js/util/mainClass.js"></script>
             <script>
-                $(function () {
+                $(function() {
                     // Loader.addLoadPage();
                 })
             </script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
             <script>
-
-                $(function () {
+                $(function() {
                     toActiveLinks();
                     fetchAllPermissionDashboard();
 
@@ -257,7 +250,7 @@
                         "method": "GET",
                     };
 
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(settings).done(function(response) {
                         response = JSON.parse(response)
                         if (response.status === 200)
                             $("#userProfileImage").attr("src", response.message)
@@ -279,22 +272,22 @@
                             "data": form
                         };
 
-                        $.ajax(settings).done(function (response) {
+                        $.ajax(settings).done(function(response) {
                             response = JSON.parse(response)
                             if (response.status === 200) {
                                 $('.modal').modal('hide');
                                 $("#userProfileImage").attr("src", response.message)
                                 Message.addModalMessage({
-                                    status: 200,
-                                    message: "upload Image successfully"
-                                },
+                                        status: 200,
+                                        message: "upload Image successfully"
+                                    },
                                     1000)
                                 return
                             }
                             Message.addModalMessage({
-                                status: 201,
-                                message: response.message
-                            },
+                                    status: 201,
+                                    message: response.message
+                                },
                                 1000)
                         });
                     })
@@ -304,36 +297,36 @@
             @yield('content')
         </div>
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 Loader.removeLoadPage();
             })
         </script>
         <script>
-        function filterTable() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.querySelector("table");
-            tr = table.getElementsByTagName("tr");
+            function filterTable() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.querySelector("table");
+                tr = table.getElementsByTagName("tr");
 
-            // يمر على كل صف في الجدول ويخفي الذي لا يتناسب مع مدخلات البحث
-            for (i = 0; i < tr.length; i++) {
-                tds = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < tds.length; j++) {
-                    td = tds[j];
-                    if (td) {
-                        txtValue = td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            break;
-                        } else {
-                            tr[i].style.display = "none";
+                // يمر على كل صف في الجدول ويخفي الذي لا يتناسب مع مدخلات البحث
+                for (i = 0; i < tr.length; i++) {
+                    tds = tr[i].getElementsByTagName("td");
+                    for (var j = 0; j < tds.length; j++) {
+                        td = tds[j];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                                break;
+                            } else {
+                                tr[i].style.display = "none";
+                            }
                         }
                     }
                 }
             }
-        }
-    </script>
+        </script>
 
 </body>
 
