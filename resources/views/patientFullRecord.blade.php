@@ -141,8 +141,7 @@
               </div>
               <div class="modal-body h-50">
                 <div class="form-floating">
-                  <textarea class="form-control" readonly placeholder="Leave a comment here"
-                    id="noteTextArea"></textarea>
+                  <textarea class="form-control" readonly placeholder="Leave a comment here" id="noteTextArea"></textarea>
                 </div>
               </div>
             </div>
@@ -182,8 +181,7 @@
         </div>
         <!-- ====================================================================================== -->
         <!-- ========================================update========================================= -->
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-          tabindex="-1">
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -197,41 +195,42 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
-                  data-bs-dismiss="modal">Back</button>
-                <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
-                  data-bs-dismiss="modal">Submit</button>
+                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+                <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</button>
               </div>
             </div>
           </div>
         </div>
         <!-- ====================================================================================== -->
         <!-- ===================================search============================================== -->
-                    <h2 class="mb-4" style="width: 100%; text-align: center;">name</h2>
-                    <div class="row mb-3" >
-                        <div class="col-2">
-                    <input type="text" class="form-control" id="textBox" placeholder="Cash">
-                    </div>
-                    <div class="col"></div>
-                    <div class="col-2"><input type="text" class="form-control" id="textBox" placeholder="Total">
-                </div>
-                    </div>
+        <h2 class="mb-4" id="name" style="width: 100%; text-align: center;">name</h2>
+        <div class=" mb-3" style="display: flex; justify-content: space-between;">
+          <div class="text-center">
+            <label for="totalHavePatientPay">Patient Pay</label>
+            <input type="text" class="form-control text-center" id="totalHavePatientPay" placeholder="Cash">
+          </div>
+
+          <div class="text-center">
+            <label for="totalHavePatientPay ">Patient Have To Pay</label>
+            <input type="text" class="form-control text-center" id="patientFullWasPay" placeholder="Total">
+          </div>
+        </div>
         <!-- ====================================================================================== -->
         <div class="container" style="max-height: 60vh; overflow-y: auto;">
-        <table class="table table-bordered" >
-          <thead class="table-bordered-custom">
-            <tr style="text-align: center;">
-              <th scope="col" class="col-1">id</th>
-              <th scope="col" class="col-3">Name</th>
-              <th scope="col" class="col-3">Date</th>
-              <th scope="col" class="col-2">Nots</th>
-              <th scope="col" class="col-2">Photo</th>
-              <th scope="col" class="col-4">Events</th>
-            </tr>
-          </thead>
-          <tbody id="patientsRecordBody">
-          </tbody>
-        </table>
+          <table class="table table-bordered">
+            <thead class="table-bordered-custom">
+              <tr style="text-align: center;">
+                <th scope="col" class="col-1">id</th>
+                <th scope="col" class="col-3">Patient pay</th>
+                <th scope="col" class="col-3">Date</th>
+                <th scope="col" class="col-2">Nots</th>
+                <th scope="col" class="col-2">Photo</th>
+                <th scope="col" class="col-4">Events</th>
+              </tr>
+            </thead>
+            <tbody id="patientsRecordBody">
+            </tbody>
+          </table>
         </div>
         <!-- You can retain your existing HTML content here -->
   </main>
@@ -244,11 +243,11 @@
     var selecedToken;
     var selectedPhoto;
     var selectedNote;
-    $(function () {
-      $(document).on("click", "#showNoteModal", function () {
+    $(function() {
+      $(document).on("click", "#showNoteModal", function() {
         $("#noteTextArea").val($(this).data("note"))
       })
-      $(document).on("click", "#showPhotoModal", function () {
+      $(document).on("click", "#showPhotoModal", function() {
         var settings = {
           "url": baseUrl() + "/dashboard/image/patient/show",
           "method": "POST",
@@ -260,7 +259,7 @@
             "recordId": $(this).data("photo")
           }),
         };
-        $.ajax(settings).done(function (response) {
+        $.ajax(settings).done(function(response) {
           response = JSON.parse(response)
           if (response.status === 200) {
             imagesName = response.data[1]
@@ -271,17 +270,17 @@
           }
         });
       })
-      $("#imageSelect").on("change", function () {
+      $("#imageSelect").on("change", function() {
         // Get the selected image filename
         var selectedImage = $(this).val();
 
         // Update the image container with the selected image
         $("#imageContainer").html("<img src='" + selectedImage + "' alt='Selected Image'>");
       });
-      $("#photoModal").on("hide.bs.modal", function () {
+      $("#photoModal").on("hide.bs.modal", function() {
         $("#imageContainer").html("")
       })
-      $("#downloadImage").on("click", function () {
+      $("#downloadImage").on("click", function() {
         // Get the selected image filename
         if ($("#imageSelect").val() === "select image to show or dowanload or delete") {
           alert("please select image")
@@ -321,10 +320,13 @@
             "patienToken": token
           }),
         };
-        $.ajax(settings).done(function (response) {
+        $.ajax(settings).done(function(response) {
           response = JSON.parse(response);
           $("#patientsRecordBody").html("");
           if (response.status === 200) {
+            $("#totalHavePatientPay").val(response.main.patientFullPay)
+            $("#name").text(response.main.name)
+            $("#patientFullWasPay").val(response.main.patientFullWasPay)
             $("#patientsRecordBody").html("");
             $("#patientsRecordBody").append(response.data.patientsRecordBody)
           }

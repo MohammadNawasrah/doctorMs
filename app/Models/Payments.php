@@ -37,14 +37,37 @@ class Payments extends Model
     {
         try {
             $pay = self::where("fk_record", $doctorTableId)->firstOrFail();
-            return $pay["must_be_paid"];
+            return $pay["paymet_value"];
         } catch (\Throwable $th) {
             //throw $th;
             return 0;
         }
     }
-    public static function getAllPaymentsForPateint()
+    public static function getAllPaymentsForPateint($patientId)
     {
+        try {
+            $lastRecord = self::where("fk_patient", $patientId)
+                ->sum("paymet_value");
+            if (isset($lastRecord)) {
+                return ($lastRecord);
+            }
+            return 0;
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
+    public static function getAllPaymentsForPateintWellPay($patientId)
+    {
+        try {
+            $lastRecord = self::where("fk_patient", $patientId)
+                ->select("must_be_paid")->first();
+            if (isset($lastRecord)) {
+                return ($lastRecord);
+            }
+            return 0;
+        } catch (\Throwable $th) {
+            return 0;
+        }
     }
     public static function isPatientNotPay($patientId)
     {

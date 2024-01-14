@@ -38,7 +38,7 @@ class PatientAppoinntments extends Model
         try {
             $patientAppointmentsData = Patients::select('patients.token', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
-                ->where("patient_appointments.status_to_send_doctor", false)->get();
+                ->where("patient_appointments.status_to_send_doctor", false)->orderBy("patient_appointments.next_appointment", "desc")->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
@@ -66,7 +66,7 @@ class PatientAppoinntments extends Model
             $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
                 ->whereDate('patient_appointments.next_appointment', '=', $today)
-                ->where("patient_appointments.status_to_send_doctor", false)->get();
+                ->where("patient_appointments.status_to_send_doctor", false)->orderBy("patient_appointments.next_appointment", "asc")->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
