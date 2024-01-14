@@ -12,8 +12,10 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel"></h5>
-                        <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="ModalLabel"> Note</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body h-50">
                         <div class="form-floating">
@@ -394,15 +396,17 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel"> اضافة المبلغ الذي على المريض</h5>
-                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="ModalLabel"> Add the amount owed by the patient</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                         </div>
                         <form action="payment/addPaymnet" id="addPaymentForm" method="post">
                             <div class="modal-body h-50">
                                 <div class="form-floating">
                                     <input type="hidden" name="patientToken" id="patientToken" required>
                                     <input type="hidden" name="recordId" id="recordId" required>
-                                    <input type="number" name="paymentValue" placeholder="add payment for patient" id="paymentInputForPatient" required>
+                                    <input type="number" class="form-control" name="paymentValue" placeholder="add payment for patient" id="paymentInputForPatient" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
