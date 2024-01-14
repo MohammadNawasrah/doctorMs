@@ -219,10 +219,14 @@
               </div>
 
               <!-- ====================================================================================== -->
+<<<<<<< HEAD
               <div class="search-box">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search..."
                                 oninput="filterTable()">
                         </div>
+=======
+
+>>>>>>> 19a3381aaa5002419571bfff8ce43b1ebc3dea5b
               <!-- ====================================================================================== -->
               <div class="container" style="max-height: 60vh; overflow-y: auto;">
                 <table class="table table-bordered">
@@ -245,4 +249,8 @@
     </div>
   </div>
 </main>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 19a3381aaa5002419571bfff8ce43b1ebc3dea5b
