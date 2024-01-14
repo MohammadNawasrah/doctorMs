@@ -8,8 +8,7 @@
     <!-- Main Content -->
     <main role="main" class="col">
         <!-- modal table to add note -->
-        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1"
-            aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -34,8 +33,7 @@
         <!--===================================================================================================================== -->
         <main role="main" class="col">
             <!-- modal table to add note -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1"
-                aria-labelledby="paymentsModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1" aria-labelledby="paymentsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -49,8 +47,7 @@
                                 <div class="form-floating">
                                     <input type="hidden" name="patientToken" id="patientToken" required>
                                     <input type="hidden" name="recordId" id="recordId" required>
-                                    <input type="number" class="form-control" name="paymentValue"
-                                        placeholder="add payment for patient" id="paymentInputForPatient" required>
+                                    <input type="number" class="form-control" name="paymentValue" placeholder="add payment for patient" id="paymentInputForPatient" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -61,8 +58,7 @@
                 </div>
             </div>
             <!-- image upload -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1"
-                aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -76,8 +72,7 @@
                                 <h3 class="mb-4" style="text-align: center;">Image Upload Profile personly</h3>
                                 <div class="mb-3" style="text-align: center;">
                                     <label for="image" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control w-100" id="patientImage" multiple
-                                        accept="image/*">
+                                    <input type="file" class="form-control w-100" id="patientImage" multiple accept="image/*">
                                 </div>
                                 <button type="button" id="uplodeImagePatient" class="btn btn-primary w-100">Upload
                                     Image</button>
@@ -88,8 +83,7 @@
             </div>
             <!-- image upload -->
             <button id="showModal" data-target="checkModal" data-toggle="modal"></button>
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="checkModal" tabindex="-1"
-                aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="checkModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -99,9 +93,7 @@
                         </div>
                         <div class="modal-body w-100">
                             <div class="container col" id="checkDiv">
-                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample" aria-expanded="false"
-                                    aria-controls="collapseExample">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                     Button with data-bs-target
                                 </button>
                                 <div class="collapse" id="collapseExample">
@@ -140,12 +132,10 @@
                 </div>
             </div>
         </main>
-        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
-            integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
-            crossorigin="anonymous"></script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
         <script>
-            $(function () {
-                $(document).on("click", "#showModal", function () {
+            $(function() {
+                $(document).on("click", "#showModal", function() {
 
                     console.log("fuck")
                     $("#checkModal").modal("show")
@@ -159,7 +149,7 @@
                     "method": "POST",
                     "timeout": 0,
                 };
-                $.ajax(settings).done(function (response) {
+                $.ajax(settings).done(function(response) {
 
 
                     response = JSON.parse(response);
@@ -179,15 +169,15 @@
             })
         </script>
         <script>
-            $(function () {
+            $(function() {
                 var selectedPatient;
                 var recordId;
-                $(document).on("click", "#addNoteButton", function () {
+                $(document).on("click", "#addNoteButton", function() {
                     $("#addPhotoModal").modal("show");
                     selectedPatient = $(this).data("token")
                     recordId = $(this).data("id");
                 })
-                $(document).on("click", "#uplodeImagePatient", function () {
+                $(document).on("click", "#uplodeImagePatient", function() {
 
                     var form = new FormData();
                     var files = $("#patientImage")[0].files;
@@ -208,7 +198,7 @@
                         "data": form
                     };
 
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(settings).done(function(response) {
 
                         response = JSON.parse(response);
                         if (response.status === 200) {
@@ -218,7 +208,7 @@
                                 message: "Upload image successfully"
                             }, 1000);
                             $("#noteModal").modal("show");
-                            $("#checkboxHint").each(function (index, element) {
+                            $("#checkboxHint").each(function(index, element) {
                                 if (element.checked) {
                                     console.log(element)
                                 }
@@ -233,7 +223,7 @@
 
                 })
 
-                $(document).on("click", "#saveNote", function () {
+                $(document).on("click", "#saveNote", function() {
 
                     var settings = {
                         "url": baseUrl() + "/dashboard/patientRecords/record/add",
@@ -251,7 +241,7 @@
                     var selectedButton = $(this);
                     $("#recordId").val(recordId)
                     Loader.addLoader(selectedButton);
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(settings).done(function(response) {
 
                         response = JSON.parse(response)
                         if (response.status === 200) {
@@ -283,12 +273,12 @@
                 })
             }
             addPayment()
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // Initialize an empty object to store the data
                 var labelTextArray = {};
 
                 // Iterate through each list item in the dropdown menu
-                $('.dropdown-menu li').each(function () {
+                $('.dropdown-menu li').each(function() {
                     // Extract the button text and label text
                     var buttonText = $('.dropdown-toggle').text().trim();
                     var labelText = $(this).find('label').text().trim();
@@ -371,8 +361,7 @@
                     "Temporary Cementation",
                     "Permanent Cementation"
                 ],
-                "Endodontics": [
-                    {
+                "Endodontics": [{
                         "Root Canal treatment": [
                             "a - First Visit (Access)",
                             "b - Second Visit (Cleaning & shaping)",

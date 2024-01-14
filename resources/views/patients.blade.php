@@ -219,10 +219,14 @@
               </div>
 
               <!-- ====================================================================================== -->
+<<<<<<< HEAD
               <div class="search-box">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search..."
                                 oninput="filterTable()">
                         </div>
+=======
+
+>>>>>>> a1982f4 (fix)
               <!-- ====================================================================================== -->
               <div class="container" style="max-height: 60vh; overflow-y: auto;">
                 <table class="table table-bordered">
@@ -245,4 +249,8 @@
     </div>
   </div>
 </main>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> a1982f4 (fix)

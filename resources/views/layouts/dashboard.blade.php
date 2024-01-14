@@ -215,7 +215,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
+<<<<<<< HEAD
                             <h5 class="modal-title" id="ModalLabel">Settings</h5>
+=======
+                            <h5 class="modal-title" id="ModalLabel">photo</h5>
+>>>>>>> a1982f4 (fix)
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -337,4 +341,8 @@
 
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> a1982f4 (fix)
