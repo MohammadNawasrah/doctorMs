@@ -8,12 +8,15 @@
     <!-- Main Content -->
     <main role="main" class="col">
         <!-- modal table to add note -->
-        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="noteModal" tabindex="-1"
+            aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel"></h5>
-                        <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="ModalLabel"> Note</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body h-50">
                         <div class="form-floating">
@@ -26,383 +29,28 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pathological case</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body ">
+        <!--===================================================cheak books======================================================= -->
 
-                        <!--==============================================================================================================-->
-                        <div class="row mt-3">
-                            <div class="container col">
-                                <div class="dropdown w-200">
-                                    <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Prosthetics
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox1">
-                                                    preparation
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox2">
-                                                    Impression
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Bite regestration
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Complete removable denture</label>
-
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Partial denture
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    over denture
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    # fixed crowns :
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    a - PFM crown
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    b - Zircon crow
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    c - E-Ma* crown
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Dental Veneers
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    # Post & core :
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    a - metal post
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    b - Fiber post
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <form class="form-check">
-                                            <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                            <label class="form-check-label" for="checkbox3">
-                                                Temporary Cementation
-                                            </label>
-                                        </form>
-                                        <form class="form-check">
-                                            <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                            <label class="form-check-label" for="checkbox3">
-                                                Permenant Cementation
-                                            </label>
-                                        </form>
-
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!--==============================================================================================================-->
-                            <div class="container col">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Endodontics
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <form class="form-check">
-                                                <label class="form-check-label" for="checkbox1">
-                                                    # Root Canal treatment :
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    a - First Visit( a Csess )
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    b - Secod Visit( cleaning & shaping )
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    c - Obturation
-                                                </label>
-                                            </form>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    d - composite filling
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Re Root Canal treatment
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Apicoectomy
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--==============================================================================================================-->
-                            <div class="container col">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Pedodontics
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Fluride application
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Pit & fissure sealent
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Temporary filling
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Comosite filling
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    pulpectomy
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    extraetion
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    SSC
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Root Canal treatment
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--==============================================================================================================-->
-                            <div class="container col">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Periodontics
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Scalling & polishing
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    root planing
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Gingivictomy
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Gingival depigmentat
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--==============================================================================================================-->
-                            <!--==============================================================================================================-->
-                            <div class="container col">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Orthodontics
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Removable appliances
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Fixed appliances
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Functional appliances
-                                                </label>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form class="form-check">
-                                                <input id="checkboxHint" class="form-check-input" type="checkbox" value="">
-                                                <label class="form-check-label" for="checkbox3">
-                                                    Orthodontic implants
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--==============================================================================================================-->
-                        </div>
-                    </div>
-                    <!--==============================================================================================================-->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- modal table to add note -->
+        <!--===================================================================================================================== -->
         <main role="main" class="col">
             <!-- modal table to add note -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1" aria-labelledby="paymentsModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentsModal" tabindex="-1"
+                aria-labelledby="paymentsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel"> اضافة المبلغ الذي على المريض</h5>
-                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="ModalLabel"> Add the amount owed by the patient</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <form action="payment/addPaymnet" id="addPaymentForm" method="post">
                             <div class="modal-body h-50">
                                 <div class="form-floating">
                                     <input type="hidden" name="patientToken" id="patientToken" required>
                                     <input type="hidden" name="recordId" id="recordId" required>
-                                    <input type="number" name="paymentValue" placeholder="add payment for patient" id="paymentInputForPatient" required>
+                                    <input type="number" class="form-control" name="paymentValue"
+                                        placeholder="add payment for patient" id="paymentInputForPatient" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -413,21 +61,25 @@
                 </div>
             </div>
             <!-- image upload -->
-            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addPhotoModal" tabindex="-1"
+                aria-labelledby="ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">photo</h5>
-                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h4 class="modal-title" id="ModalLabel">photo</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body w-100" style="height: 50;">
-                            <div class="container mt-5">
-                                <h2 class="mb-4">Image Upload Profile personly</h2>
-                                <div class="mb-3">
+                            <div class="container mt-2">
+                                <h3 class="mb-4" style="text-align: center;">Image Upload Profile personly</h3>
+                                <div class="mb-3" style="text-align: center;">
                                     <label for="image" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control w-50" id="patientImage" multiple accept="image/*">
+                                    <input type="file" class="form-control w-100" id="patientImage" multiple
+                                        accept="image/*">
                                 </div>
-                                <button type="button" id="uplodeImagePatient" class="btn btn-primary">Upload
+                                <button type="button" id="uplodeImagePatient" class="btn btn-primary w-100">Upload
                                     Image</button>
                             </div>
                         </div>
@@ -435,6 +87,37 @@
                 </div>
             </div>
             <!-- image upload -->
+            <button id="showModal" data-target="checkModal" data-toggle="modal"></button>
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="checkModal" tabindex="-1"
+                aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body w-100">
+                            <div class="container col" id="checkDiv">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Button with data-bs-target
+                                </button>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        Some placeholder content for the collapse component. This panel is hidden by
+                                        default but revealed when the user activates the relevant trigger.
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" id="uplodeImagePatient" class="btn btn-primary w-100">Upload
+                                Image</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
             <!-- Content Goes Here -->
             <div class="container mt-5  ">
                 <div class="row justify-content-center ">
@@ -457,8 +140,18 @@
                 </div>
             </div>
         </main>
-        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
+            integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
+            crossorigin="anonymous"></script>
         <script>
+            $(function () {
+                $(document).on("click", "#showModal", function () {
+
+                    console.log("fuck")
+                    $("#checkModal").modal("show")
+                })
+            })
+
             // Loader.removeLoadPage();
             function fetchPatientsHaveDateToday() {
                 var settings = {
@@ -466,7 +159,7 @@
                     "method": "POST",
                     "timeout": 0,
                 };
-                $.ajax(settings).done(function(response) {
+                $.ajax(settings).done(function (response) {
 
 
                     response = JSON.parse(response);
@@ -486,15 +179,15 @@
             })
         </script>
         <script>
-            $(function() {
+            $(function () {
                 var selectedPatient;
                 var recordId;
-                $(document).on("click", "#addNoteButton", function() {
+                $(document).on("click", "#addNoteButton", function () {
                     $("#addPhotoModal").modal("show");
                     selectedPatient = $(this).data("token")
                     recordId = $(this).data("id");
                 })
-                $(document).on("click", "#uplodeImagePatient", function() {
+                $(document).on("click", "#uplodeImagePatient", function () {
 
                     var form = new FormData();
                     var files = $("#patientImage")[0].files;
@@ -515,7 +208,7 @@
                         "data": form
                     };
 
-                    $.ajax(settings).done(function(response) {
+                    $.ajax(settings).done(function (response) {
 
                         response = JSON.parse(response);
                         if (response.status === 200) {
@@ -525,7 +218,7 @@
                                 message: "Upload image successfully"
                             }, 1000);
                             $("#noteModal").modal("show");
-                            $("#checkboxHint").each(function(index, element) {
+                            $("#checkboxHint").each(function (index, element) {
                                 if (element.checked) {
                                     console.log(element)
                                 }
@@ -540,7 +233,7 @@
 
                 })
 
-                $(document).on("click", "#saveNote", function() {
+                $(document).on("click", "#saveNote", function () {
 
                     var settings = {
                         "url": baseUrl() + "/dashboard/patientRecords/record/add",
@@ -558,7 +251,7 @@
                     var selectedButton = $(this);
                     $("#recordId").val(recordId)
                     Loader.addLoader(selectedButton);
-                    $.ajax(settings).done(function(response) {
+                    $.ajax(settings).done(function (response) {
 
                         response = JSON.parse(response)
                         if (response.status === 200) {
@@ -590,12 +283,12 @@
                 })
             }
             addPayment()
-            $(document).ready(function() {
+            $(document).ready(function () {
                 // Initialize an empty object to store the data
                 var labelTextArray = {};
 
                 // Iterate through each list item in the dropdown menu
-                $('.dropdown-menu li').each(function() {
+                $('.dropdown-menu li').each(function () {
                     // Extract the button text and label text
                     var buttonText = $('.dropdown-toggle').text().trim();
                     var labelText = $(this).find('label').text().trim();
@@ -615,6 +308,107 @@
 
                 // Log the resulting JSON to the console
                 console.log(jsonString);
+            });
+        </script>
+        <script>
+            const checkData = {
+                "Oral Surgery": [
+                    "Simple extraction",
+                    "Surgical extraction",
+                    "Surgical extraction with suturing",
+                    "Root Separation",
+                    "Abscess drainage",
+                    "Treatment of dry socket",
+                    "Curettage",
+                    "Wisdom tooth extraction",
+                    "Impacted wisdom tooth extraction"
+                ],
+                "Dental implants": [
+                    "Bone graft",
+                    "Single implant",
+                    "Multiple implants"
+                ],
+                "Radiograph": [
+                    "Panoramic x-ray",
+                    "CBCT",
+                    "X-ray",
+                    "Cephalometric"
+                ],
+                "Bleaching": [
+                    "Full teeth whitening",
+                    "Upper teeth whitening",
+                    "Lower teeth whitening"
+                ],
+                "Restorative": [
+                    "Composite filling",
+                    "Temporary filling",
+                    "Temporary filling with CaOH base",
+                    "Composite filling with CaOH base",
+                    "Re.Composite",
+                    "Composite Facing"
+                ],
+                "Prosthetics": [
+                    "Preparation",
+                    "Impression",
+                    "Bite registration",
+                    "Complete removable denture",
+                    "Partial denture",
+                    "Overdenture",
+                    {
+                        "Fixed crowns": [
+                            "a - PFM crown",
+                            "b - Zircon crown",
+                            "c - E-Max crown"
+                        ]
+                    },
+                    "DentalVeneers",
+                    {
+                        "Postcore": [
+                            "a - Metal post",
+                            "b - Fiber post"
+                        ]
+                    },
+                    "Temporary Cementation",
+                    "Permanent Cementation"
+                ],
+                "Endodontics": [
+                    {
+                        "Root Canal treatment": [
+                            "a - First Visit (Access)",
+                            "b - Second Visit (Cleaning & shaping)",
+                            "c - Obturation",
+                            "d - Composite filling"
+                        ]
+                    },
+                    "Re-Root Canal treatment",
+                    "Apicoectomy"
+                ],
+                "Pedodontics": [
+                    "Fluoride application",
+                    "Pit & fissure sealant",
+                    "Temporary filling",
+                    "Composite filling",
+                    "Pulpectomy",
+                    "Extraction",
+                    "SSC",
+                    "Root Canal treatment"
+                ],
+                "Periodontics": [
+                    "Scaling & polishing",
+                    "Root planing",
+                    "Gingivectomy",
+                    "Gingival depigmentation"
+                ],
+                "Orthodontics": [
+                    "Removable appliances",
+                    "Fixed appliances",
+                    "Functional appliances",
+                    "Orthodontic implants"
+                ]
+            }
+            const checkDataKeys = Object.keys
+            checkData.forEach(element => {
+
             });
         </script>
     </main>
