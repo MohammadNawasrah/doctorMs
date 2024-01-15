@@ -26,6 +26,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" id="addMonyToPatient" class="btn btn-success">Add Mony To Patient</button>
                     <button type="button" id="saveNote" class="btn btn-success">Save</button>
                 </div>
             </div>
@@ -152,6 +153,9 @@
         $(function() {
             var selectedPatient;
             var recordId;
+            $(document).on("click", "#addMonyToPatient", function() {
+                $('#paymentsModal').modal("show");
+            })
             $(document).on("click", "#addNoteButton", function() {
                 $("#addPhotoModal").modal("show");
                 selectedPatient = $(this).data("token")
@@ -228,11 +232,9 @@
                         Message.addMessage(response.message, selectedButton, "success");
                         $(".close").trigger("click");
                         Loader.removeLoader();
-                        if (!response.hasPayment) {
-                            $('#paymentsModal').modal("show");
-                        }
                         return;
                     }
+                    fetchPatientsHaveDateToday();
                     Loader.removeLoader();
                     Message.addMessage(response.message, selectedButton, "danger");
                 });
@@ -246,7 +248,7 @@
                     callBackFunction: (response) => {
                         if (response.status === 200) {
                             fetchPatientsHaveDateToday();
-                            $(".close").trigger("click");
+                            $("#paymentsModal").modal("hide");
                         }
                     }
                 })

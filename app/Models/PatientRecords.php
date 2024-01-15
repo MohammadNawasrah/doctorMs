@@ -51,10 +51,12 @@ class PatientRecords extends Model
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
-    public static function deletePatientRecord($patientId, $recordId)
+    public static function deletePatientRecord($recordId)
     {
         try {
-            self::getPatientRecordByRecordId($patientId, $recordId)->delte();
+            $record = self::getRecordByRecordId($recordId);
+            Payments::deletePayment($record["doctorTableId"]);
+            $record->delete();
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
@@ -65,6 +67,15 @@ class PatientRecords extends Model
             self::getPatientRecordByRecordId($patientId, $recordId)->update($newData);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
+    public static function getRecordByRecordId($recordId)
+    {
+        try {
+            $patientRecord = PatientRecords::Where("id", $recordId)->firstOrFail();
+            return   $patientRecord;
+        } catch (\Throwable $th) {
+            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, 'Record not found');
         }
     }
     public static function getPatientRecordByRecordId($patientId, $recordId)

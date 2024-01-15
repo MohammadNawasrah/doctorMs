@@ -43,6 +43,16 @@ class Payments extends Model
             return 0;
         }
     }
+    public static function deletePayment($doctorTableId)
+    {
+        try {
+            $pay = self::where("fk_record", $doctorTableId)->firstOrFail();
+            $pay->delete();
+            return true;
+        } catch (\Throwable $th) {
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+        }
+    }
     public static function getAllPaymentsForPateint($patientId)
     {
         try {
@@ -60,7 +70,7 @@ class Payments extends Model
     {
         try {
             $lastRecord = self::where("fk_patient", $patientId)
-                ->select("must_be_paid")->first();
+                ->sum("must_be_paid");
             if (isset($lastRecord)) {
                 return ($lastRecord);
             }

@@ -98,7 +98,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" id="deleteRecord" class="btn btn-danger">Delete</button>
               </div>
             </div>
           </div>
@@ -336,6 +336,34 @@
       }
       fetchPatientsHaveDateToday();
     })
+    var selectedRecord;
+    const deleteRecord = () => {
+      $(document).on("click", "#deleteRecord", function() {
+        ajax({
+          URL: baseUrl() + "/dashboard/patientRecords/record/delete",
+          METHOD: "post",
+          showAlert: true,
+          DATA: {
+            "recordId": selectedRecord,
+          },
+          callBackFunction: (response) => {
+            if (response.status === 200) {
+              $(".close").trigger("click");
+              fetchPatientsHaveDateToday();
+
+            }
+          }
+        });
+      })
+    }
+    deleteRecord();
+    const openDeleteRecordModal = () => {
+      $(document).on("click", "#showDeleteRecordModal", function() {
+        selectedRecord = $(this).data("record_id");
+        $("#deleteRecordModal").modal("show")
+      })
+    }
+    openDeleteRecordModal();
   </script>
 </body>
 

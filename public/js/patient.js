@@ -9,7 +9,9 @@ $(function () {
                 if (response.status === 200) {
                     $("#patientsBody").html("");
                     $("#patientsBody").append(response.data.patientsBody)
+                    return
                 }
+                $("#patientsBody").html("");
             }
         });
     }
@@ -96,8 +98,8 @@ $(function () {
             })
         })
     }
-    addPayment()
     fetchPatients();
+    addPayment()
     showUpdateAppointemtModal();
     showDeletePatientModal();
     updateAppointmetApi();
