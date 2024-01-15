@@ -155,6 +155,7 @@
             var recordId;
             $(document).on("click", "#addMonyToPatient", function() {
                 $('#paymentsModal').modal("show");
+                $("#recordId").val(recordId)
             })
             $(document).on("click", "#addNoteButton", function() {
                 $("#addPhotoModal").modal("show");
@@ -223,10 +224,10 @@
                     }),
                 };
                 var selectedButton = $(this);
-                $("#recordId").val(recordId)
+
                 Loader.addLoader(selectedButton);
                 $.ajax(settings).done(function(response) {
-
+                    fetchPatientsHaveDateToday();
                     response = JSON.parse(response)
                     if (response.status === 200) {
                         Message.addMessage(response.message, selectedButton, "success");
@@ -234,7 +235,6 @@
                         Loader.removeLoader();
                         return;
                     }
-                    fetchPatientsHaveDateToday();
                     Loader.removeLoader();
                     Message.addMessage(response.message, selectedButton, "danger");
                 });
