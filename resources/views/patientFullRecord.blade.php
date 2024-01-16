@@ -337,6 +337,8 @@
       fetchPatientsHaveDateToday();
     })
     var selectedRecord;
+    var selectdPhotoDirectory;
+    var patientToken;
     const deleteRecord = () => {
       $(document).on("click", "#deleteRecord", function() {
         ajax({
@@ -345,12 +347,17 @@
           showAlert: true,
           DATA: {
             "recordId": selectedRecord,
+            "PhotoDirectory": selectdPhotoDirectory,
+            "patientToken": patientToken,
           },
           callBackFunction: (response) => {
             if (response.status === 200) {
               $(".close").trigger("click");
-              fetchPatientsHaveDateToday();
-
+              if (typeof fetchPatientsHaveDateToday === 'function') {
+                fetchPatientsHaveDateToday();
+                return
+              }
+              window.location.reload();
             }
           }
         });
@@ -360,6 +367,8 @@
     const openDeleteRecordModal = () => {
       $(document).on("click", "#showDeleteRecordModal", function() {
         selectedRecord = $(this).data("record_id");
+        selectdPhotoDirectory = $(this).data("photo")
+        patientToken = $(this).data("token")
         $("#deleteRecordModal").modal("show")
       })
     }

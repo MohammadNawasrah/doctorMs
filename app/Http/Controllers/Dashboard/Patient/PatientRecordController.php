@@ -10,6 +10,7 @@ use App\Models\Payments;
 use Faker\Provider\ar_EG\Payment;
 use Illuminate\Http\Request;
 use Trait\Helpers\HttpStatusCodes;
+use Trait\Helpers\ImageHelper;
 use Trait\Helpers\RequsetHelper;
 use Trait\Helpers\UtileHelper;
 
@@ -84,7 +85,10 @@ class PatientRecordController
     public function deleteRecord(Request $request)
     {
         $recordId = $request->get("recordId");
+        $PhotoDirectory = $request->get("PhotoDirectory");
+        $patientToken = $request->get("patientToken");
         PatientRecords::deletePatientRecord($recordId);
+        ImageHelper::deleteDirectory('image/' . $patientToken . "/$PhotoDirectory");
         return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, 'Patient Record deleted successfully');
     }
     public function updateRecord(Request $request)

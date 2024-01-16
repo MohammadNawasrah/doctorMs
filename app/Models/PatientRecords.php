@@ -55,8 +55,8 @@ class PatientRecords extends Model
     {
         try {
             $record = self::getRecordByRecordId($recordId);
-            Payments::deletePayment($record["doctorTableId"]);
             $record->delete();
+            Payments::deletePayment($record["doctorTableId"]);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }

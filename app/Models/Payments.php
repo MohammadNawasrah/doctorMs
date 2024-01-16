@@ -50,7 +50,7 @@ class Payments extends Model
             $pay->delete();
             return true;
         } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
+            // die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
     }
     public static function getAllPaymentsForPateint($patientId)
