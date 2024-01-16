@@ -50,7 +50,7 @@ class UploadImageController
             $responseMessages[] = SessionHelper::baseUrl($request) . "/image/$patientToken/$recordId/$filename";
         }
 
-        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, $responseMessages);
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "upload Image successfully");
     }
     public function getAllImgeToPatient(Request $request)
     {

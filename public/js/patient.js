@@ -1,3 +1,4 @@
+
 var patients;
 $(function () {
     var selectedUser;
@@ -13,6 +14,14 @@ $(function () {
                 }
                 $("#patientsBody").html("");
             }
+        });
+    }
+    const socketResponse = () => {
+        let ipAddress = UrlData.host;
+        let socketPort = "3000";
+        let socket = io(ipAddress + ":" + socketPort);
+        socket.on("responsSendToSecr", (response) => {
+            fetchPatients();
         });
     }
     const showUpdateAppointemtModal = () => {
@@ -105,6 +114,7 @@ $(function () {
     updateAppointmetApi();
     deleletePatient();
     addNewPatient();
+    socketResponse();
 
     $(document).on("click", "#mustPay", function () {
         $("#patientToken").val($(this).data("token"));
