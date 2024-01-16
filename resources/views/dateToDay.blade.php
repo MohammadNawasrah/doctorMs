@@ -48,7 +48,6 @@
                   <th scope="col" class="col-5">Events</th>
                 </tr>
               </thead>
-
               <tbody id="patientsAppointmentBody">
               </tbody>
             </table>
@@ -65,44 +64,8 @@
 </div>
 </div>
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
-<script>
-  function fetchPatientsHaveDateToday() {
-    var settings = {
-      "url": PatientAppointments.patientsHaveAppoinntment,
-      "method": "POST",
-      "timeout": 0,
-    };
-    $.ajax(settings).done(function(response) {
-      response = JSON.parse(response);
-      $("#patientsAppointmentBody").html("");
-      if (response.status === 200) {
-        $("#patientsAppointmentBody").html("");
-        $("#patientsAppointmentBody").append(response.data.patientsAppointmentBody)
-      }
-      Loader.removeLoadPage();
+<script src="/js/dateToDay.js"></script>
 
-    });
-  }
-  fetchPatientsHaveDateToday();
-  let ipAddress = UrlData.host;
-  let socketPort = "3000";
-  let socket = io(ipAddress + ":" + socketPort);
-  $(document).on("click", "#sendToDoctorButton", function() {
-    if ($("#selectDoctorToken").val() === null) {
-      showAlert("please select doctor to send", 201);
-      return;
-    }
-    socket.emit("sendPatientToServer", {
-      toDoctor: $("#selectDoctorToken").val(),
-      patientToken: $(this).data("token"),
-      baseUrl: UrlData.baseUrl
-    });
-  })
-  socket.on("responsSendToServer", (response) => {
-    fetchPatientsHaveDateToday();
-    Message.addModalMessage(response, 1500);
-  })
-</script>
 
 </main>
 
