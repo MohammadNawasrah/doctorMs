@@ -59,6 +59,7 @@ $(function () {
                 METHOD: "POST",
                 DATA: { "userName": selectedUser },
                 callBackFunction: function (response) {
+                    console.log(response)
                     jsonPermission = response.data;
                     const pagesNamePermission = $("#pagesNamePermission");
                     pagesNamePermission.html("<option selected>Choose Page</option>");
@@ -131,6 +132,7 @@ $(function () {
             })
             JsonPermaission[pageName] = actions;
         });
+        console.log(JsonPermaission)
         var settings = {
             "url": UserPermission.updatePermissionForUser,
             "method": "POST",

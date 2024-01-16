@@ -70,7 +70,7 @@ class Users extends Model
                 return $users;
             }
         } catch (\Throwable $th) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage()."in page Users.php please Add type of users"));
+            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, $th->getMessage() . "in page Users.php please Add type of users"));
         }
     }
     public static function deleteUser($userName)
@@ -120,7 +120,7 @@ class Users extends Model
                 "token" => $token
             ]);
         } catch (Exception $e) {
-            die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "User Name already Exist"));
+            redirect()->route("index");
         }
     }
     public static function createNewUser($newData)

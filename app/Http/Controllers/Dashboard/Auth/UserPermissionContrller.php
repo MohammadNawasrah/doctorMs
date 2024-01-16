@@ -18,6 +18,7 @@ class UserPermissionContrller
         $jsonPermission = $request->input('jsonPermission');
         UtileHelper::checkIfDataEmptyOrNullJsonData($request->input());
         $user = Users::getUserByUsername($userName);
+
         UserPermission::updateOrAddUserPermission($user["id"], $jsonPermission);
     }
     public function getPermissionForUser(Request $request)

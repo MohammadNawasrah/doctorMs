@@ -16,7 +16,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalLabel"> Note</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -26,6 +26,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" id="addMonyToPatient" class="btn btn-success">Add Mony To Patient</button>
                     <button type="button" id="saveNote" class="btn btn-success">Save</button>
                 </div>
             </div>
@@ -37,7 +38,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalLabel"> Add the amount owed by the patient</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="hidden" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -152,6 +153,10 @@
         $(function() {
             var selectedPatient;
             var recordId;
+            $(document).on("click", "#addMonyToPatient", function() {
+                $('#paymentsModal').modal("show");
+                $("#recordId").val(recordId)
+            })
             $(document).on("click", "#addNoteButton", function() {
                 $("#addPhotoModal").modal("show");
                 selectedPatient = $(this).data("token")
@@ -219,18 +224,15 @@
                     }),
                 };
                 var selectedButton = $(this);
-                $("#recordId").val(recordId)
+
                 Loader.addLoader(selectedButton);
                 $.ajax(settings).done(function(response) {
-
+                    fetchPatientsHaveDateToday();
                     response = JSON.parse(response)
                     if (response.status === 200) {
                         Message.addMessage(response.message, selectedButton, "success");
                         $(".close").trigger("click");
                         Loader.removeLoader();
-                        if (!response.hasPayment) {
-                            $('#paymentsModal').modal("show");
-                        }
                         return;
                     }
                     Loader.removeLoader();
@@ -246,7 +248,7 @@
                     callBackFunction: (response) => {
                         if (response.status === 200) {
                             fetchPatientsHaveDateToday();
-                            $(".close").trigger("click");
+                            $("#paymentsModal").modal("hide");
                         }
                     }
                 })

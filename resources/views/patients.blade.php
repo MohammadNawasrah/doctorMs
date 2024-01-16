@@ -180,7 +180,6 @@
                         <div>
                           <button type="button" id="addAppointment" class="btn btn-danger m-3">Add New
                             Appointmet</button>
-
                         </div>
                       </div>
                     </div>
