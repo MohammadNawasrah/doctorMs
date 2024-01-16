@@ -232,101 +232,11 @@
             <script src="/js/jquery/jquery-3.7.1.min.js"></script>
             <script src="/js/util/route.js"></script>
             <script src="/js/util/mainClass.js"></script>
-            <script>
-                $(function() {
-                    // Loader.addLoadPage();
-                })
-            </script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-            <script>
-                $(function() {
-                    toActiveLinks();
-                    fetchAllPermissionDashboard();
-
-                    var settings = {
-                        "url": baseUrl() +
-                            "/dashboard/image/profile/getUserProfileImage",
-                        "method": "GET",
-                    };
-
-                    $.ajax(settings).done(function(response) {
-                        response = JSON.parse(response)
-                        if (response.status === 200)
-                            $("#userProfileImage").attr("src", response.message)
-                    });
-                    $(document).on("click", "#settingsButton", () => {
-                        $("#photoModal").modal("show");
-                    })
-                    $(document).on("click", "#uplodeImage", () => {
-                        var form = new FormData();
-                        form.append("file", $("#profileImage")[0].files[0]);
-                        form.append("userName", sessionStorage.getItem("userName"))
-                        var settings = {
-                            "url": baseUrl() + "/dashboard/image/profile/add",
-                            "method": "POST",
-                            "timeout": 0,
-                            "processData": false,
-                            "mimeType": "multipart/form-data",
-                            "contentType": false,
-                            "data": form
-                        };
-
-                        $.ajax(settings).done(function(response) {
-                            response = JSON.parse(response)
-                            if (response.status === 200) {
-                                $('.modal').modal('hide');
-                                $("#userProfileImage").attr("src", response.message)
-                                Message.addModalMessage({
-                                        status: 200,
-                                        message: "upload Image successfully"
-                                    },
-                                    1000)
-                                return
-                            }
-                            Message.addModalMessage({
-                                    status: 201,
-                                    message: response.message
-                                },
-                                1000)
-                        });
-                    })
-
-                })
-            </script>
+            <script src="/js/dashboard.js"></script>
             @yield('content')
         </div>
-        <script>
-            $(document).ready(function() {
-                Loader.removeLoadPage();
-            })
-        </script>
-        <script>
-            function filterTable() {
-                var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("searchInput");
-                filter = input.value.toUpperCase();
-                table = document.querySelector("table");
-                tr = table.getElementsByTagName("tr");
-
-                // يمر على كل صف في الجدول ويخفي الذي لا يتناسب مع مدخلات البحث
-                for (i = 0; i < tr.length; i++) {
-                    tds = tr[i].getElementsByTagName("td");
-                    for (var j = 0; j < tds.length; j++) {
-                        td = tds[j];
-                        if (td) {
-                            txtValue = td.textContent || td.innerText;
-                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                                break;
-                            } else {
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
-                }
-            }
-        </script>
 
 </body>
 

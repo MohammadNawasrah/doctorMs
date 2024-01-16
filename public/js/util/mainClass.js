@@ -99,6 +99,11 @@ const ajax = (options = {}) => {
     const send = (options) => {
         $.ajax({
             url: options.URL,
+            ...(options.fileUp ? {
+                "contentType": false,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+            } : {}),
             type: options.METHOD,
             data: options.DATA,
             success: function (response) {
