@@ -123,7 +123,6 @@
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
     <script>
-        // Loader.removeLoadPage();
         function fetchPatientsHaveDateToday() {
             var settings = {
                 "url": PatientsToDoctor.showtoDoctor,
@@ -151,6 +150,7 @@
     </script>
     <script>
         $(function() {
+
             var selectedPatient;
             var recordId;
             $(document).on("click", "#addMonyToPatient", function() {
@@ -209,7 +209,6 @@
             })
 
             $(document).on("click", "#saveNote", function() {
-
                 var settings = {
                     "url": baseUrl() + "/dashboard/patientRecords/record/add",
                     "method": "POST",
@@ -228,6 +227,10 @@
                 Loader.addLoader(selectedButton);
                 $.ajax(settings).done(function(response) {
                     fetchPatientsHaveDateToday();
+                    let ipAddress = "127.0.0.1";
+                    let socketPort = "3000";
+                    let socket = io(ipAddress + ":" + socketPort);
+                    socket.emit("sendToSecr", "done")
                     response = JSON.parse(response)
                     if (response.status === 200) {
                         Message.addMessage(response.message, selectedButton, "success");
@@ -257,178 +260,83 @@
         addPayment()
     </script>
     <script>
-        const checkData = {
-            "Oral_Surgery": [
-                "Simple extraction",
-                "Surgical extraction",
-                "Surgical extraction with suturing",
-                "Root Separation",
-                "Abscess drainage",
-                "Treatment of dry socket",
-                "Curettage",
-                "Wisdom tooth extraction",
-                "Impacted wisdom tooth extraction"
-            ],
-            "Dental_implants": [
-                "Bone graft",
-                "Single implant",
-                "Multiple implants"
-            ],
-            "Radiograph": [
-                "Panoramic x-ray",
-                "CBCT",
-                "X-ray",
-                "Cephalometric"
-            ],
-            "Bleaching": [
-                "Full teeth whitening",
-                "Upper teeth whitening",
-                "Lower teeth whitening"
-            ],
-            "Restorative": [
-                "Composite filling",
-                "Temporary filling",
-                "Temporary filling with CaOH base",
-                "Composite filling with CaOH base",
-                "Re.Composite",
-                "Composite Facing"
-            ],
-
-            "Prosthetics": [
-                "Preparation",
-                "Impression",
-                "Bite registration",
-                "Complete removable denture",
-                "Partial denture",
-                "Overdenture",
-                {
-                    "Fixed crowns": [
-                        "a - PFM crown",
-                        "b - Zircon crown",
-                        "c - E-Max crown"
-                    ]
-                },
-                "DentalVeneers",
-                {
-                    "Postcore": [
-                        "a - Metal post",
-                        "b - Fiber post"
-                    ]
-                },
-                "Temporary Cementation",
-                "Permanent Cementation"
-            ],
-
-            "Endodontics": [{
-                    "Root Canal treatment": [
-                        "a - First Visit (Access)",
-                        "b - Second Visit (Cleaning & shaping)",
-                        "c - Obturation",
-                        "d - Composite filling"
-                    ]
-                },
-                "Re-Root Canal treatment",
-                "Apicoectomy"
-            ],
-
-
-            "Pedodontics": [
-                "Fluoride application",
-                "Pit & fissure sealant",
-                "Temporary filling",
-                "Composite filling",
-                "Pulpectomy",
-                "Extraction",
-                "SSC",
-                "Root Canal treatment"
-            ],
-            "Periodontics": [
-                "Scaling & polishing",
-                "Root planing",
-                "Gingivectomy",
-                "Gingival depigmentation"
-            ],
-            "Orthodontics": [
-                "Removable appliances",
-                "Fixed appliances",
-                "Functional appliances",
-                "Orthodontic implants"
-            ]
-        }
-        var count = 0;
-        const checkDataKeys = Object.keys(checkData);
-        checkDataKeys.forEach(data => {
-            $("#checkDiv").append(`
+        $.getJSON('/json/checkData.json', function(response) {
+            var checkData = response;
+            var count = 0;
+            const checkDataKeys = Object.keys(checkData);
+            checkDataKeys.forEach(data => {
+                $("#checkDiv").append(`
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#${data}" aria-expanded="false">
                     ${data}
                 </button>
                 `);
-            inputs = ``;
-            checkData[data].forEach((value, index) => {
-                if (typeof value !== "object") {
-                    inputs += `<div><input type="checkbox" id=${data+index} data-parent="${data}"  value="${value}"/> <label for="${data+index}">${value} </label></div>`;
-                } else {
-                    const valueKeys = Object.keys(value)
-                    inputs += `<br><hr>${valueKeys}`;
-                    value[valueKeys].forEach((element, index) => {
-                        inputs += `<div><input type="checkbox" id=${index+''+count} data-parent="${data}" data-sup="${valueKeys}" value="${element}"/> <label for="${index+''+count}">${element} </label></div>`;
-                    })
-                    inputs += `<br><hr>`;
-                    count++;
-                }
-            })
-            $("#checkDiv").append(`
+                inputs = ``;
+                checkData[data].forEach((value, index) => {
+                    if (typeof value !== "object") {
+                        inputs += `<div><input type="checkbox" id=${data+index} data-parent="${data}"  value="${value}"/> <label for="${data+index}">${value} </label></div>`;
+                    } else {
+                        const valueKeys = Object.keys(value)
+                        inputs += `<br><hr>${valueKeys}`;
+                        value[valueKeys].forEach((element, index) => {
+                            inputs += `<div><input type="checkbox" id=${index+''+count} data-parent="${data}" data-sup="${valueKeys}" value="${element}"/> <label for="${index+''+count}">${element} </label></div>`;
+                        })
+                        inputs += `<br><hr>`;
+                        count++;
+                    }
+                })
+                $("#checkDiv").append(`
                 <div class="collapse" id="${data}">
                     <div class="card card-body">
                         ${ inputs}
                     </div>
                 </div>
                 `);
-            const addToNote = () => {
-                $(document).off("click", "#addCehcedToNote")
-                $(document).on("click", "#addCehcedToNote", function() {
-                    let Oral_Surgery = "\n\nOral_Surgery=======================\n";
-                    let Dental_implants = "\n\nDental_implants=======================\n";
-                    let Radiograph = "\n\nRadiograph=======================\n";
-                    let Bleaching = "\n\nBleaching=======================\n";
-                    let Restorative = "\n\nRestorative=======================\n";
-                    let Prosthetics = "\n\nProsthetics=======================\n";
-                    let Endodontics = "\n\nEndodontics=======================\n";
-                    let Pedodontics = "\n\nPedodontics=======================\n";
-                    let Periodontics = "\n\nPeriodontics=======================\n";
-                    let Orthodontics = "\n\nOrthodontics=======================\n";
+                const addToNote = () => {
+                    $(document).off("click", "#addCehcedToNote")
+                    $(document).on("click", "#addCehcedToNote", function() {
+                        let Oral_Surgery = "\n\nOral_Surgery=======================\n";
+                        let Dental_implants = "\n\nDental_implants=======================\n";
+                        let Radiograph = "\n\nRadiograph=======================\n";
+                        let Bleaching = "\n\nBleaching=======================\n";
+                        let Restorative = "\n\nRestorative=======================\n";
+                        let Prosthetics = "\n\nProsthetics=======================\n";
+                        let Endodontics = "\n\nEndodontics=======================\n";
+                        let Pedodontics = "\n\nPedodontics=======================\n";
+                        let Periodontics = "\n\nPeriodontics=======================\n";
+                        let Orthodontics = "\n\nOrthodontics=======================\n";
 
-                    $("input[type='checkbox']:checked").each((index, element) => {
-                        if ($(element).data("parent") === "Oral_Surgery")
-                            Oral_Surgery += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Dental_implants")
-                            Dental_implants += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Radiograph")
-                            Radiograph += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Bleaching")
-                            Bleaching += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Restorative")
-                            Restorative += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Prosthetics")
-                            Prosthetics += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Endodontics")
-                            Endodontics += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Pedodontics")
-                            Pedodontics += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Periodontics")
-                            Periodontics += `${$(element).val()}  ,    `
-                        if ($(element).data("parent") === "Orthodontics")
-                            Orthodontics += `${$(element).val()}  ,    `
+                        $("input[type='checkbox']:checked").each((index, element) => {
+                            if ($(element).data("parent") === "Oral_Surgery")
+                                Oral_Surgery += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Dental_implants")
+                                Dental_implants += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Radiograph")
+                                Radiograph += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Bleaching")
+                                Bleaching += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Restorative")
+                                Restorative += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Prosthetics")
+                                Prosthetics += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Endodontics")
+                                Endodontics += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Pedodontics")
+                                Pedodontics += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Periodontics")
+                                Periodontics += `${$(element).val()}  ,    `
+                            if ($(element).data("parent") === "Orthodontics")
+                                Orthodontics += `${$(element).val()}  ,    `
+                        })
+                        text = Oral_Surgery + Dental_implants + Radiograph + Bleaching + Restorative + Prosthetics +
+                            Endodontics + Pedodontics + Periodontics + Orthodontics;
+                        $("#noteModal").modal("show")
+                        $(".close").trigger("click");
+                        $("#noteTextArea").val(text);
                     })
-                    text = Oral_Surgery + Dental_implants + Radiograph + Bleaching + Restorative + Prosthetics +
-                        Endodontics + Pedodontics + Periodontics + Orthodontics;
-                    $("#noteModal").modal("show")
-                    $(".close").trigger("click");
-                    $("#noteTextArea").val(text);
-                })
-            }
-            addToNote();
-        });
+                }
+                addToNote();
+            });
+        })
     </script>
 </main>
 

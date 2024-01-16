@@ -20,7 +20,6 @@ io.on("connection", (socket) => {
 
             "patientToken": response.patientToken
         });
-        console.log(response.baseUrl)
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -41,6 +40,9 @@ io.on("connection", (socket) => {
                 }
             })
     })
+    socket.on("sendToSecr", (response) => {
+        io.emit("responsSendToSecr", "done")
+    });
     socket.on("disconnect", () => {
     });
 });

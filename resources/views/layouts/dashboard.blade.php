@@ -232,6 +232,7 @@
             <script src="/js/jquery/jquery-3.7.1.min.js"></script>
             <script src="/js/util/route.js"></script>
             <script src="/js/util/mainClass.js"></script>
+            <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
             <script src="/js/dashboard.js"></script>
