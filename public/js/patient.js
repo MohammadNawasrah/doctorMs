@@ -1,3 +1,4 @@
+
 var patients;
 $(function () {
     var selectedUser;
@@ -9,8 +10,18 @@ $(function () {
                 if (response.status === 200) {
                     $("#patientsBody").html("");
                     $("#patientsBody").append(response.data.patientsBody)
+                    return
                 }
+                $("#patientsBody").html("");
             }
+        });
+    }
+    const socketResponse = () => {
+        let ipAddress = UrlData.host;
+        let socketPort = "3000";
+        let socket = io(ipAddress + ":" + socketPort);
+        socket.on("responsSendToSecr", (response) => {
+            fetchPatients();
         });
     }
     const showUpdateAppointemtModal = () => {
@@ -96,13 +107,14 @@ $(function () {
             })
         })
     }
-    addPayment()
     fetchPatients();
+    addPayment()
     showUpdateAppointemtModal();
     showDeletePatientModal();
     updateAppointmetApi();
     deleletePatient();
     addNewPatient();
+    socketResponse();
 
     $(document).on("click", "#mustPay", function () {
         $("#patientToken").val($(this).data("token"));

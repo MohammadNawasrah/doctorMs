@@ -1,0 +1,98 @@
+{
+    "Oral_Surgery": [
+        "Simple extraction",
+        "Surgical extraction",
+        "Surgical extraction with suturing",
+        "Root Separation",
+        "Abscess drainage",
+        "Treatment of dry socket",
+        "Curettage",
+        "Wisdom tooth extraction",
+        "Impacted wisdom tooth extraction"
+    ],
+    "Dental_implants": [
+        "Bone graft",
+        "Single implant",
+        "Multiple implants"
+    ],
+    "Radiograph": [
+        "Panoramic x-ray",
+        "CBCT",
+        "X-ray",
+        "Cephalometric"
+    ],
+    "Bleaching": [
+        "Full teeth whitening",
+        "Upper teeth whitening",
+        "Lower teeth whitening"
+    ],
+    "Restorative": [
+        "Composite filling",
+        "Temporary filling",
+        "Temporary filling with CaOH base",
+        "Composite filling with CaOH base",
+        "Re.Composite",
+        "Composite Facing"
+    ],
+
+    "Prosthetics": [
+        "Preparation",
+        "Impression",
+        "Bite registration",
+        "Complete removable denture",
+        "Partial denture",
+        "Overdenture",
+        {
+            "Fixed crowns": [
+                "a - PFM crown",
+                "b - Zircon crown",
+                "c - E-Max crown"
+            ]
+        },
+        "DentalVeneers",
+        {
+            "Postcore": [
+                "a - Metal post",
+                "b - Fiber post"
+            ]
+        },
+        "Temporary Cementation",
+        "Permanent Cementation"
+    ],
+
+    "Endodontics": [{
+            "Root Canal treatment": [
+                "a - First Visit (Access)",
+                "b - Second Visit (Cleaning & shaping)",
+                "c - Obturation",
+                "d - Composite filling"
+            ]
+        },
+        "Re-Root Canal treatment",
+        "Apicoectomy"
+    ],
+
+
+    "Pedodontics": [
+        "Fluoride application",
+        "Pit & fissure sealant",
+        "Temporary filling",
+        "Composite filling",
+        "Pulpectomy",
+        "Extraction",
+        "SSC",
+        "Root Canal treatment"
+    ],
+    "Periodontics": [
+        "Scaling & polishing",
+        "Root planing",
+        "Gingivectomy",
+        "Gingival depigmentation"
+    ],
+    "Orthodontics": [
+        "Removable appliances",
+        "Fixed appliances",
+        "Functional appliances",
+        "Orthodontic implants"
+    ]
+}
