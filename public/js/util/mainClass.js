@@ -200,3 +200,7 @@ const fetchAllPermissionDashboard = () => {
         }
     });
 }
+const emptyInputs = () => {
+    $("input").val('');
+    $("input[type='checkbox']").prop("checked", false)
+}
