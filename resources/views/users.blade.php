@@ -14,7 +14,6 @@
 </style>
 <script src="/js/users.js"></script>
 <main role="main" class="col">
-
     <div class="container mt-5  ">
         <div class="row justify-content-center ">
             <div class="col">
@@ -70,38 +69,15 @@
                 </div>
                 <!-- ===================================================================================== -->
                 <div class="row" style="justify-content: space-between;display: flex; margin: 20px;">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addUserType">
-                        Add Users Type
-                    </button>
+                    <div data-permission="addType">
+
+                    </div>
                     <div data-permission="addUser" style="justify-content: center;display: flex;">
 
                     </div>
                 </div>
                 <!--=================================================== Modal================================================================== -->
-                <div class="modal fade" id="addUserType" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUserTypeLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add User Type</h5>
-                                <button type="button" class="close" id="addUserTypea" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form method="post" id="addNewUserTypeForm" action="users/user/type/add">
-                                <div class="modal-body">
-                                    <input type="text" name="type" id="userType" class="form-control" placeholder="write the type user" required>
-                                </div>
-                                <div class="modal-footer centerPage">
-                                    <div class="">
-                                        <div>
-                                            <div>
-                                                <button type="submit" id="addNewUserType" class="btn btn-success">Save</button>
-                                            </div>
-                                        </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -122,17 +98,9 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function() {
-
-    })
-</script>
 <script>
     // Save the original table HTML
     // var originalTableHTML = document.getElementById('originalTable').outerHTML;

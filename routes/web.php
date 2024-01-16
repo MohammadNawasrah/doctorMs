@@ -41,7 +41,6 @@ Route::group(['prefix' => '/dashboard'],  function () {
     })->name('dashboard');
     Route::group(['prefix' => '/htmlCodePage'], function () {
         Route::get('/', [HtmlCodeController::class, 'index']);
-
         Route::post('/getAllHtmlCode', [HtmlCodeController::class, 'getAllHtmlCode']);
         Route::post('/updateHtmlCode', [HtmlCodeController::class, 'updateHtmlCode']);
     });
