@@ -1,5 +1,5 @@
-
 var patients;
+var onAppointment = [];
 $(function () {
     var selectedUser;
     const fetchPatients = () => {
@@ -34,6 +34,12 @@ $(function () {
     }
     const updateAppointmetApi = () => {
         $(document).on("click", "#updateAppointment", function () {
+            let selectedDate = $("#dateAppointmentUpdate").val();
+            let selectedTime = $("#timeAppointmentUpdate").val()
+            if (checkAvailability(selectedDate, selectedTime)) {
+                showAlert("This appointment slot is already booked. Please choose another time.");
+                return;
+            }
             {
                 ajax({
                     URL: PatientAppointments.updateAppointment,
@@ -47,7 +53,9 @@ $(function () {
                         if (response.status === 200) {
                             $(".close").trigger("click");
                             fetchPatients();
-                            window.location.href = baseUrl() + "/dashboard/dateToDay"
+                            if (isToday(selectedDate + " " + selectedTime)) {
+                                window.location.href = baseUrl() + "/dashboard/dateToDay"
+                            }
                         }
                     }
                 })
@@ -107,6 +115,21 @@ $(function () {
             })
         })
     }
+    const fetchAllAppointment = () => {
+        ajax({
+            URL: baseUrl() + '/dashboard/patientAppointments',
+            METHOD: 'POST',
+            callBackFunction: (response) => {
+                let data = response.data;
+                data.forEach(element => {
+                    let splitDateTime = element.next_appointment.split(" ");
+                    let date = splitDateTime[0];
+                    let time = splitDateTime[1];
+                    onAppointment.push({ "date": date, "start": time, end: addMinutesToTime(time, 15) })
+                });
+            }
+        })
+    }
     fetchPatients();
     addPayment()
     showUpdateAppointemtModal();
@@ -115,13 +138,14 @@ $(function () {
     deleletePatient();
     addNewPatient();
     socketResponse();
+    fetchAllAppointment();
+
+
 
     $(document).on("click", "#mustPay", function () {
         $("#patientToken").val($(this).data("token"));
         $("#recordId").val($(this).data("doctor"));
     })
-
-
     $(document).on("click", "#updatePatientModalButton", function () {
         selectedUser = $(this).data("token")
         $("#updatePatientModal").modal("show")
@@ -167,6 +191,12 @@ $(function () {
     })
     $(document).off("click", "#addAppointment")
     $(document).on("click", "#addAppointment", function () {
+        let selectedDate = $("#dateAppointment").val();
+        let selectedTime = $("#timeAppointment").val()
+        if (checkAvailability(selectedDate, selectedTime)) {
+            showAlert("This appointment slot is already booked. Please choose another time.");
+            return;
+        }
         var settings = {
             "url": PatientAppointments.addAppointment,
             "method": "POST",
@@ -180,13 +210,16 @@ $(function () {
                 "next_appointment": $("#dateAppointment").val() + "  " + $("#timeAppointment").val()
             }),
         };
-
         var selectedButton = $(this);
         Loader.addLoader(selectedButton);
         $.ajax(settings).done(function (response) {
             response = JSON.parse(response)
             if (response.status === 200) {
-                window.location.href = baseUrl() + "/dashboard/dateToDay"
+                fetchPatients();
+                $('.close').trigger("click")
+                if (isToday(selectedDate + " " + selectedTime)) {
+                    window.location.href = baseUrl() + "/dashboard/dateToDay"
+                }
             }
             Loader.removeLoader();
             Message.addMessage(response.message, selectedButton, "danger");

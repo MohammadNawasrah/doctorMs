@@ -63,7 +63,6 @@ class UsersController
     {
 
         $acctionAllow = UserPermission::getOnPermissionPageToUser();
-
         $pages = HtmlCode::getHtmlCodeForPage("dashboard");
         $pagesSend = array();
         foreach ($acctionAllow as  $value) {

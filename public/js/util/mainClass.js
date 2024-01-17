@@ -97,6 +97,9 @@ const addResponse = (statusData, messageData) => {
 const ajax = (options = {}) => {
 
     const send = (options) => {
+        if (options.FORMID) {
+            Loader.addLoader($("#" + options.FORMID + " button[type='submit']"))
+        }
         $.ajax({
             url: options.URL,
             ...(options.fileUp ? {
@@ -107,14 +110,21 @@ const ajax = (options = {}) => {
             type: options.METHOD,
             data: options.DATA,
             success: function (response) {
+                if (options.FORMID) {
+                    Loader.removeLoader()
+                }
                 response = JSON.parse(response);
                 if (options.showAlert === true) {
                     showAlert(response.message, response.status);
                 }
                 if (options.callBackFunction)
-                    options.callBackFunction(response);
+                    if (response.status === 200)
+                        options.callBackFunction(response);
             },
             error: function (xhr, textStatus, errorThrown) {
+                if (options.FORMID) {
+                    Loader.removeLoader()
+                }
                 showAlert(202, errorThrown);
             }
         });
@@ -203,4 +213,44 @@ const fetchAllPermissionDashboard = () => {
 const emptyInputs = () => {
     $("input").val('');
     $("input[type='checkbox']").prop("checked", false)
+}
+const addMinutesToTime = (timeString, minutesToAdd) => {
+    // Parse the time string into a Date object
+    const parsedTime = new Date(`2000-01-01 ${timeString}`);
+
+    // Add the specified minutes
+    parsedTime.setMinutes(parsedTime.getMinutes() + minutesToAdd);
+
+    // Format the result as HH:mm:ss
+    const resultTime = parsedTime.toTimeString().slice(0, 8);
+
+    return resultTime;
+}
+function isToday(selectedDateTime) {
+    const today = new Date();
+    const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
+    const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+
+    const formattedSelectedDateTime = new Date(selectedDateTime);
+
+    // Check if the selected date and time are within the current day
+    return formattedSelectedDateTime >= startOfDay && formattedSelectedDateTime <= endOfDay;
+}
+
+const checkAvailability = (selectedDate, selectedTime) => {
+    const selectedDateTime = new Date(`${selectedDate} ${selectedTime}`);
+    const overlap = onAppointment.some(appointment => {
+        const appointmentStart = new Date(`${appointment.date} ${appointment.start}`);
+        const appointmentEnd = new Date(`${appointment.date} ${appointment.end}`);
+        const minAllowedTime = new Date(appointmentStart);
+        minAllowedTime.setMinutes(minAllowedTime.getMinutes() - 15);
+        const maxAllowedTime = new Date(appointmentEnd);
+        maxAllowedTime.setMinutes(maxAllowedTime.getMinutes() + 15);
+        return (
+            selectedDateTime >= minAllowedTime &&
+            selectedDateTime < maxAllowedTime
+        );
+    });
+
+    return overlap;
 }

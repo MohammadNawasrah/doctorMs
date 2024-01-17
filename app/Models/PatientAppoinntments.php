@@ -39,6 +39,7 @@ class PatientAppoinntments extends Model
             $patientAppointmentsData = Patients::select('patients.token', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
                 ->where("patient_appointments.status_to_send_doctor", false)->orderBy("patient_appointments.next_appointment", "desc")->get();
+
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
@@ -57,7 +58,11 @@ class PatientAppoinntments extends Model
     }
     public static function getAllUserIdHaveAppoinntment()
     {
-        return  self::pluck('patientId')->toArray();
+        try {
+            return  self::pluck('patientId')->toArray();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
     public static function getAllPatientsHaveAppoinntmentToday()
     {
@@ -71,7 +76,6 @@ class PatientAppoinntments extends Model
                 return $patientAppointmentsData;
             }
             return [];
-            // die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }
@@ -88,7 +92,6 @@ class PatientAppoinntments extends Model
                 return $patientAppointmentsData;
             }
             return [];
-            // die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, 'Not found Record'));
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
         }

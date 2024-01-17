@@ -226,9 +226,10 @@
                 <table class="table table-bordered">
                   <thead class="table-bordered-custom sti">
                     <tr>
-                      <th scope="col" class="col-1 text-center">id</th>
-                      <th scope="col" class="col-3 text-center">Name</th>
-                      <th scope="col" class="col-4 text-center">Events</th>
+                      <th scope="col" class="text-center">id</th>
+                      <th scope="col" class="text-center">Name</th>
+                      <th scope="col" class=" text-center">Appointment Date</th>
+                      <th scope="col" class="text-center">Events</th>
                     </tr>
                   </thead>
                   <tbody id="patientsBody" class="text-center">
