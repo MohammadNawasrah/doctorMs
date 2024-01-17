@@ -67,11 +67,15 @@ class PatientAppoinntments extends Model
     public static function getAllPatientsHaveAppoinntmentToday()
     {
         try {
-            $today = Carbon::now()->toDateString();
+            $today = now()->toDateString();
+            $startOfDay = now()->startOfDay(); // 00:00:00
+            $endOfDay = now()->endOfDay();     // 23:59:59
             $patientAppointmentsData = Patients::select('patients.*', 'patient_appointments.*')
                 ->join('patient_appointments', 'patients.id', '=', 'patient_appointments.patientId')
-                ->whereDate('patient_appointments.next_appointment', '=', $today)
-                ->where("patient_appointments.status_to_send_doctor", false)->orderBy("patient_appointments.next_appointment", "asc")->get();
+                ->whereBetween('patient_appointments.next_appointment', [$startOfDay, $endOfDay])
+                ->where("patient_appointments.status_to_send_doctor", false)
+                ->orderBy("patient_appointments.next_appointment", "asc")
+                ->get();
             if (count($patientAppointmentsData) != 0) {
                 return $patientAppointmentsData;
             }
