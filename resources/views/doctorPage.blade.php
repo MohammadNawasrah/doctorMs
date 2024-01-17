@@ -69,7 +69,7 @@
                 </div>
                 <div class="modal-body w-100" style="height: 50;">
                     <div class="container mt-2">
-                        <h3 class="mb-4" style="text-align: center;">Image Upload Profile personly</h3>
+                        <h3 class="mb-4" style="text-align: center;">Image Upload For Patient </h3>
                         <div class="mb-3" style="text-align: center;">
                             <label for="image" class="form-label">Choose Image</label>
                             <input type="file" class="form-control w-100" id="patientImage" multiple accept="image/*">
@@ -91,8 +91,10 @@
                     </button>
                 </div>
                 <div class="modal-body w-100">
+                <div class="container" style="max-height: 60vh; overflow-y: auto;">
                     <div class="container col" style="display: flex;flex-direction: column;gap: 10px;" id="checkDiv">
 
+                    </div>
                     </div>
                     <button type="button" id="addCehcedToNote" class="btn btn-success mt-3 w-100">Add To Note</button>
                 </div>

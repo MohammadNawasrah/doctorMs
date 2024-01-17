@@ -196,6 +196,3 @@ $(function () {
     addPayment()
     saveNote();
 })
-
-
-

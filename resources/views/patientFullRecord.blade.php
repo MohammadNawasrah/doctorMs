@@ -206,19 +206,19 @@
         <h2 class="mb-4" id="name" style="width: 100%; text-align: center;">name</h2>
         <div class=" mb-3" style="display: flex; justify-content: space-between;">
           <div class="text-center">
-            <label for="totalHavePatientPay">Patient Pay</label>
+            <label class="mb-3" for="totalHavePatientPay">Patient Pay</label>
             <input type="text" class="form-control text-center" id="totalHavePatientPay" placeholder="Cash">
           </div>
 
           <div class="text-center">
-            <label for="totalHavePatientPay ">Patient Have To Pay</label>
+            <label class="mb-3" for="totalHavePatientPay ">Patient Have To Pay</label>
             <input type="text" class="form-control text-center" id="patientFullWasPay" placeholder="Total">
           </div>
         </div>
         <!-- ====================================================================================== -->
         <div class="container" style="max-height: 60vh; overflow-y: auto;">
           <table class="table table-bordered">
-            <thead class="table-bordered-custom">
+            <thead class="table-bordered-custom sti">
               <tr style="text-align: center;">
                 <th scope="col" class="col-1">id</th>
                 <th scope="col" class="col-3">Patient pay</th>
