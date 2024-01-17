@@ -215,6 +215,8 @@ $(function () {
         $.ajax(settings).done(function (response) {
             response = JSON.parse(response)
             if (response.status === 200) {
+                fetchPatients();
+                $('.close').trigger("click")
                 if (isToday(selectedDate + " " + selectedTime)) {
                     window.location.href = baseUrl() + "/dashboard/dateToDay"
                 }

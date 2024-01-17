@@ -46,7 +46,9 @@ $(function () {
             }
             form.append("patientToken", selectedPatient);
             form.append("recordId", recordId);
+            console.log(selectedPatient)
             $("#patientToken").val(selectedPatient);
+            console.log($("#patientToken").val())
             ajax({
                 URL: baseUrl() + "/dashboard/image/patient/add",
                 METHOD: "POST",
@@ -98,41 +100,18 @@ $(function () {
                 const addToNote = () => {
                     $(document).off("click", "#addCehcedToNote")
                     $(document).on("click", "#addCehcedToNote", function () {
-                        let Oral_Surgery = "\n\nOral_Surgery=======================\n";
-                        let Dental_implants = "\n\nDental_implants=======================\n";
-                        let Radiograph = "\n\nRadiograph=======================\n";
-                        let Bleaching = "\n\nBleaching=======================\n";
-                        let Restorative = "\n\nRestorative=======================\n";
-                        let Prosthetics = "\n\nProsthetics=======================\n";
-                        let Endodontics = "\n\nEndodontics=======================\n";
-                        let Pedodontics = "\n\nPedodontics=======================\n";
-                        let Periodontics = "\n\nPeriodontics=======================\n";
-                        let Orthodontics = "\n\nOrthodontics=======================\n";
-
-                        $("input[type='checkbox']:checked").each((index, element) => {
-                            if ($(element).data("parent") === "Oral_Surgery")
-                                Oral_Surgery += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Dental_implants")
-                                Dental_implants += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Radiograph")
-                                Radiograph += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Bleaching")
-                                Bleaching += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Restorative")
-                                Restorative += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Prosthetics")
-                                Prosthetics += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Endodontics")
-                                Endodontics += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Pedodontics")
-                                Pedodontics += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Periodontics")
-                                Periodontics += `${$(element).val()}  ,    `
-                            if ($(element).data("parent") === "Orthodontics")
-                                Orthodontics += `${$(element).val()}  ,    `
+                        const checkDataKeys = Object.keys(checkData);
+                        let text = "";
+                        checkDataKeys.forEach((element) => {
+                            let checkboxTrue = $(`input[type='checkbox']:checked[data-parent='${element}']`);
+                            if (checkboxTrue.length >= 1) {
+                                text += `\n\n${element}=======================\n`;
+                                checkboxTrue.each((index, checkBox) => {
+                                    console.log(checkBox)
+                                    text += `${$(checkBox).siblings().text()}  ,    `
+                                })
+                            }
                         })
-                        text = Oral_Surgery + Dental_implants + Radiograph + Bleaching + Restorative + Prosthetics +
-                            Endodontics + Pedodontics + Periodontics + Orthodontics;
                         $("#noteModal").modal("show")
                         $(".close").trigger("click");
                         $("#noteTextArea").val(text);
@@ -144,7 +123,6 @@ $(function () {
     }
     const addPayment = () => {
         $(document).on("click", "#addPayment", () => {
-            console.log("done add payment")
             ajax({
                 FORMID: "addPaymentForm",
                 callBackFunction: (response) => {

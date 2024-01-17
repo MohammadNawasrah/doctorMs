@@ -44,13 +44,15 @@ class UploadImageController
         $recordId = $request->input("recordId");
 
         $files = $request->file('files');
-        foreach ($files as $file) {
-            $filename = time() . '_' . $file->getClientOriginalName();  // Ensure unique filenames
-            $file->move(public_path('image/' . "$patientToken/$recordId"), $filename);
-            $responseMessages[] = SessionHelper::baseUrl($request) . "/image/$patientToken/$recordId/$filename";
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();  // Ensure unique filenames
+                $file->move(public_path('image/' . "$patientToken/$recordId"), $filename);
+                $responseMessages[] = SessionHelper::baseUrl($request) . "/image/$patientToken/$recordId/$filename";
+            }
+            return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "upload Image successfully");
         }
-
-        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "upload Image successfully");
+        return RequsetHelper::setResponse(HttpStatusCodes::HTTP_OK, "Thank You");
     }
     public function getAllImgeToPatient(Request $request)
     {

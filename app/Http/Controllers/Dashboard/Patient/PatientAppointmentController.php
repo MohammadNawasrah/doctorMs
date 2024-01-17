@@ -78,8 +78,6 @@ class PatientAppointmentController
 
             $table .= '<button class="btn btn-success" id="sendToDoctorButton" data-token="' . $patient["token"] . '"  data-toggle="tooltip" data-placement="top" title="send"><i class="bi bi-arrow-right"></i></button>';
 
-            $table .= '<button class="btn btn-danger" data-token="' . $patient["token"] . '" data-toggle="tooltip"  data-placement="top" title="Delete appointment" data-bs-toggle="modal" data-bs-target="#Modal"><i class="bi bi-calendar-check"></i></button>';
-
             $table .= "</td></tr>";
         }
         $actions = [

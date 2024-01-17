@@ -97,6 +97,9 @@ const addResponse = (statusData, messageData) => {
 const ajax = (options = {}) => {
 
     const send = (options) => {
+        if (options.FORMID) {
+            Loader.addLoader($("#" + options.FORMID + " button[type='submit']"))
+        }
         $.ajax({
             url: options.URL,
             ...(options.fileUp ? {
@@ -107,14 +110,21 @@ const ajax = (options = {}) => {
             type: options.METHOD,
             data: options.DATA,
             success: function (response) {
+                if (options.FORMID) {
+                    Loader.removeLoader()
+                }
                 response = JSON.parse(response);
                 if (options.showAlert === true) {
                     showAlert(response.message, response.status);
                 }
                 if (options.callBackFunction)
-                    options.callBackFunction(response);
+                    if (response.status === 200)
+                        options.callBackFunction(response);
             },
             error: function (xhr, textStatus, errorThrown) {
+                if (options.FORMID) {
+                    Loader.removeLoader()
+                }
                 showAlert(202, errorThrown);
             }
         });

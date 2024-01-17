@@ -35,7 +35,7 @@
                             </div>
                             <div style="display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
                                 <div class="mb-5">
-                                    <input type="submit" id="loginButton" style="width: 100%;" value="Login" class="btn btn-primary">
+                                    <button type="submit" id="loginButton" style="width: 100%;" class="btn btn-primary">Login</button>
                                 </div>
                             </div>
                         </form>
