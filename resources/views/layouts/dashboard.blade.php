@@ -166,68 +166,23 @@
 
                 <div class="sidebar-sticky" style="overflow: auto;margin-top:5px">
                     <ul class="nav flex-column">
-                        <li class="nav-item" data-permission="schedulePage"> </li>
-                        <li class="nav-item" data-permission="patientsPage"> </li>
                         <li class="nav-item" data-permission="permissionPage"> </li>
                         <li class="nav-item" data-permission="usersPage"> </li>
                         <li class="nav-item" data-permission="htmlCodePage"> </li>
-
                         <li class="nav-item" data-permission="patientsPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="patients" href="/dashboard/patients">
-                                <div class="menu-btn mt-2">
-                                    <i class="bi bi-people-fill custom-icon"></i> Patients
-                                </div>
-                            </a>
                         </li>
-                        <li class="nav-item" data-permission="secertarPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="dateToDay" href="/dashboard/dateToDay">
-                                <div class="menu-btn">
-                                    <div class="menu-text  mt-2">
-                                        <i class="bi bi-clock-fill custom-icon"></i> Date To Day
-                                    </div>
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="secretaryPage">
+
                         </li>
                         <li class="nav-item" data-permission="doctorPage">
-                            <a class="nav-link hover-link" style="height:70px;" data-url="doctor" href="/dashboard/doctor">
-                                <div class="menu-btn mt-2">
-                                    <i class="bi bi-person-lines-fill custom-icon"></i> Doctor
-                                </div>
-                            </a>
+
                         </li>
-                        <li class="nav-item" data-permission="doctorPage">
-                            <a class="nav-link hover-link" style="height:70px;" id="settingsButton" data-url="patient">
-                                <div class="menu-btn mt-2">
-                                    <i class="bi bi-gear-fill custom-icon"></i> Settings
-                                </div>
-                            </a>
+                        <li class="nav-item" data-permission="settingsPage">
+
                         </li>
                     </ul>
                 </div>
             </nav>
-            <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">Settings</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container mt-3">
-                                <h3 class="mb-4" style="text-align: center;">Image Upload Profile personly</h3>
-                                <div class="mb-3" style="text-align: center;">
-                                    <label for="image" class="form-label">Choose Image</label>
-                                    <input type="file" class="form-control w-100" id="profileImage" accept="image/*">
-                                </div>
-                                <button type="button" id="uplodeImage" class="btn btn-primary w-100">Upload
-                                    Image</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <script src="/js/jquery/jquery-3.7.1.min.js"></script>
             <script src="/js/util/route.js"></script>
