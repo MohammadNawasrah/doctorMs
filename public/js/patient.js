@@ -36,10 +36,10 @@ $(function () {
         $(document).on("click", "#updateAppointment", function () {
             let selectedDate = $("#dateAppointmentUpdate").val();
             let selectedTime = $("#timeAppointmentUpdate").val()
-            if (checkAvailability(selectedDate, selectedTime)) {
-                showAlert("This appointment slot is already booked. Please choose another time.");
-                return;
-            }
+            // if (checkAvailability(selectedDate, selectedTime)) {
+            //     showAlert("This appointment slot is already booked. Please choose another time.");
+            //     return;
+            // }
             {
                 ajax({
                     URL: PatientAppointments.updateAppointment,
@@ -193,10 +193,10 @@ $(function () {
     $(document).on("click", "#addAppointment", function () {
         let selectedDate = $("#dateAppointment").val();
         let selectedTime = $("#timeAppointment").val()
-        if (checkAvailability(selectedDate, selectedTime)) {
-            showAlert("This appointment slot is already booked. Please choose another time.");
-            return;
-        }
+        // if (checkAvailability(selectedDate, selectedTime)) {
+        //     showAlert("This appointment slot is already booked. Please choose another time.");
+        //     return;
+        // }
         var settings = {
             "url": PatientAppointments.addAppointment,
             "method": "POST",
