@@ -5,8 +5,8 @@
 @section('content')
 <style>
     textarea {
-        width: 850px;
-        height: 500px;
+        width: 100%;
+        height: 60vh;
     }
 </style>
 
@@ -16,7 +16,7 @@
         <select name="" id="selectActionName">
             <option value="0">Select Action Name</option>
         </select>
-        <div class="mt-5 pt-4" id="htmlCode"></div>
+        <div class="mt-5" id="htmlCode"></div>
     </main>
     <div style="width: 120px; display: flex;justify-content: center ;align-items: center; flex-direction: column; text-align: center;">
         <div>

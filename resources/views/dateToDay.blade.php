@@ -37,9 +37,9 @@
             </div>
             <!-- ====================================================================================== -->
             <!-- ====================================================================================== -->
-
+            <div class="container" style="max-height: 60vh; overflow-y: auto;">
             <table class="table table-bordered">
-              <thead class="table-bordered-custom">
+              <thead class="table-bordered-custom sti">
                 <tr style="text-align: center;">
                   <th scope="col" class="col-1">id</th>
                   <th scope="col" class="col-3">Name</th>
@@ -51,6 +51,7 @@
               <tbody id="patientsAppointmentBody">
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </div>
