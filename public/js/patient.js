@@ -145,6 +145,7 @@ $(function () {
     $(document).on("click", "#mustPay", function () {
         $("#patientToken").val($(this).data("token"));
         $("#recordId").val($(this).data("doctor"));
+        $("#paymentValueToPay").text($(this).data("payment_value"))
     })
     $(document).on("click", "#updatePatientModalButton", function () {
         selectedUser = $(this).data("token")
