@@ -22,9 +22,9 @@ class PatientAppoinntments extends Model
     {
         try {
             if (!self::isPatientRecordAlreadyExist($newData["patientId"])) {
-                if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
-                    die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
-                }
+                // if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
+                //     die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
+                // }
                 self::create($newData);
                 return;
             }
@@ -140,9 +140,9 @@ class PatientAppoinntments extends Model
     {
         try {
 
-            if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
-                die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
-            }
+            // if (!DateHelper::isDateTodayOrInFuture($newData["next_appointment"])) {
+            //     die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_ACCEPTED, "Past Date Not Allow"));
+            // }
             PatientAppoinntments::where("patientId", $patientId)->firstOrFail()->update($newData);
         } catch (\Throwable $th) {
             die(RequsetHelper::setResponse(HttpStatusCodes::HTTP_NOT_FOUND, $th->getMessage()));
