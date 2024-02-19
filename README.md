@@ -149,7 +149,6 @@ sudo chmod o+r doctorMs   sudo chmod -R  o+r doctorMs
 sudo chmod o+x doctorMs   sudo chmod -R  o+x doctorMs
 
 
-
-
+sudo chcon -R -t httpd_sys_rw_content_t /var/www/html
 
 
